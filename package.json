@@ -1,0 +1,19 @@
+{
+  "name": "devbootcamp",
+  "version": "1.0.0",
+  "description": "devbootcamp backend api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smooney211993/devbootcamp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smooney211993/devbootcamp/issues"
+  },
+  "homepage": "https://github.com/smooney211993/devbootcamp#readme"
+}
