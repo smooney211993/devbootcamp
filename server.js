@@ -5,10 +5,11 @@ const PORT = process.env.PORT || 5000;
 const connectDB = require('./config/db');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
 //controllers
-const bootcamp = require('./routes/bootcampRoute');
 
 dotenv.config({ path: './config/config.env' });
 connectDB();
+
+const bootcamp = require('./routes/bootcampRoute');
 app.use(express.json());
 
 app.use('/api/v1/bootcamps', bootcamp);
