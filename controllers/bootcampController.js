@@ -33,9 +33,11 @@ const deleteBootCamp = asyncHandler(async (req, res) => {
     throw new Error('Bootcamp Not Found');
   }
   await bootcamp.remove();
+  res.status(200).json({ success: true, msg: 'Bootcamp Successfully Deleted' });
 });
 module.exports = {
   createNewBootCamp,
   getBootCamps,
   getBootCampById,
+  deleteBootCamp,
 };
