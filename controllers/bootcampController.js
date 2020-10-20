@@ -1,40 +1,28 @@
 const Bootcamp = require('../models/Bootcamps');
+const asyncHandler = require('express-async-handler');
 
-const createNewBootCamp = async (req, res) => {
-  try {
-    const bootcamp = await Bootcamp.create(req.body);
-    res.status(201).json({
-      success: true,
-      data: bootcamp,
-    });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ msg: 'Server Error' });
-  }
-};
+const createNewBootCamp = asyncHandler(async (req, res) => {
+  const newBootCamp = await Bootcamp.create(req.body);
+  res.status(201).json({ success: true, data: newBootCamp });
+});
 
-const getBootCamps = async (req, res) => {
-  try {
-    const bootcamps = await Bootcamp.find({});
-    res.status(200).json({ success: true, data: bootcamps });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ msg: 'Server Error' });
+const getBootCamps = asyncHandler(async (req, res) => {
+  const bootcamps = await Bootcamp.find({});
+  if (!bootcamps) {
+    throw new Error('Bootcamp Not Found');
   }
-};
+  res
+    .status(200)
+    .json({ success: true, count: bootcamps.length, data: bootcamps });
+});
 
-const getBootCampById = async (req, res) => {
-  try {
-    const bootcamp = await Bootcamp.findById(req.params.id);
-    if (!bootcamp) {
-      return res.status(404).json({ msg: 'Bootcamp Not Found' });
-    }
-    res.status(200).json({ success: true, data: bootcamp });
-  } catch (error) {
-    console.log(error);
-    res.status(400).json({ msg: 'Server Error' });
+const getBootCampById = asyncHandler(async (req, res) => {
+  const bootcamp = await Bootcamp.findById(req.params.id);
+  if (!bootcamp) {
+    throw new Error('Bootcamp Not Found');
   }
-};
+  res.status(200).json({ success: true, data: bootcamp });
+});
 module.exports = {
   createNewBootCamp,
   getBootCamps,
