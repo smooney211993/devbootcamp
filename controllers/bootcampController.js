@@ -80,10 +80,7 @@ const getBootcampsViaRadius = asyncHandler(async (req, res) => {
       $geoWithin: { $centerSphere: [[longitude, latitude], radius] },
     },
   });
-  if (!bootcamps) {
-    res.status(404);
-    throw new Error('Bootcamps Not Found Within Chosen Radius');
-  }
+
   res
     .status(200)
     .json({ success: true, count: bootcamps.length, data: bootcamps });
