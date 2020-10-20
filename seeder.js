@@ -33,3 +33,9 @@ const deleteData = async () => {
     console.log(error);
   }
 };
+
+if (process.arg[2] === '-d') {
+  deleteData();
+} else {
+  importData();
+}
