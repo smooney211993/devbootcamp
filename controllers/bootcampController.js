@@ -1,5 +1,6 @@
-const Bootcamp = require('../models/Bootcamps');
 const asyncHandler = require('express-async-handler');
+const geocoder = require('../utils/geocoder');
+const Bootcamp = require('../models/Bootcamps');
 
 // create new bootcamp
 // post request
@@ -59,6 +60,14 @@ const updateBootCamp = asyncHandler(async (req, res) => {
   }
   res.status(200).json({ success: true, data: bootcamp });
 });
+
+// getbootcamps within a radius
+// api/v1/bootcamps/radius/:zipcode/:distance
+
+const getBootcampsViaRadius = asyncHandler(async (req, res) => {
+  const { zipcode, distance } = req.params;
+});
+
 module.exports = {
   createNewBootCamp,
   getBootCamps,
