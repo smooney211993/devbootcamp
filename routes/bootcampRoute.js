@@ -4,9 +4,10 @@ const {
   createNewBootCamp,
   getBootCamps,
   getBootCampById,
+  deleteBootCamp,
 } = require('../controllers/bootcampController');
 
 router.route('/').post(createNewBootCamp).get(getBootCamps);
-router.route('/:id').get(getBootCampById);
+router.route('/:id').get(getBootCampById).delete(deleteBootCamp);
 
 module.exports = router;
