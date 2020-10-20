@@ -12,7 +12,7 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 const bootcamps = JSON.parse(
-  fs.readFileSync(`${__dirname}/data/bootcamps.json`, 'utf-8')
+  fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf-8')
 );
 
 const importData = async () => {
@@ -34,7 +34,7 @@ const deleteData = async () => {
   }
 };
 
-if (process.arg[2] === '-d') {
+if (process.argv[2] === '-d') {
   deleteData();
 } else {
   importData();
