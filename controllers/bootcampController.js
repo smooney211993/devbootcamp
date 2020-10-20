@@ -66,6 +66,26 @@ const updateBootCamp = asyncHandler(async (req, res) => {
 
 const getBootcampsViaRadius = asyncHandler(async (req, res) => {
   const { zipcode, distance } = req.params;
+  const loc = await geocoder.geocode(zipcode);
+  const { lattitude, longitude } = loc[0];
+
+  // caluclate radius using radians
+  // divide distance by radius of earth
+  // radius earth = 6378.1km
+
+  const radius = distance / 6378;
+  const bootcamps = await Bootcamps.find({
+    location: {
+      $geoWithin: { $centerSphere: [[longitude, lattitude], radius] },
+    },
+  });
+  if (bootcamps) {
+    res.status(404);
+    throw new Error('Bootcamps Not Found Within Chosen Radius');
+  }
+  res
+    .status(200)
+    .json({ success: true, count: bootcamps.length, data: bootcamps });
 });
 
 module.exports = {
@@ -74,4 +94,5 @@ module.exports = {
   getBootCampById,
   deleteBootCamp,
   updateBootCamp,
+  getBootcampsViaRadius,
 };
