@@ -48,12 +48,12 @@ const BootcampSchema = new mongoose.Schema(
         type: [Number],
         index: '2dsphere',
       },
-      formattedAddress: String,
-      street: String,
-      city: String,
-      state: String,
-      zipcode: String,
-      country: String,
+      formattedAddress: { type: String },
+      street: { type: String },
+      city: { type: String },
+      state: { type: String },
+      zipcode: { type: String },
+      country: { type: String },
     },
     careers: {
       // Array of strings
@@ -118,4 +118,4 @@ BootcampSchema.pre('save', function (next) {
 
 // Geocode & create location field
 
-module.exports = mongoose.model('Bootcamp', BootcampSchema);
+module.exports = Bootcamp = mongoose.model('Bootcamp', BootcampSchema);
