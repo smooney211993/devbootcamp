@@ -1,7 +1,7 @@
 const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-
+dotenv.config({ path: './config/config.env' });
 const Bootcamp = require('./models/Bootcamps');
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -28,6 +28,7 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Bootcamp.deleteMany();
+    console.log('data destroyed');
     process.exit();
   } catch (error) {
     console.log(error);
