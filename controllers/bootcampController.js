@@ -22,7 +22,21 @@ const getBootCamps = async (req, res) => {
     res.status(400).json({ msg: 'Server Error' });
   }
 };
+
+const getBootCampById = async (req, res) => {
+  try {
+    const bootcamp = await Bootcamp.findById(req.params.id);
+    if (!bootcamp) {
+      return res.status(404).json({ msg: 'Bootcamp Not Found' });
+    }
+    res.status(200).json({ success: true, data: bootcamp });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ msg: 'Server Error' });
+  }
+};
 module.exports = {
   createNewBootCamp,
   getBootCamps,
+  getBootCampById,
 };
