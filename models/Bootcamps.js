@@ -98,23 +98,12 @@ const BootcampSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      required: true,
-    },
   },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 );
-
-// Create bootcamp slug from the name
-BootcampSchema.pre('save', function (next) {
-  this.slug = slugify(this.name, { lower: true });
-  next();
-});
 
 // Geocode & create location field
 

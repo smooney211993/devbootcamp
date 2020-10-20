@@ -8,10 +8,21 @@ const createNewBootCamp = async (req, res) => {
       data: bootcamp,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({ msg: 'Server Error' });
   }
 };
 
+const getBootCamps = async (req, res) => {
+  try {
+    const bootcamps = await Bootcamp.find({});
+    res.status(200).json({ success: true, data: bootcamps });
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ msg: 'Server Error' });
+  }
+};
 module.exports = {
   createNewBootCamp,
+  getBootCamps,
 };
