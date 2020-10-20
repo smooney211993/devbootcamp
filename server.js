@@ -13,6 +13,7 @@ app.use(express.json());
 
 app.use('/api/v1/bootcamps', bootcamp);
 
+// errorhandler
 app.use(notFound);
 app.use(errorHandler);
 
