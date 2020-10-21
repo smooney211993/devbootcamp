@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Course = require('../models/Course');
+const Bootcamp = require('../models/Bootcamps');
 
 // Get courses
 // Get /api/v1/courses
@@ -41,6 +42,13 @@ const getCourseById = asyncHandler(async (req, res) => {
     data: course,
   });
 });
+
+//Create course
+//POST
+//private
+//api/v1/bootcamps/:bootcampId/courses
+
+const createCourse = asyncHandler(async (req, res) => {});
 module.exports = {
   getCourses,
   getCourseById,
