@@ -38,7 +38,7 @@ const getBootCamps = asyncHandler(async (req, res) => {
     (match) => `$${match}`
   );
   const queryString = JSON.parse(queryStr);
-  // finding bootcamps
+  // finding bootcamps and also reverse populate with courses
   query = Bootcamp.find(queryString).populate('courses');
   // select fields
   if (req.query.keyword) {
@@ -94,6 +94,7 @@ const getBootCamps = asyncHandler(async (req, res) => {
   res.status(200).json({
     success: true,
     data: bootcamps,
+    count: bootcamps.length,
     page,
     pages: Math.ceil(total / pageSize),
     pagination,
