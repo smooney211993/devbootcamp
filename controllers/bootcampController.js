@@ -37,6 +37,7 @@ const getBootCamps = asyncHandler(async (req, res) => {
     /\b(gt|gte|lt|lte|in)\b/g,
     (match) => `$${match}`
   );
+  // finding resource
   const queryString = JSON.parse(queryStr);
   // finding bootcamps and also reverse populate with courses
   query = Bootcamp.find(queryString).populate('courses');
@@ -105,7 +106,7 @@ const getBootCamps = asyncHandler(async (req, res) => {
 //get request
 //api/v1/bootcamps/:id
 const getBootCampById = asyncHandler(async (req, res) => {
-  const bootcamp = await Bootcamp.findById(req.params.id);
+  const bootcamp = await Bootcamp.findById(req.params.id).populate('courses');
   if (!bootcamp) {
     res.status(404);
     throw new Error('Bootcamp Not Found');
