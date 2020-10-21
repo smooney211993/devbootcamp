@@ -37,15 +37,14 @@ const getBootCamps = asyncHandler(async (req, res) => {
     /\b(gt|gte|lt|lte|in)\b/g,
     (match) => `$${match}`
   );
-  console.log(queryStr);
+  const queryString = JSON.parse(queryStr);
   // finding bootcamps
-  query = Bootcamp.find(JSON.parse(queryStr));
+  query = Bootcamp.find(queryString);
   // select fields
 
   if (req.query.select) {
     const fields = req.query.select.split(',').join(' ');
     query = query.select(fields);
-    console.log(fields);
   }
 
   if (req.query.sort) {
@@ -54,6 +53,9 @@ const getBootCamps = asyncHandler(async (req, res) => {
   } else {
     query.sort('-createdAt');
   }
+
+  // pagination
+  const page = Number(req.query.pageNumber) || 1;
 
   const bootcamps = await query;
   if (!bootcamps) {
