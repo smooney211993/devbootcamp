@@ -23,6 +23,20 @@ const getCourses = asyncHandler(async (req, res) => {
   });
 });
 
+// get a single course
+// public
+//Get api/v1/course/:id
+
+const getCourseById = asyncHandler(async (req, res) => {
+  const course = await Course.findById(req.params.id).populate({
+    path: 'bootcamp',
+    select: 'name description',
+  });
+  if (!course) {
+    res.status(404);
+    throw new Error('Course Not Found');
+  }
+});
 module.exports = {
   getCourses,
 };
