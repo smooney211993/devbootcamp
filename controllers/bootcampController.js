@@ -21,7 +21,7 @@ const getBootCamps = asyncHandler(async (req, res) => {
 
   //fields to exclude
 
-  const removeFields = ['select', 'sort'];
+  const removeFields = ['select', 'sort', 'pageNumber', 'keyword'];
 
   // lopp over the removeFields and delete them from query
 
@@ -41,7 +41,15 @@ const getBootCamps = asyncHandler(async (req, res) => {
   // finding bootcamps
   query = Bootcamp.find(queryString);
   // select fields
-
+  if (req.query.keyword) {
+    const keyword = {
+      name: {
+        $regex: req.query.keyword,
+        $options: 'i',
+      },
+    };
+    query = query.find({ ...keyword });
+  }
   if (req.query.select) {
     const fields = req.query.select.split(',').join(' ');
     query = query.select(fields);
@@ -55,16 +63,20 @@ const getBootCamps = asyncHandler(async (req, res) => {
   }
 
   // pagination
+  const pageSize = 2;
   const page = Number(req.query.pageNumber) || 1;
-
+  query = query.limit(pageSize).skip(pageSize * (page - 1));
   const bootcamps = await query;
   if (!bootcamps) {
     res.status(404);
     throw new Error('Bootcamp Not Found');
   }
-  res
-    .status(200)
-    .json({ success: true, count: bootcamps.length, data: bootcamps });
+  res.status(200).json({
+    success: true,
+    data: bootcamps,
+    page,
+    pages: Math.ceil(bootcamps.length / pageSize),
+  });
 });
 
 // get bootcamps via id
