@@ -14,7 +14,48 @@ const createNewBootCamp = asyncHandler(async (req, res) => {
 //get request
 //api/v1/bootcamps
 const getBootCamps = asyncHandler(async (req, res) => {
-  const bootcamps = await Bootcamp.find({});
+  let query;
+  // copy req.query
+
+  const reqQuery = { ...req.query };
+
+  //fields to exclude
+
+  const removeFields = ['select', 'sort'];
+
+  // lopp over the removeFields and delete them from query
+
+  removeFields.forEach((param) => delete reqQuery[param]);
+
+  // create query string
+
+  let queryStr = JSON.stringify(reqQuery);
+
+  // create operators
+
+  queryStr = queryStr.replace(
+    /\b(gt|gte|lt|lte|in)\b/g,
+    (match) => `$${match}`
+  );
+  console.log(queryStr);
+  // finding bootcamps
+  query = Bootcamp.find(JSON.parse(queryStr));
+  // select fields
+
+  if (req.query.select) {
+    const fields = req.query.select.split(',').join(' ');
+    query = query.select(fields);
+    console.log(fields);
+  }
+
+  if (req.query.sort) {
+    const sortBy = req.query.sort.split(',').join(' ');
+    query = query.sort(sortBy);
+  } else {
+    query.sort('-createdAt');
+  }
+
+  const bootcamps = await query;
   if (!bootcamps) {
     res.status(404);
     throw new Error('Bootcamp Not Found');
@@ -23,6 +64,7 @@ const getBootCamps = asyncHandler(async (req, res) => {
     .status(200)
     .json({ success: true, count: bootcamps.length, data: bootcamps });
 });
+
 // get bootcamps via id
 //get request
 //api/v1/bootcamps/:id
