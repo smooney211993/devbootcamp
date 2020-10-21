@@ -11,7 +11,8 @@ const {
 const courseRouter = require('./courseRoute');
 const router = express.Router();
 
-router.use('/:bootcampId', courseRouter);
+// if this is hit its going to continue on to courseRouter and run into getcourses
+router.use('/:bootcampId/courses', courseRouter);
 
 router.route('/radius/:zipcode/:distance').get(getBootcampsViaRadius);
 router.route('/').post(createNewBootCamp).get(getBootCamps);
