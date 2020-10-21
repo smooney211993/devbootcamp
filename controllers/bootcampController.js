@@ -39,7 +39,7 @@ const getBootCamps = asyncHandler(async (req, res) => {
   );
   const queryString = JSON.parse(queryStr);
   // finding bootcamps
-  query = Bootcamp.find(queryString);
+  query = Bootcamp.find(queryString).populate('courses');
   // select fields
   if (req.query.keyword) {
     const keyword = {
