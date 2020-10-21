@@ -65,8 +65,28 @@ const getBootCamps = asyncHandler(async (req, res) => {
   // pagination
   const pageSize = 2;
   const page = Number(req.query.pageNumber) || 1;
+  const startIndex = (page - 1) * pageSize;
+  const endIndex = page * pageSize;
+  const total = await Bootcamp.countDocuments();
   query = query.limit(pageSize).skip(pageSize * (page - 1));
+
   const bootcamps = await query;
+  // creates a pagination object in the response to tell clients how many more bootcamps are on the next page
+  const pagination = {};
+  if (endIndex < total) {
+    pagination.next = {
+      page: page + 1,
+      limit: pageSize,
+    };
+  }
+
+  if (startIndex > 0) {
+    pagination.prev = {
+      page: page - 1,
+      limit: pageSize,
+    };
+  }
+
   if (!bootcamps) {
     res.status(404);
     throw new Error('Bootcamp Not Found');
@@ -75,7 +95,8 @@ const getBootCamps = asyncHandler(async (req, res) => {
     success: true,
     data: bootcamps,
     page,
-    pages: Math.ceil(bootcamps.length / pageSize),
+    pages: Math.ceil(total / pageSize),
+    pagination,
   });
 });
 
