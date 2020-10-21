@@ -36,7 +36,12 @@ const getCourseById = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error('Course Not Found');
   }
+  res.status(200).json({
+    success: true,
+    data: course,
+  });
 });
 module.exports = {
   getCourses,
+  getCourseById,
 };
