@@ -28,7 +28,7 @@ const CourseSchema = new mongoose.Schema({
     default: false,
   },
   createdAt: {
-    type: Data,
+    type: Date,
     default: Date.now,
   },
   bootcamp: {

@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config({ path: './config/config.env' });
 const Bootcamp = require('./models/Bootcamps');
+const Course = require('./models/Course');
 
 mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
@@ -15,10 +16,16 @@ const bootcamps = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf-8')
 );
 
+const courses = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf-8')
+);
+
 const importData = async () => {
   try {
     await Bootcamp.create(bootcamps);
-    console.log('Data Imported');
+    await Course.create(courses);
+
+    await console.log('Data Imported');
     process.exit();
   } catch (error) {
     console.log(error);
