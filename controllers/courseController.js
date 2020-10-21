@@ -51,12 +51,30 @@ const getCourseById = asyncHandler(async (req, res) => {
 const createCourse = asyncHandler(async (req, res) => {
   const { bootcampId } = req.params;
   req.body.bootcamp = bootcampId;
-  const bootcamp = await Bootcamp.findById(bootcampId);
-  if (!bootcamp) {
+  const bootcampExists = await Bootcamp.findById(bootcampId);
+  if (!bootcampExists) {
     res.status(404);
     throw new Error(`Bootcamp Does Not Exist With The ID of ${bootcampId}`);
   }
-  const newCourse = await Course.create(req.body);
+  const {
+    title,
+    description,
+    weeks,
+    tuition,
+    minimumSkill,
+    scholarshipAvailable,
+    bootcamp,
+  } = req.body;
+  const course = new Course({
+    title,
+    description,
+    weeks,
+    tuition,
+    minimumSkill,
+    scholarshipAvailable,
+    bootcamp,
+  });
+  const newCourse = await course.save();
   res.status(201).json({
     success: true,
     data: newCourse,
