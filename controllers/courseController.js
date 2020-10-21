@@ -19,3 +19,7 @@ const getCourses = asyncHandler(async (req, res) => {
     data: courses,
   });
 });
+
+module.exports = {
+  getCourses,
+};
