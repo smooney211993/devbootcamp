@@ -4,4 +4,4 @@ const router = express.Router();
 
 router.route('/').get(getCourses);
 
-module.exports = route;
+module.exports = router;

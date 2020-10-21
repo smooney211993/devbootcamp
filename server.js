@@ -10,9 +10,11 @@ dotenv.config({ path: './config/config.env' });
 connectDB();
 
 const bootcamp = require('./routes/bootcampRoute');
+const course = require('./routes/courseRoute');
 app.use(express.json());
 
 app.use('/api/v1/bootcamps', bootcamp);
+app.use('/api/v1/courses', course);
 
 // errorhandler
 app.use(notFound);
