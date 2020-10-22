@@ -80,8 +80,28 @@ const createCourse = asyncHandler(async (req, res) => {
     data: newCourse,
   });
 });
+
+// update course
+//private
+//api/v1/courses/:id
+const updateCourse = asyncHandler(async (req, res) => {
+  let course = await Course.findById(req.params.id);
+  if (!course) {
+    res.status(404);
+    throw new Error('Course Not Found');
+  }
+  course = await Course.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({
+    success: true,
+    data: course,
+  });
+});
 module.exports = {
   getCourses,
   getCourseById,
   createCourse,
+  updateCourse,
 };
