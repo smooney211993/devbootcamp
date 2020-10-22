@@ -99,6 +99,20 @@ const updateCourse = asyncHandler(async (req, res) => {
     data: course,
   });
 });
+
+const deleteCourse = asyncHandler(async (req, res) => {
+  const course = await Course.findById(req.params.id);
+  if (!course) {
+    res.status(404);
+    throw new Error('Course Not Found');
+  }
+
+  await course.remove();
+  res.status(200).json({
+    success: true,
+    msg: 'Course SuccessFully Deleted',
+  });
+});
 module.exports = {
   getCourses,
   getCourseById,
