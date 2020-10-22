@@ -165,6 +165,23 @@ const getBootcampsViaRadius = asyncHandler(async (req, res) => {
     .json({ success: true, count: bootcamps.length, data: bootcamps });
 });
 
+// upload photo for bootcamp
+// PUT api/v1/bootcamps/:id/photo
+// private
+
+const bootcampPhotoUpload = asyncHandler(async (req, res) => {
+  const bootcamp = await Bootcamp.findById(req.params.id);
+  if (!bootcamp) {
+    res.status(404);
+    throw new Error('Bootcamp Not Found');
+  }
+
+  if (!req.files) {
+    res.status(400);
+    throw new Error('Please Upload File');
+  }
+});
+
 module.exports = {
   createNewBootCamp,
   getBootCamps,
