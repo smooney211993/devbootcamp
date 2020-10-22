@@ -180,6 +180,13 @@ const bootcampPhotoUpload = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please Upload File');
   }
+  const file = req.files.file;
+
+  if (!file.mimetype.startsWith('image')) {
+    res.status(400);
+    throw new Error('Please Upload An Image File');
+  }
+  console.log(req.files);
 });
 
 module.exports = {
@@ -189,4 +196,5 @@ module.exports = {
   deleteBootCamp,
   updateBootCamp,
   getBootcampsViaRadius,
+  bootcampPhotoUpload,
 };
