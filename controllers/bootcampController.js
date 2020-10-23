@@ -1,3 +1,4 @@
+const path = require('path');
 const asyncHandler = require('express-async-handler');
 const geocoder = require('../utils/geocoder');
 const Bootcamp = require('../models/Bootcamps');
@@ -171,6 +172,7 @@ const getBootcampsViaRadius = asyncHandler(async (req, res) => {
 
 const bootcampPhotoUpload = asyncHandler(async (req, res) => {
   const bootcamp = await Bootcamp.findById(req.params.id);
+
   if (!bootcamp) {
     res.status(404);
     throw new Error('Bootcamp Not Found');
@@ -186,6 +188,27 @@ const bootcampPhotoUpload = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please Upload An Image File');
   }
+
+  if (file.size > process.env.MAX_FILE_UPLOAD) {
+    res.status(400);
+    throw new Error('File Size Limit Exceeded ');
+  }
+
+  file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
+
+  file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (error) => {
+    if (error) {
+      console.log(error);
+      throw new Error('Problem With File Upload');
+    }
+    await Bootcamp.findByIdAndUpdate(req.params.id, {
+      photo: file.name,
+    });
+    res.status(200).json({
+      success: true,
+      data: file.name,
+    });
+  });
   console.log(req.files);
 });
 
