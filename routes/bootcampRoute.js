@@ -8,6 +8,8 @@ const {
   getBootcampsViaRadius,
   bootcampPhotoUpload,
 } = require('../controllers/bootcampController');
+const Bootcamp = require('../models/Bootcamps');
+const advanceResults = require('../middleware/advanceResults');
 // include other resource routers
 const courseRouter = require('./courseRoute');
 const router = express.Router();
