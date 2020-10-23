@@ -20,7 +20,10 @@ router.use('/:bootcampId/courses', courseRouter);
 router.route('/radius/:zipcode/:distance').get(getBootcampsViaRadius);
 router.route('/:id/photo').put(bootcampPhotoUpload);
 
-router.route('/').post(createNewBootCamp).get(getBootCamps);
+router
+  .route('/')
+  .post(createNewBootCamp)
+  .get(advanceResults(Bootcamp, 'courses'), getBootCamps);
 
 router
   .route('/:id')
