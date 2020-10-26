@@ -23,6 +23,25 @@ const register = asyncHandler(async (req, res) => {
   res.json({ success: true, token: token });
 });
 
+const login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
+  if (!email || password) {
+    res.status(400);
+    throw new Error('Please Provide Email And Password');
+  }
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.status(400);
+    throw new Error('Invalid Credentials');
+  }
+
+  if (user && (await user.matchpassword(password))) {
+    const token = user.getSignedJwtToken();
+    res.json({ success: true, token });
+  }
+});
+
 module.exports = {
   register,
+  login,
 };
