@@ -2,11 +2,19 @@ const path = require('path');
 const asyncHandler = require('express-async-handler');
 const geocoder = require('../utils/geocoder');
 const Bootcamp = require('../models/Bootcamps');
+const User = require('../models/User');
 
 // create new bootcamp
 // post request
 //api/v1/bootcamps
 const createNewBootCamp = asyncHandler(async (req, res) => {
+  req.body.user = req.user.id;
+  const user = await User.findById(req.user.id);
+  const publishedBootCamp = await Bootcamp.findById(req.user.id);
+  if (publishedBootCamp && user.role !== 'admin') {
+    res.status(400);
+    throw new Error('User Has Already Published A Bootcamp');
+  }
   const newBootCamp = await Bootcamp.create(req.body);
   res.status(201).json({ success: true, data: newBootCamp });
 });
