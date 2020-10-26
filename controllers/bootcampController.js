@@ -10,7 +10,7 @@ const User = require('../models/User');
 const createNewBootCamp = asyncHandler(async (req, res) => {
   req.body.user = req.user.id;
   const user = await User.findById(req.user.id);
-  const publishedBootCamp = await Bootcamp.findById(req.user.id);
+  const publishedBootCamp = await Bootcamp.findOne({ user: req.user.id });
   if (publishedBootCamp && user.role !== 'admin') {
     res.status(400);
     throw new Error('User Has Already Published A Bootcamp');

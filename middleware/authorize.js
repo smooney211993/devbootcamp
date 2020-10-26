@@ -3,12 +3,9 @@ const User = require('../models/User');
 
 const isAuthorized = asyncHandler(async (req, res, next) => {
   const user = await User.findById(req.user.id);
-  if (user.role !== 'publisher') {
+  if (user.role !== 'publisher' && user.role !== 'admin') {
     res.status(401);
-    throw new Error('Not Authorized As Publisher');
-  } else if (user.role !== 'admin') {
-    res.status(401);
-    throw new Error('Not Authorized As Admin');
+    throw new Error('Not Authorized');
   }
   next();
 });
