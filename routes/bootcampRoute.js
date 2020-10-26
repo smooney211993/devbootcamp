@@ -24,7 +24,7 @@ router.route('/:id/photo').put(bootcampPhotoUpload);
 
 router
   .route('/')
-  .post(createNewBootCamp)
+  .post(authToken, isAuthorized, createNewBootCamp)
   .get(advanceResults(Bootcamp, 'courses'), getBootCamps);
 
 router

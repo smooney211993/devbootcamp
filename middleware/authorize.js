@@ -6,6 +6,9 @@ const isAuthorized = asyncHandler(async (req, res, next) => {
   if (user.role !== 'publisher') {
     res.status(401);
     throw new Error('Not Authorized As Publisher');
+  } else if (user.role !== 'admin') {
+    res.status(401);
+    throw new Error('Not Authorized As Admin');
   }
   next();
 });
