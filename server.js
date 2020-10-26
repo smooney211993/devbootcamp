@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
 const fileupload = require('express-fileupload');
@@ -15,6 +16,7 @@ const bootcamp = require('./routes/bootcampRoute');
 const course = require('./routes/courseRoute');
 const auth = require('./routes/authRoute');
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(fileupload());
 // set static folder
