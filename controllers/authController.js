@@ -25,19 +25,22 @@ const register = asyncHandler(async (req, res) => {
 
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  if (!email || password) {
+  if (!email || !password) {
     res.status(400);
     throw new Error('Please Provide Email And Password');
   }
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select('+password');
   if (!user) {
     res.status(400);
     throw new Error('Invalid Credentials');
   }
 
-  if (user && (await user.matchpassword(password))) {
+  if (user && (await user.matchPassword(password))) {
     const token = user.getSignedJwtToken();
     res.json({ success: true, token });
+  } else {
+    res.status(400);
+    throw new Error('Invalid Credentials');
   }
 });
 
