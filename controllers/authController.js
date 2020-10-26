@@ -21,7 +21,9 @@ const register = asyncHandler(async (req, res) => {
   const token = user.getSignedJwtToken();
   res.json({ success: true, token: token });
 });
-
+// login
+// api/v1/login
+//post
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -40,6 +42,14 @@ const login = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Invalid Credentials');
   }
+});
+// api/v1.auth/me
+//private needs webtoken
+// gets logged user
+const getMe = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(200).json({ success: true, data: user });
 });
 
 const sendTokenResponse = (user, statusCode, res) => {
@@ -63,4 +73,5 @@ const sendTokenResponse = (user, statusCode, res) => {
 module.exports = {
   register,
   login,
+  getMe,
 };
