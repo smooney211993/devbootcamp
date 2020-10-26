@@ -13,6 +13,7 @@ connectDB();
 
 const bootcamp = require('./routes/bootcampRoute');
 const course = require('./routes/courseRoute');
+const auth = require('./routes/authRoute');
 app.use(express.json());
 
 app.use(fileupload());
@@ -21,6 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1/bootcamps', bootcamp);
 app.use('/api/v1/courses', course);
+app.use('/api/v1/auth', auth);
 
 // errorhandler
 app.use(notFound);
