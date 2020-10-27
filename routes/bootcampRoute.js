@@ -31,6 +31,6 @@ router
   .route('/:id')
   .get(getBootCampById)
   .delete(authToken, isAuthorized, deleteBootCamp)
-  .put(updateBootCamp);
+  .put(authToken, isAuthorized, updateBootCamp);
 
 module.exports = router;

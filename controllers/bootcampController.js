@@ -53,15 +53,27 @@ const deleteBootCamp = asyncHandler(async (req, res) => {
 //put request
 //api/v1/bootcamps/:id
 const updateBootCamp = asyncHandler(async (req, res) => {
-  const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  const bootcamp = await Bootcamp.findById(req.params.id);
+  const user = await User.findById(req.user.id);
   if (!bootcamp) {
     res.status(404);
     throw new Error('Bootcamp Not Found');
   }
-  res.status(200).json({ success: true, data: bootcamp });
+  if (bootcamp.user.toString() !== req.user.id && user.role !== 'admin') {
+    res.status(401);
+    throw new Error('Not Authorized To Update This BootCamp');
+  }
+
+  const updatedBootcamp = await Bootcamp.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+
+  res.status(200).json({ success: true, data: updatedBootcamp });
 });
 
 // getbootcamps within a radius
