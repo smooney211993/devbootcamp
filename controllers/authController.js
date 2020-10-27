@@ -55,8 +55,18 @@ const getMe = asyncHandler(async (req, res) => {
 });
 
 // private
-//ap1/v1/auth/updatedetails
-const updateDetails = asyncHandler(async (req, res) => {});
+//ap1/v1/me/updatedetails
+const updateDetails = asyncHandler(async (req, res) => {
+  const { email, name } = req.body;
+  const user = await User.findById(req.user.id);
+  user.email = email;
+  user.name = name;
+  await user.save({ validateBeforeSave: false });
+  res.status(200).json({
+    success: true,
+    data: user,
+  });
+});
 
 // ap1/v1/auth/forgotpassword
 //public
@@ -139,4 +149,5 @@ module.exports = {
   getMe,
   forgotPassword,
   resetPassword,
+  updateDetails,
 };
