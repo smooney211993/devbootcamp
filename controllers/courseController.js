@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
 const Course = require('../models/Course');
+const User = require('../models/User');
 const Bootcamp = require('../models/Bootcamps');
 
 // Get courses
@@ -45,9 +46,14 @@ const createCourse = asyncHandler(async (req, res) => {
   const { bootcampId } = req.params;
   req.body.bootcamp = bootcampId;
   const bootcampExists = await Bootcamp.findById(bootcampId);
+  const user = await User.findById(req.user.id);
   if (!bootcampExists) {
     res.status(404);
     throw new Error(`Bootcamp Does Not Exist With The ID of ${bootcampId}`);
+  }
+  if (bootcampExists.user.toString() !== req.user.id && user.role !== 'admin') {
+    res.status(401);
+    throw new Error('Not Authorized To Create A Course To This BootCamp');
   }
   const {
     title,
@@ -79,6 +85,11 @@ const createCourse = asyncHandler(async (req, res) => {
 //api/v1/courses/:id
 const updateCourse = asyncHandler(async (req, res) => {
   let course = await Course.findById(req.params.id);
+  const user = await User.findById(req.user.id);
+  if (course.user.toString !== req.user.id && user.role !== 'admin') {
+    res.status(401);
+    throw new Error('Not Authorized To Update This Course');
+  }
   if (!course) {
     res.status(404);
     throw new Error('Course Not Found');
@@ -95,6 +106,11 @@ const updateCourse = asyncHandler(async (req, res) => {
 
 const deleteCourse = asyncHandler(async (req, res) => {
   const course = await Course.findById(req.params.id);
+  const user = await User.findById(req.user.id);
+  if (course.user.toString !== req.user.id && user.role !== 'admin') {
+    res.status(401);
+    throw new Error('Not Authorized To Update This Course');
+  }
   if (!course) {
     res.status(404);
     throw new Error('Course Not Found');
