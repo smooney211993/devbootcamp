@@ -51,7 +51,8 @@ const getMe = asyncHandler(async (req, res) => {
 
   res.status(200).json({ success: true, data: user });
 });
-
+// ap1/v1/auth/forgotpassword
+//public
 const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
@@ -61,6 +62,11 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }
 
   const resetToken = user.getResetPasswordtoken();
+  await user.save({ validateBeforeSave: false });
+  res.json({
+    success: true,
+    data: user,
+  });
 });
 
 const sendTokenResponse = (user, statusCode, res) => {
@@ -85,4 +91,5 @@ module.exports = {
   register,
   login,
   getMe,
+  forgotPassword,
 };
