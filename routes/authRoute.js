@@ -4,6 +4,7 @@ const {
   login,
   getMe,
   forgotPassword,
+  resetPassword,
 } = require('../controllers/authController');
 const authToken = require('../middleware/authToken');
 
@@ -13,5 +14,6 @@ router.route('/register').post(register);
 router.route('/login').post(login);
 router.route('/me').get(authToken, getMe);
 router.route('/forgotpassword').post(forgotPassword);
+router.route('/resetpassword/:resettoken').put(resetPassword);
 
 module.exports = router;

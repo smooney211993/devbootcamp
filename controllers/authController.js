@@ -2,6 +2,7 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const sendEmail = require('../utils/sendEmail');
+const crypto = require('crypto');
 
 // api/v1/auth/register
 //public
@@ -63,11 +64,50 @@ const forgotPassword = asyncHandler(async (req, res) => {
   }
 
   const resetToken = user.getResetPasswordtoken();
+
   await user.save({ validateBeforeSave: false });
-  res.json({
-    success: true,
-    data: user,
+  const resetUrl = `${req.protocol}://${req.get(
+    'host'
+  )}/api/v1/auth/resetpassword/${resetToken}`;
+  const message = `You or someone else has requested a password reset. Please make a PUT request to : \n\n\ ${resetUrl}`;
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: 'Password Reset',
+      message,
+    });
+    res.status(200).json({ success: true, data: 'Email Sent' });
+  } catch (error) {
+    console.log(error);
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpired = undefined;
+    await user.save({ validateBeforeSave: false });
+    res.status(500);
+    throw new Error('Email Could Not Be Sent');
+  }
+});
+
+// reset Password
+//PUT api/v1/auth/resetpassword/:resettoken
+//public
+const resetPassword = asyncHandler(async (req, res) => {
+  const resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(req.params.resettoken)
+    .digest('hex');
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
   });
+  if (!user) {
+    res.status(400);
+    throw new Error('Invalid Token');
+  }
+  user.password = req.body.password;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpired = undefined;
+  await user.save({ validateBeforeSave: false });
+  sendTokenResponse(user, 200, res);
 });
 
 const sendTokenResponse = (user, statusCode, res) => {
@@ -93,4 +133,5 @@ module.exports = {
   login,
   getMe,
   forgotPassword,
+  resetPassword,
 };
