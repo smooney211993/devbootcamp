@@ -53,6 +53,11 @@ const getMe = asyncHandler(async (req, res) => {
 
   res.status(200).json({ success: true, data: user });
 });
+
+// private
+//ap1/v1/auth/updatedetails
+const updateDetails = asyncHandler(async (req, res) => {});
+
 // ap1/v1/auth/forgotpassword
 //public
 const forgotPassword = asyncHandler(async (req, res) => {
