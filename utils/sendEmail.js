@@ -10,16 +10,17 @@ const sendEmail = async (options) => {
     },
   });
 
-  let info = await transporter.sendMail({
-    from: '"Fred Foo 👻" <foo@example.com>',
-    to: 'bar@example.com, baz@example.com',
-    subject: 'Hello ✔',
-    text: 'Hello world?',
+  let message = {
+    from: `${process.env.FROM_NAME}<${process.env.FROM_EMAIL}>`,
+    to: options.email,
+    subject: options.subject,
+    text: options.message,
     html: '<b>Hello world?</b>',
-  });
-
+  };
+  const info = await transporter.sendMail(message);
   console.log('Message sent: %s', info.messageId);
 
-  // Preview only available when sending through an Ethereal account
   console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 };
+
+module.exports = sendEmail;
