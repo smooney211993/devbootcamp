@@ -52,6 +52,17 @@ const getMe = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true, data: user });
 });
 
+const forgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (!user) {
+    res.status(404);
+    throw new Error('There Is No Account With This Email');
+  }
+
+  const resetToken = user.getResetPasswordtoken();
+});
+
 const sendTokenResponse = (user, statusCode, res) => {
   const token = user.getSignedJwtToken();
 
