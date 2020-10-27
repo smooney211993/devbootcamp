@@ -46,6 +46,10 @@ const deleteBootCamp = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error('Bootcamp Not Found');
   }
+  if (bootcamp.user.toString() !== req.user.id && user.role !== 'admin') {
+    res.status(401);
+    throw new Error('Not Authorized To Delete This BootCamp');
+  }
   await bootcamp.remove();
   res.status(200).json({ success: true, msg: 'Bootcamp Successfully Deleted' });
 });
