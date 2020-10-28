@@ -59,6 +59,7 @@ const getMe = asyncHandler(async (req, res) => {
 const updateDetails = asyncHandler(async (req, res) => {
   const { email, name } = req.body;
   const user = await User.findById(req.user.id);
+
   user.email = email;
   user.name = name;
   await user.save({ validateBeforeSave: false });
@@ -66,6 +67,22 @@ const updateDetails = asyncHandler(async (req, res) => {
     success: true,
     data: user,
   });
+});
+
+// update password
+//api/v1/auth/me/updatepassword
+// private
+const updatePassword = asyncHandler(async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const user = await User.findById(req.user.id);
+  if (!(await user.matchPassword(user.password))) {
+    res.status(401);
+    throw new Error('Password Is Incorrect');
+  }
+
+  user.password = newPassword;
+  await user.save({ validateBeforeSave: false });
+  sendTokenResponse(user, 200, res);
 });
 
 // ap1/v1/auth/forgotpassword
@@ -150,4 +167,5 @@ module.exports = {
   forgotPassword,
   resetPassword,
   updateDetails,
+  updatePassword,
 };

@@ -6,6 +6,7 @@ const {
   forgotPassword,
   resetPassword,
   updateDetails,
+  updatePassword,
 } = require('../controllers/authController');
 const authToken = require('../middleware/authToken');
 
@@ -15,6 +16,7 @@ router.route('/register').post(register);
 router.route('/login').post(login);
 router.route('/me').get(authToken, getMe);
 router.route('/me/updatedetails').put(authToken, updateDetails);
+router.route('/me/updatepassword').put(authToken, updatePassword);
 router.route('/forgotpassword').post(forgotPassword);
 router.route('/resetpassword/:resettoken').put(resetPassword);
 
