@@ -37,7 +37,40 @@ const getReviewById = asyncHandler(async (req, res) => {
   });
 });
 
+// Add Reviw
+// POST /api/v1/bootcamps:bootcampId/reviews
+
+const addReview = asyncHandler(async (req, res) => {
+  const { bootcampId } = req.params;
+  const { title, text, rating } = req.body;
+  const bootcamp = await Bootcamp.findById(bootcampId);
+  if (!bootcamp) {
+    res.status(404);
+    throw new Error('Bootcamp Does Not Exist');
+  }
+
+  const reviewExists = await Review.findOne({ user: req.user.id });
+  if (reviewExists) {
+    res.status(400);
+    throw new Error('User Already Submitted A Review');
+  }
+
+  const newReview = new Review({
+    title,
+    text,
+    rating,
+    user: req.user.id,
+    bootcamp: bootcampId,
+  });
+  await newReview.save();
+  res.status(201).json({
+    success: true,
+    data: newReview,
+  });
+});
+
 module.exports = {
   getReviews,
   getReviewById,
+  addReview,
 };
