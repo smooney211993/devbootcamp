@@ -8,6 +8,7 @@ const getUsersAsAdmin = asyncHandler(async (rec, res) => {
   res.status(200).json(res.advanceResults);
 });
 
+// GET/api/v1/auth/users/:id
 const getUserByIdAsAdmin = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (!user) {
@@ -19,7 +20,28 @@ const getUserByIdAsAdmin = asyncHandler(async (req, res) => {
     data: user,
   });
 });
+
+//POST api/v1/auth/users
+//Create users
+//admin only
+const createUserAsAdmin = asyncHandler(async (req, res) => {
+  const { name, email, role, password } = req.body;
+  const newUser = new User({
+    name,
+    email,
+    role,
+    password,
+    createdAt: Date.now(),
+  });
+  await newUser.save();
+  res.status(201).json({
+    success: true,
+    data: newUser,
+  });
+});
+
 module.exports = {
   getUsersAsAdmin,
   getUserByIdAsAdmin,
+  createUserAsAdmin,
 };
