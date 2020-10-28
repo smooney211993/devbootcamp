@@ -6,6 +6,7 @@ const {
   getUserByIdAsAdmin,
   createUserAsAdmin,
   updateUserAsAdmin,
+  deleteUserAsAdmin,
 } = require('../controllers/userController');
 const User = require('../models/User');
 const express = require('express');
@@ -20,6 +21,7 @@ router
 router
   .route('/:id')
   .get(authToken, isAdmin, getUserByIdAsAdmin)
-  .put(authToken, isAdmin, updateUserAsAdmin);
+  .put(authToken, isAdmin, updateUserAsAdmin)
+  .delete(authToken, isAdmin, deleteUserAsAdmin);
 
 module.exports = router;

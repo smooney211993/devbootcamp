@@ -41,6 +41,8 @@ const createUserAsAdmin = asyncHandler(async (req, res) => {
 });
 
 // PUT /api/v1/auth/users/:id
+// update user details
+//admin only
 const updateUserAsAdmin = asyncHandler(async (req, res) => {
   const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
@@ -52,9 +54,21 @@ const updateUserAsAdmin = asyncHandler(async (req, res) => {
   });
 });
 
+// DELETE /api/v1/auth/users/:id
+// delete users
+//admin only
+const deleteUserAsAdmin = asyncHandler(async (req, res) => {
+  await User.findByIdAndDelete(req.params.id);
+  res.status(200).json({
+    success: true,
+    data: 'User Successfully Deleted',
+  });
+});
+
 module.exports = {
   getUsersAsAdmin,
   getUserByIdAsAdmin,
   createUserAsAdmin,
   updateUserAsAdmin,
+  deleteUserAsAdmin,
 };
