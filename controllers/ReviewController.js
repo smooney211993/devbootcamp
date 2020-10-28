@@ -23,7 +23,10 @@ const getReviews = asyncHandler(async (req, res) => {
 // api/v1/reviews/:id
 // public
 const getReviewById = asyncHandler(async (req, res) => {
-  const review = await Review.findById(req.params.id);
+  const review = await Review.findById(req.params.id).populate({
+    path: 'bootcamp',
+    select: 'name description',
+  });
   if (!review) {
     res.status(400);
     throw new Error('Review Not Found');
