@@ -70,8 +70,58 @@ const addReview = asyncHandler(async (req, res) => {
   });
 });
 
+//update review
+// api/v1/reviews/:id
+// admin and user who made the review
+const updateReview = asyncHandler(async (req, res) => {
+  const review = await Review.findById(req.params.id);
+  const user = await User.findById(req.user.id);
+  if (!review) {
+    res.status(404);
+    throw new Error('Review Does Not Exist');
+  }
+  if (review.user.toString() !== req.user.id && user.role !== 'admin') {
+    res.status(400);
+    throw new Error('Not Authorized To Update Review');
+  }
+
+  const updatedReview = await Review.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  res.status(200).json({
+    success: true,
+    data: updatedReview,
+  });
+});
+
+const deleteReview = asyncHandler(async (req, res) => {
+  const review = await Review.findById(req.params.id);
+  const user = await User.findById(req.user.id);
+  if (!review) {
+    res.status(404);
+    throw new Error('Review Does Not Exist');
+  }
+  if (review.user.toString() !== req.user.id && user.role !== 'admin') {
+    res.status(400);
+    throw new Error('Not Authorized To Update Review');
+  }
+
+  await review.remove();
+  res.status(200).json({
+    success: true,
+    data: 'Review Successfully Deleted',
+  });
+});
+
 module.exports = {
   getReviews,
   getReviewById,
   addReview,
+  updateReview,
+  deleteReview,
 };

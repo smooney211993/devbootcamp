@@ -6,6 +6,8 @@ const {
   getReviews,
   getReviewById,
   addReview,
+  updateReview,
+  deleteReview,
 } = require('../controllers/reviewController');
 const express = require('express');
 
@@ -22,6 +24,10 @@ router
   )
   .post(authToken, addReview);
 
-router.route('/:id').get(getReviewById);
+router
+  .route('/:id')
+  .get(getReviewById)
+  .put(authToken, updateReview)
+  .delete(authToken, deleteReview);
 
 module.exports = router;
