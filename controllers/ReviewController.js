@@ -39,6 +39,7 @@ const getReviewById = asyncHandler(async (req, res) => {
 
 // Add Reviw
 // POST /api/v1/bootcamps:bootcampId/reviews
+// private
 
 const addReview = asyncHandler(async (req, res) => {
   const { bootcampId } = req.params;
