@@ -9,8 +9,8 @@ const router = express.Router({ mergeParams: true });
 
 router.route('/').get(
   advanceResults(Review, {
-    path: 'bootcamp',
-    select: 'name',
+    path: 'user bootcamp ',
+    select: 'name description',
   }),
   getReviews
 );
