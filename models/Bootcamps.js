@@ -2,6 +2,21 @@ const mongoose = require('mongoose');
 const slugify = require('slugify');
 const geocoder = require('../utils/geocoder');
 
+const reviewSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  rating: { type: Number, required: true },
+  comment: { type: String, required: true },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 const BootcampSchema = new mongoose.Schema(
   {
     name: {
@@ -104,6 +119,7 @@ const BootcampSchema = new mongoose.Schema(
       ref: 'User',
       required: true,
     },
+    reviews: [reviewSchema],
   },
   {
     toJSON: { virtuals: true },
