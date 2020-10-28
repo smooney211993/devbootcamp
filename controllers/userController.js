@@ -5,7 +5,7 @@ const User = require('../models/User');
 // private admin
 
 const getUsersAsAdmin = asyncHandler(async (rec, res) => {
-  res.status(200).json(res.addvanceResults);
+  res.status(200).json(res.advanceResults);
 });
 
 module.exports = {
