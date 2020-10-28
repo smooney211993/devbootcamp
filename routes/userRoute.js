@@ -5,6 +5,7 @@ const {
   getUsersAsAdmin,
   getUserByIdAsAdmin,
   createUserAsAdmin,
+  updateUserAsAdmin,
 } = require('../controllers/userController');
 const User = require('../models/User');
 const express = require('express');
@@ -16,6 +17,9 @@ router
   .get(authToken, isAdmin, advanceResults(User), getUsersAsAdmin)
   .post(authToken, isAdmin, createUserAsAdmin);
 
-router.route('/:id').get(authToken, isAdmin, getUserByIdAsAdmin);
+router
+  .route('/:id')
+  .get(authToken, isAdmin, getUserByIdAsAdmin)
+  .put(authToken, isAdmin, updateUserAsAdmin);
 
 module.exports = router;

@@ -40,8 +40,21 @@ const createUserAsAdmin = asyncHandler(async (req, res) => {
   });
 });
 
+// PUT /api/v1/auth/users/:id
+const updateUserAsAdmin = asyncHandler(async (req, res) => {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(201).json({
+    success: data,
+    data: user,
+  });
+});
+
 module.exports = {
   getUsersAsAdmin,
   getUserByIdAsAdmin,
   createUserAsAdmin,
+  updateUserAsAdmin,
 };
