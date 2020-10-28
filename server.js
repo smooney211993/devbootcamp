@@ -16,6 +16,7 @@ const bootcamp = require('./routes/bootcampRoute');
 const course = require('./routes/courseRoute');
 const auth = require('./routes/authRoute');
 const user = require('./routes/userRoute');
+const review = require('./routes/reviewRoute');
 app.use(express.json());
 app.use(cookieParser());
 
@@ -27,6 +28,7 @@ app.use('/api/v1/bootcamps', bootcamp);
 app.use('/api/v1/courses', course);
 app.use('/api/v1/auth', auth);
 app.use('/api/v1/auth/users', user);
+app.use('/api/v1/reviews', review);
 
 // errorhandler
 app.use(notFound);
