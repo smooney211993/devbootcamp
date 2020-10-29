@@ -9,13 +9,11 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <main>
+      <Container>
         <Switch>
-          <Container>
-            <Route exact path='/' component={Landing} />
-          </Container>
+          <Route exact path='/' component={Landing} />
         </Switch>
-      </main>
+      </Container>
     </Router>
   );
 };
