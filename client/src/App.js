@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { getBootcamps } from './actions/bootcampActions';
-import { useDispatch } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import Header from './Components/Layout/Header';
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getBootcamps());
-  }, [dispatch]);
-  return <div>HEllo</div>;
+  return (
+    <Router>
+      <Header />
+    </Router>
+  );
 };
 export default App;
