@@ -85,6 +85,8 @@ const advanceResults = (model, populate) => async (req, res, next) => {
     count: results.length,
     pagination,
     data: results,
+    page,
+    pages: Math.ceil(total / pageSize),
   };
   next();
 };

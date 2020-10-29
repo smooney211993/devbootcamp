@@ -2,13 +2,16 @@ import React, { useEffect } from 'react';
 import { Container, Col, Row, Card, Form, Button } from 'react-bootstrap';
 import { getBootcamps } from '../../actions/bootcampActions';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Landing = () => {
   const dispatch = useDispatch();
+  const { bootcampList, loading, error } = useSelector(
+    (state) => state.bootcampList
+  );
   useEffect(() => {
     dispatch(getBootcamps());
-  });
+  }, [dispatch]);
 
   return (
     <Container>
