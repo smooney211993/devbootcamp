@@ -13,7 +13,7 @@ const initialState = {
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case type.BOOTCAMPS_LIST_REQUEST:
+    case BOOTCAMPS_LIST_REQUEST:
       return { ...state, loading: true };
     case BOOTCAMPS_LIST_SUCCESS:
       return {
