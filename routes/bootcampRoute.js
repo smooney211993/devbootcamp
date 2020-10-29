@@ -22,7 +22,7 @@ router.use('/:bootcampId/courses', courseRouter);
 router.use('/:bootcampId/reviews', reviewRouter);
 
 router.route('/radius/:zipcode/:distance').get(getBootcampsViaRadius);
-router.route('/:id/photo').put(bootcampPhotoUpload);
+router.route('/:id/photo').put(authToken, bootcampPhotoUpload);
 
 router
   .route('/')
