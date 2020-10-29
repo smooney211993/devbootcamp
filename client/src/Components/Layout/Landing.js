@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react';
 import { Container, Col, Row, Card, Form, Button } from 'react-bootstrap';
 import { getBootcamps } from '../../actions/bootcampActions';
+import Spinner from './Spinner';
+import Message from './Message';
+import BootcampCard from '../Bootcamps/BootcampCard';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -37,7 +40,21 @@ const Landing = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col md={8}></Col>
+        <Col md={8}>
+          {loading ? (
+            <Spinner />
+          ) : error ? (
+            <Message variant='danger'>{error.msg}</Message>
+          ) : (
+            <>
+              {bootcampList.map((bootcamp) => (
+                <Row key={bootcamp._id} className='my-2 p-2'>
+                  <BootcampCard bootcamp={bootcamp} />
+                </Row>
+              ))}
+            </>
+          )}
+        </Col>
       </Row>
     </Container>
   );
