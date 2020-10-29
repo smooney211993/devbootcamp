@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
 const app = express();
 const PORT = process.env.PORT || 5000;
+const mongoSanitize = require('express-mongo-sanitize');
 const fileupload = require('express-fileupload');
 const connectDB = require('./config/db');
 const { errorHandler, notFound } = require('./middleware/errorHandler');
@@ -23,6 +24,8 @@ app.use(cookieParser());
 app.use(fileupload());
 // set static folder
 app.use(express.static(path.join(__dirname, 'public')));
+//sanitize
+app.use(mongoSanitize());
 
 app.use('/api/v1/bootcamps', bootcamp);
 app.use('/api/v1/courses', course);
