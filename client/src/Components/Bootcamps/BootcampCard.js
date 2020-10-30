@@ -17,7 +17,9 @@ const BootcampCard = ({ bootcamp }) => {
 
         <Row>
           <Col md={4}>
-            <Card.Img src={bootcamp.photo} />
+            <Link to={`/bootcamp/${bootcamp._id}`}>
+              <Card.Img src={bootcamp.photo} />
+            </Link>
           </Col>
           <Col md={8}>
             <Card.Text>{bootcamp.description}</Card.Text>
