@@ -19,7 +19,7 @@ const Bootcamp = ({ match }) => {
   const id = match.params.id;
   const dispatch = useDispatch();
   const {
-    bootcamp: { careers, photo, housing, website, email, name },
+    bootcamp: { careers, photo, housing, website, email, name, description },
     state,
     city,
     loading,
@@ -31,8 +31,11 @@ const Bootcamp = ({ match }) => {
     <Spinner />
   ) : (
     <>
-      <Jumbotron className='my-4'>
+      <Jumbotron className='my-4' style={{ height: '20vh' }}>
         <Row>
+          <Col md={8}>
+            <div>{description}</div>
+          </Col>
           <Col md={4}>
             <Card>
               <Card.Img variant='top' src={photo} />
