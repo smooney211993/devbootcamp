@@ -8,6 +8,8 @@ import {
   ListGroup,
 } from 'react-bootstrap';
 
+import Spinner from '../Layout/Spinner';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { getBootcamp } from '../../actions/bootcampActions';
 
@@ -15,20 +17,17 @@ const Bootcamp = ({ match }) => {
   const id = match.params.id;
   const dispatch = useDispatch();
   const {
-    bootcamp: {
-      location: { city, state },
-      careers,
-      photo,
-      housing,
-      website,
-      email,
-      name,
-    },
+    bootcamp: { careers, photo, housing, website, email, name },
+    state,
+    city,
+    loading,
   } = useSelector((state) => state.bootcamp);
   useEffect(() => {
     dispatch(getBootcamp(id));
   }, [dispatch, id]);
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <>
       <Jumbotron className='my-4'>
         <Row>
@@ -39,8 +38,14 @@ const Bootcamp = ({ match }) => {
                 <ListGroup variant='flush'>
                   <ListGroup.Item>{name}</ListGroup.Item>
                   <ListGroup.Item>{website}</ListGroup.Item>
-                  <ListGroup.Item>{email}</ListGroup.Item>
-                  <ListGroup.Item>{`${city}, ${state}`}</ListGroup.Item>
+                  <ListGroup.Item>
+                    <i className='far fa-envelope p-2'></i>
+                    {email}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <i className='fas fa-location-arrow p-2'></i>
+                    {`${state}, ${city}`}
+                  </ListGroup.Item>
                 </ListGroup>
               </Card.Body>
             </Card>

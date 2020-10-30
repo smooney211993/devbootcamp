@@ -8,6 +8,8 @@ const initialState = {
   bootcamp: {},
   loading: null,
   error: null,
+  city: null,
+  state: null,
 };
 
 export default function (state = initialState, action) {
@@ -16,7 +18,13 @@ export default function (state = initialState, action) {
     case BOOTCAMP_REQUEST:
       return { ...state, loading: true };
     case BOOTCAMP_SUCCESS:
-      return { ...state, loading: false, bootcamp: payload.data };
+      return {
+        ...state,
+        loading: false,
+        bootcamp: payload.data,
+        city: payload.data.location.city,
+        state: payload.data.location.state,
+      };
     case BOOTCAMP_FAIL:
       return {
         ...state,

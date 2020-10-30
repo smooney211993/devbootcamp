@@ -3,7 +3,7 @@ import {
   BOOTCAMPS_LIST_SUCCESS,
   BOOTCAMPS_LIST_FAIL,
 } from '../actions/types';
-import { fetchBootcamps, fetchBootCampById } from '../api/bootcamps';
+import { fetchBootcamps } from '../api/bootcamps';
 
 import { call, put, takeEvery } from 'redux-saga/effects';
 
