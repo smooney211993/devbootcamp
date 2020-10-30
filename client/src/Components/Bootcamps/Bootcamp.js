@@ -31,41 +31,56 @@ const Bootcamp = ({ match }) => {
     <Spinner />
   ) : (
     <>
-      <Jumbotron className='my-4' style={{ height: '20vh' }}>
-        <Row>
-          <Col md={8}>
-            <div>{description}</div>
-          </Col>
-          <Col md={4}>
-            <Card>
-              <Card.Img variant='top' src={photo} />
-              <Card.Body>
-                <ListGroup variant='flush'>
-                  <ListGroup.Item>
-                    <i className='fas fa-campground m-2'></i>
-                    {name}
-                  </ListGroup.Item>
+      <Row>
+        <Col md={4}>
+          <Card className='my-2'>
+            <Card.Img variant='top' src={photo} />
+            <Card.Body>
+              <ListGroup variant='flush'>
+                <ListGroup.Item>
+                  <i className='fas fa-campground m-2'></i>
+                  {name}
+                </ListGroup.Item>
 
-                  <ListGroup.Item>
-                    <a className='m-2' href={website}>
-                      {website}{' '}
-                    </a>
-                  </ListGroup.Item>
+                <ListGroup.Item>
+                  <a className='m-2' href={website}>
+                    {website}{' '}
+                  </a>
+                </ListGroup.Item>
 
-                  <ListGroup.Item>
-                    <i className='far fa-envelope m-2'></i>
-                    {email}
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    <i className='fas fa-location-arrow m-2'></i>
-                    {`${state}, ${city}`}
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Jumbotron>
+                <ListGroup.Item>
+                  <i className='far fa-envelope m-2'></i>
+                  {email}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <i className='fas fa-location-arrow m-2'></i>
+                  {`${state}, ${city}`}
+                </ListGroup.Item>
+              </ListGroup>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col>
+          <ListGroup className='my-2'>
+            <ListGroup.Item>
+              <h3>Description</h3>
+              <p>{description}</p>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <h3 className='my-2'>Careers</h3>
+              <Row>
+                {careers.map((career, i) => (
+                  <Col key={i} md={3}>
+                    <ul>
+                      <li>{career}</li>
+                    </ul>
+                  </Col>
+                ))}
+              </Row>
+            </ListGroup.Item>
+          </ListGroup>
+        </Col>
+      </Row>
     </>
   );
 };
