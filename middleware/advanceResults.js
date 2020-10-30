@@ -82,7 +82,7 @@ const advanceResults = (model, populate) => async (req, res, next) => {
     res.status(404);
     throw new Error('model Not Found');
   }
-  console.log(`total is ${total} and the pageSize is ${pageSize}`);
+
   res.advanceResults = {
     success: true,
     count: results.length,

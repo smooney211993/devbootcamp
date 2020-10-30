@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
     case BOOTCAMP_REQUEST:
       return { ...state, loading: true };
     case BOOTCAMP_SUCCESS:
-      return { ...state, loading: false, bootcamp: payload };
+      return { ...state, loading: false, bootcamp: payload.data };
     case BOOTCAMP_FAIL:
       return {
         ...state,
