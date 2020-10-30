@@ -8,6 +8,8 @@ import {
   ListGroup,
 } from 'react-bootstrap';
 
+import { Link } from 'react-router-dom';
+
 import Spinner from '../Layout/Spinner';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -36,14 +38,23 @@ const Bootcamp = ({ match }) => {
               <Card.Img variant='top' src={photo} />
               <Card.Body>
                 <ListGroup variant='flush'>
-                  <ListGroup.Item>{name}</ListGroup.Item>
-                  <ListGroup.Item>{website}</ListGroup.Item>
                   <ListGroup.Item>
-                    <i className='far fa-envelope p-2'></i>
+                    <i className='fas fa-campground m-2'></i>
+                    {name}
+                  </ListGroup.Item>
+
+                  <ListGroup.Item>
+                    <a className='m-2' href={website}>
+                      {website}{' '}
+                    </a>
+                  </ListGroup.Item>
+
+                  <ListGroup.Item>
+                    <i className='far fa-envelope m-2'></i>
                     {email}
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    <i className='fas fa-location-arrow p-2'></i>
+                    <i className='fas fa-location-arrow m-2'></i>
                     {`${state}, ${city}`}
                   </ListGroup.Item>
                 </ListGroup>
