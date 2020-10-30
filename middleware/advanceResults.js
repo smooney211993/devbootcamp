@@ -53,13 +53,15 @@ const advanceResults = (model, populate) => async (req, res, next) => {
   const page = Number(req.query.pageNumber) || 1;
   const startIndex = (page - 1) * pageSize;
   const endIndex = page * pageSize;
-  const total = await model.countDocuments();
+  const total = await model.countDocuments(query);
+
   query = query.limit(pageSize).skip(pageSize * (page - 1));
   if (populate) {
     query = query.populate(populate);
   }
 
   const results = await query;
+
   // creates a pagination object in the response to tell clients how many more results are on the next page
   const pagination = {};
   if (endIndex < total) {
@@ -80,6 +82,7 @@ const advanceResults = (model, populate) => async (req, res, next) => {
     res.status(404);
     throw new Error('model Not Found');
   }
+  console.log(`total is ${total} and the pageSize is ${pageSize}`);
   res.advanceResults = {
     success: true,
     count: results.length,

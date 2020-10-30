@@ -12,6 +12,9 @@ const App = () => {
       <Container>
         <Switch>
           <Route exact path='/' component={Landing} />
+          <Route path='/search/:keyword/page/:pageNumber' component={Landing} />
+          <Route path='/search/:keyword' component={Landing} />
+          <Route path='/page/:pageNumber' component={Landing} />
         </Switch>
       </Container>
     </Router>

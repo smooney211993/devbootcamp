@@ -8,8 +8,9 @@ import { fetchBootcamps } from '../api/bootcamps';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 function* getAllBootCamps(action) {
+  const { keyword, pageNumber } = action.payload;
   try {
-    const bootcamps = yield call(fetchBootcamps);
+    const bootcamps = yield call(fetchBootcamps, keyword, pageNumber);
     yield put({ type: BOOTCAMPS_LIST_SUCCESS, payload: bootcamps });
   } catch (error) {
     yield put({

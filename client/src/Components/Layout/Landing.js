@@ -1,21 +1,32 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Col, Row, Card, Form, Button } from 'react-bootstrap';
 import { getBootcamps } from '../../actions/bootcampActions';
 import Spinner from './Spinner';
 import Message from './Message';
 import BootcampCard from '../Bootcamps/BootcampCard';
+import Paginate from './Paginate';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-const Landing = () => {
+const Landing = ({ match, history }) => {
+  const keyword = match.params.keyword || '';
+  const pageNumber = match.params.pageNumber || 1;
+  const [search, setSearch] = useState('');
   const dispatch = useDispatch();
-  const { bootcampList, loading, error } = useSelector(
+  const { bootcampList, loading, error, page, pages } = useSelector(
     (state) => state.bootcampList
   );
   useEffect(() => {
-    dispatch(getBootcamps());
-  }, [dispatch]);
-
+    dispatch(getBootcamps(keyword, pageNumber));
+  }, [dispatch, keyword, pageNumber]);
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      history.push(`/search/${search}`);
+    } else {
+      history.push('/');
+    }
+  };
   return (
     <Container>
       <Row>
@@ -25,18 +36,28 @@ const Landing = () => {
               <Card.Title>By Keyword</Card.Title>
               <Row>
                 <Col className='my-2'>
-                  <Form.Group>
-                    <Form.Control
-                      type='text'
-                      placeholder='Search'></Form.Control>
-                  </Form.Group>
+                  <Form onSubmit={onSubmitHandler}>
+                    <Form.Group>
+                      <Form.Control
+                        type='text'
+                        placeholder='Search'
+                        value={search}
+                        onChange={(e) =>
+                          setSearch(e.target.value)
+                        }></Form.Control>
+                    </Form.Group>
+                    <Button
+                      variant='primary'
+                      size='sm'
+                      className='m-2'
+                      block
+                      type='submit'>
+                      Search
+                    </Button>
+                  </Form>
                 </Col>
               </Row>
-              <Row>
-                <Button variant='primary' size='sm' className='m-2' block>
-                  Search
-                </Button>
-              </Row>
+              <Row></Row>
             </Card.Body>
           </Card>
         </Col>
@@ -54,6 +75,7 @@ const Landing = () => {
               ))}
             </>
           )}
+          <Paginate pages={pages} page={page} keyword={keyword} />
         </Col>
       </Row>
     </Container>
