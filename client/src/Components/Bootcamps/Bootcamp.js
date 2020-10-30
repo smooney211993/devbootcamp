@@ -1,14 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Row,
-  Col,
-  Container,
-  Card,
-  Jumbotron,
-  ListGroup,
-} from 'react-bootstrap';
-
-import { Link } from 'react-router-dom';
+import { Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 import Spinner from '../Layout/Spinner';
 
@@ -69,13 +60,15 @@ const Bootcamp = ({ match }) => {
             <ListGroup.Item>
               <h3 className='my-2'>Careers</h3>
               <Row>
-                {careers.map((career, i) => (
-                  <Col key={i} md={3}>
-                    <ul>
-                      <li>{career}</li>
-                    </ul>
-                  </Col>
-                ))}
+                {careers &&
+                  careers.length > 0 &&
+                  careers.map((career, i) => (
+                    <Col key={i} md={3}>
+                      <ul id='careers-list'>
+                        <li>{career}</li>
+                      </ul>
+                    </Col>
+                  ))}
               </Row>
             </ListGroup.Item>
           </ListGroup>

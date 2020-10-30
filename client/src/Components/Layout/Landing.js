@@ -68,11 +68,12 @@ const Landing = ({ match, history }) => {
             <Message variant='danger'>{error.msg}</Message>
           ) : (
             <>
-              {bootcampList.map((bootcamp) => (
-                <Row key={bootcamp._id} className='my-2 p-2'>
-                  <BootcampCard bootcamp={bootcamp} />
-                </Row>
-              ))}
+              {bootcampList.length > 0 &&
+                bootcampList.map((bootcamp) => (
+                  <Row key={bootcamp._id} className='my-2 p-2'>
+                    <BootcampCard bootcamp={bootcamp} />
+                  </Row>
+                ))}
             </>
           )}
           <Paginate pages={pages} page={page} keyword={keyword} />
