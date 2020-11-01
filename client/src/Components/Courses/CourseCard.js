@@ -8,7 +8,10 @@ const CourseCard = ({ course, bootcampId }) => {
     <Card ClassName='text-center'>
       <Card.Header>
         <Link to={`/${bootcampId}/course/${course._id}`}>
-          <Card.Header>{course.title}</Card.Header>
+          <Card.Header>
+            <i class='fab fa-js-square my-2 p-2'></i>
+            {course.title}
+          </Card.Header>
         </Link>
       </Card.Header>
 

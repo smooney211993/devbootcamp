@@ -120,14 +120,19 @@ const Bootcamp = ({ match }) => {
               )}
             </Card.Footer>
           </Card>
-          <Row>
-            {courses.length > 0 &&
-              courses.map((course) => (
-                <Col key={course._id} className='my-2'>
-                  <CourseCard course={course} bootcampId={id} />
-                </Col>
-              ))}
-          </Row>
+          <Card className='my-2'>
+            <Card.Header>Courses</Card.Header>
+            <Card.Body>
+              <Row>
+                {courses.length > 0 &&
+                  courses.map((course) => (
+                    <Col md={6} key={course._id} className='my-2'>
+                      <CourseCard course={course} bootcampId={id} />
+                    </Col>
+                  ))}
+              </Row>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </>
