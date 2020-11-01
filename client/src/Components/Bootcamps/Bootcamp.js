@@ -15,7 +15,6 @@ const Bootcamp = ({ match }) => {
     bootcamp: {
       careers,
       photo,
-      housing,
       website,
       email,
       name,
@@ -27,6 +26,9 @@ const Bootcamp = ({ match }) => {
     city,
     loading,
   } = useSelector((state) => state.bootcamp);
+  const { reviews, loading: loadingReviews, error: errorReviews } = useSelector(
+    (state) => state.bootcampReviews
+  );
   useEffect(() => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));
@@ -96,10 +98,20 @@ const Bootcamp = ({ match }) => {
                   ))}
               </Row>
             </ListGroup.Item>
-            <ListGroup.Item>
-              <h3>Featured Review</h3>
-            </ListGroup.Item>
           </ListGroup>
+          <Card>
+            <Card.Header>Featured Review</Card.Header>
+            <Card.Body>
+              <Card.Title className='my-2'>
+                {reviews && (
+                  <>
+                    {reviews[0].title} <Rating value={reviews[0].rating} />
+                  </>
+                )}
+              </Card.Title>
+              <p>{reviews && reviews[0].text}</p>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </>

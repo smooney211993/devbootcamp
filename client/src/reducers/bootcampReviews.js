@@ -5,7 +5,7 @@ import {
 } from '../actions/types';
 
 const initialState = {
-  reviews: [],
+  reviews: null,
   loading: null,
   error: null,
 };
