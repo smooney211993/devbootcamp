@@ -3,6 +3,7 @@ import { Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 import Spinner from '../Layout/Spinner';
 import Rating from '../Layout/Rating';
+import CourseCard from '../Courses/CourseCard';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getBootcamp, getBootCampReview } from '../../actions/bootcampActions';
@@ -25,6 +26,7 @@ const Bootcamp = ({ match }) => {
     state,
     city,
     loading,
+    courses,
   } = useSelector((state) => state.bootcamp);
   const { reviews, loading: loadingReviews, error: errorReviews } = useSelector(
     (state) => state.bootcampReviews
@@ -33,6 +35,7 @@ const Bootcamp = ({ match }) => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));
   }, [dispatch, id]);
+  console.log(id);
   return loading ? (
     <Spinner />
   ) : (
@@ -86,17 +89,15 @@ const Bootcamp = ({ match }) => {
 
             <ListGroup.Item>
               <h3 className='my-2'>Careers</h3>
-              <Row>
-                {careers &&
-                  careers.length > 0 &&
-                  careers.map((career, i) => (
-                    <Col key={i} md={3}>
-                      <ul id='careers-list'>
-                        <li>{career}</li>
-                      </ul>
-                    </Col>
-                  ))}
-              </Row>
+              {careers &&
+                careers.length > 0 &&
+                careers.map((career, i) => (
+                  <Row key={i}>
+                    <ul id='careers-list'>
+                      <li>{career}</li>
+                    </ul>
+                  </Row>
+                ))}
             </ListGroup.Item>
           </ListGroup>
           <Card>
@@ -119,6 +120,14 @@ const Bootcamp = ({ match }) => {
               )}
             </Card.Footer>
           </Card>
+          <Row>
+            {courses.length > 0 &&
+              courses.map((course) => (
+                <Col key={course._id} className='my-2'>
+                  <CourseCard course={course} bootcampId={id} />
+                </Col>
+              ))}
+          </Row>
         </Col>
       </Row>
     </>

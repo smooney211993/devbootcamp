@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   bootcamp: {},
+  courses: [],
   loading: null,
   error: null,
   city: null,
@@ -22,6 +23,7 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         bootcamp: payload.data,
+        courses: payload.data.courses,
         city: payload.data.location.city,
         state: payload.data.location.state,
       };
