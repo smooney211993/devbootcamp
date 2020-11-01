@@ -20,3 +20,13 @@ export const fetchBootcampById = async (id) => {
     throw error;
   }
 };
+
+export const fetchBootcampReviewById = async (id) => {
+  try {
+    const { data } = await axios.get(`/api/v1/bootcamps/${id}/reviews`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

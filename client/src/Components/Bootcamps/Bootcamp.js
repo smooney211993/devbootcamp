@@ -4,7 +4,7 @@ import { Row, Col, Card, ListGroup } from 'react-bootstrap';
 import Spinner from '../Layout/Spinner';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getBootcamp } from '../../actions/bootcampActions';
+import { getBootcamp, getBootCampReview } from '../../actions/bootcampActions';
 
 const Bootcamp = ({ match }) => {
   const id = match.params.id;
@@ -17,6 +17,7 @@ const Bootcamp = ({ match }) => {
   } = useSelector((state) => state.bootcamp);
   useEffect(() => {
     dispatch(getBootcamp(id));
+    dispatch(getBootCampReview(id));
   }, [dispatch, id]);
   return loading ? (
     <Spinner />
