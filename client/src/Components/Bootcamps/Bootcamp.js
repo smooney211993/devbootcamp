@@ -111,6 +111,13 @@ const Bootcamp = ({ match }) => {
               </Card.Title>
               <p>{reviews && reviews[0].text}</p>
             </Card.Body>
+            <Card.Footer>
+              {reviews && (
+                <>
+                  <i className='fas fa-user'> {reviews[0].user.name}</i>
+                </>
+              )}
+            </Card.Footer>
           </Card>
         </Col>
       </Row>
