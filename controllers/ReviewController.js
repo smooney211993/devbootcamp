@@ -8,7 +8,9 @@ const asyncHandler = require('express-async-handler');
 // GET api/v1/reviews
 const getReviews = asyncHandler(async (req, res) => {
   if (req.params.bootcampId) {
-    const reviews = await Review.find({ bootcamp: req.params.bootcampId });
+    const reviews = await Review.find({
+      bootcamp: req.params.bootcampId,
+    }).populate({ path: 'user', select: 'name' });
     return res.status(200).json({
       success: true,
       count: reviews.length,

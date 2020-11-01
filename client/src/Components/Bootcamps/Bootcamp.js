@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Row, Col, Card, ListGroup } from 'react-bootstrap';
 
 import Spinner from '../Layout/Spinner';
+import Rating from '../Layout/Rating';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getBootcamp, getBootCampReview } from '../../actions/bootcampActions';
@@ -10,7 +11,18 @@ const Bootcamp = ({ match }) => {
   const id = match.params.id;
   const dispatch = useDispatch();
   const {
-    bootcamp: { careers, photo, housing, website, email, name, description },
+    bootcamp,
+    bootcamp: {
+      careers,
+      photo,
+      housing,
+      website,
+      email,
+      name,
+      description,
+      averageRating,
+      averageCost,
+    },
     state,
     city,
     loading,
@@ -48,6 +60,17 @@ const Bootcamp = ({ match }) => {
                   <i className='fas fa-location-arrow m-2'></i>
                   {`${state}, ${city}`}
                 </ListGroup.Item>
+                <ListGroup.Item className='d-flex'>
+                  {bootcamp && (
+                    <>
+                      {averageRating}
+                      <Rating className='my-2' value={averageRating} />
+                    </>
+                  )}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  {bootcamp && <> Average Cost: ${averageCost}</>}
+                </ListGroup.Item>
               </ListGroup>
             </Card.Body>
           </Card>
@@ -58,6 +81,7 @@ const Bootcamp = ({ match }) => {
               <h3>Description</h3>
               <p>{description}</p>
             </ListGroup.Item>
+
             <ListGroup.Item>
               <h3 className='my-2'>Careers</h3>
               <Row>
@@ -71,6 +95,9 @@ const Bootcamp = ({ match }) => {
                     </Col>
                   ))}
               </Row>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <h3>Featured Review</h3>
             </ListGroup.Item>
           </ListGroup>
         </Col>
