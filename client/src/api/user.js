@@ -17,3 +17,13 @@ export const fetchUserToken = async (email, password) => {
     throw error;
   }
 };
+
+export const fetchUser = async () => {
+  try {
+    const { data } = await axios.get(`/api/v1/auth/me`);
+    return data;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

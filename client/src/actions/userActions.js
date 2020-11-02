@@ -1,4 +1,9 @@
-import { USER_LOGIN_REQUEST } from '../actions/types';
+import { USER_LOGIN_REQUEST, LOAD_USER_REQUEST } from '../actions/types';
+
+export const loadUser = () => ({
+  type: LOAD_USER,
+});
+
 export const userLogin = (email, password) => ({
   type: USER_LOGIN_REQUEST,
   payload: {
