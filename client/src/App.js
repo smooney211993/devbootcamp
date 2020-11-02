@@ -14,6 +14,7 @@ const App = () => {
   useEffect(() => {
     dispatch(loadUser());
   }, [dispatch]);
+  console.log(document.cookie);
   return (
     <Router>
       <Header />

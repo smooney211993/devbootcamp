@@ -29,7 +29,7 @@ export default function (state = initialState, action) {
         isAuthenticated: true,
       };
     case LOAD_USER_SUCCESS:
-      return { ...state, user: payload, error: null, loading: false };
+      return { ...state, user: payload.data, error: null, loading: false };
     case USER_LOGIN_FAIL:
       return {
         ...state,

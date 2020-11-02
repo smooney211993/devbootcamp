@@ -35,7 +35,7 @@ const Bootcamp = ({ match }) => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));
   }, [dispatch, id]);
-  return loading ? (
+  return loading || loadingReviews ? (
     <Spinner />
   ) : (
     <>
