@@ -28,12 +28,14 @@ const Bootcamp = ({ match }) => {
       description,
       averageRating,
       averageCost,
+      location,
     },
     state,
     city,
     loading,
     courses,
   } = useSelector((state) => state.bootcamp);
+
   const { reviews, loading: loadingReviews, error: errorReviews } = useSelector(
     (state) => state.bootcampReviews
   );
@@ -82,7 +84,16 @@ const Bootcamp = ({ match }) => {
                   {bootcamp && <> Average Cost: ${averageCost}</>}
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <LocationMap location={location} zoomLevel={8} />
+                  {bootcamp && location && (
+                    <LocationMap
+                      location={{
+                        address: location.formattedAddress,
+                        lat: location.coordinates[1],
+                        lng: location.coordinates[0],
+                      }}
+                      zoomLevel={10}
+                    />
+                  )}
                 </ListGroup.Item>
               </ListGroup>
             </Card.Body>
