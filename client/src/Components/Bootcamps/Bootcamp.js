@@ -35,7 +35,6 @@ const Bootcamp = ({ match }) => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));
   }, [dispatch, id]);
-  console.log(id);
   return loading ? (
     <Spinner />
   ) : (
@@ -76,6 +75,7 @@ const Bootcamp = ({ match }) => {
                 <ListGroup.Item>
                   {bootcamp && <> Average Cost: ${averageCost}</>}
                 </ListGroup.Item>
+                <ListGroup.Item></ListGroup.Item>
               </ListGroup>
             </Card.Body>
           </Card>
