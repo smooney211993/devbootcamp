@@ -5,6 +5,7 @@ import { Container } from 'react-bootstrap';
 import Header from './Components/Layout/Header';
 import Landing from './Components/Layout/Landing';
 import Bootcamp from './Components/Bootcamps/Bootcamp';
+import LoginScreen from './Components/Screens/LoginScreen';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path='/search/:keyword' component={Landing} />
           <Route path='/page/:pageNumber' component={Landing} />
           <Route path='/bootcamp/:id' component={Bootcamp} />
+          <Route exact path='/login' component={LoginScreen} />
         </Switch>
       </Container>
     </Router>
