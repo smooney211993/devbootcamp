@@ -20,7 +20,7 @@ export default function (state = initialState, action) {
       return { ...state, loading: true };
 
     case USER_LOGIN_SUCCESS:
-      return { ...state, loading: false, ...payload };
+      return { ...state, loading: false, token: payload.token };
     case USER_LOGIN_FAIL:
       return {
         ...state,

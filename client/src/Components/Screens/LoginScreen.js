@@ -1,13 +1,20 @@
 import React, { useState } from 'react';
 import { Form, Button, Col, Row, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { userLogin } from '../../actions/userActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const LoginScreen = () => {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(userLogin(email, password));
+  };
   return (
     <Container>
-      <Form>
+      <Form onSubmit={onSubmitHandler}>
         <Form.Group controlId='email'>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
