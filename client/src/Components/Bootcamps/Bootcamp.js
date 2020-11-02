@@ -4,9 +4,15 @@ import { Row, Col, Card, ListGroup } from 'react-bootstrap';
 import Spinner from '../Layout/Spinner';
 import Rating from '../Layout/Rating';
 import CourseCard from '../Courses/CourseCard';
-
+import LocationMap from '../Map/LocationMap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBootcamp, getBootCampReview } from '../../actions/bootcampActions';
+
+const location = {
+  address: '1600 Amphitheatre Parkway, Mountain View, california.',
+  lat: 37.42216,
+  lng: -122.08427,
+};
 
 const Bootcamp = ({ match }) => {
   const id = match.params.id;
@@ -75,14 +81,16 @@ const Bootcamp = ({ match }) => {
                 <ListGroup.Item>
                   {bootcamp && <> Average Cost: ${averageCost}</>}
                 </ListGroup.Item>
-                <ListGroup.Item></ListGroup.Item>
+                <ListGroup.Item>
+                  <LocationMap location={location} zoomLevel={8} />
+                </ListGroup.Item>
               </ListGroup>
             </Card.Body>
           </Card>
         </Col>
         <Col>
           <ListGroup className='my-2'>
-            <ListGroup.Item>
+            <ListGroup.Item className='my-2'>
               <h3>Description</h3>
               <p>{description}</p>
             </ListGroup.Item>

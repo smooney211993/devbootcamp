@@ -25,6 +25,7 @@ const Header = () => {
                       <i className='fas fa-user'></i>Profile
                     </NavDropdown.Item>
                   </LinkContainer>
+                  <NavDropdown.Item>Log Out</NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <NavDropdown title={'Account'}>
