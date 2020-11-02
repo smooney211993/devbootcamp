@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button, Col, Row, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { userLogin } from '../../actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 
-const LoginScreen = () => {
+const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.userLoginRegister);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const onSubmitHandler = (e) => {
     e.preventDefault();
     dispatch(userLogin(email, password));
   };
+  useEffect(() => {
+    if (isAuthenticated) {
+      history.push('/');
+    }
+  }, [isAuthenticated]);
   return (
     <Container>
       <Form onSubmit={onSubmitHandler}>

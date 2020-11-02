@@ -2,9 +2,10 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAIL,
+  LOAD_USER_REQUEST,
 } from '../actions/types';
 import { fetchUserToken } from '../api/user';
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 function* getUserAccessToken(action) {
   const { email, password } = action.payload;

@@ -2,6 +2,7 @@ import {
   BOOTCAMPS_LIST_REQUEST,
   BOOTCAMPS_LIST_SUCCESS,
   BOOTCAMPS_LIST_FAIL,
+  LOAD_USER_REQUEST,
 } from '../actions/types';
 import { fetchBootcamps } from '../api/bootcamps';
 
@@ -12,6 +13,7 @@ function* getAllBootCamps(action) {
   try {
     const bootcamps = yield call(fetchBootcamps, keyword, pageNumber);
     yield put({ type: BOOTCAMPS_LIST_SUCCESS, payload: bootcamps });
+    yield put({ type: LOAD_USER_REQUEST });
   } catch (error) {
     yield put({
       type: BOOTCAMPS_LIST_FAIL,

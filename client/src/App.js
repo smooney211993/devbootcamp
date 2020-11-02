@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
@@ -7,7 +7,13 @@ import Landing from './Components/Layout/Landing';
 import Bootcamp from './Components/Bootcamps/Bootcamp';
 import LoginScreen from './Components/Screens/LoginScreen';
 
+import { useDispatch } from 'react-redux';
+import { loadUser } from './actions/userActions';
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(loadUser());
+  }, [dispatch]);
   return (
     <Router>
       <Header />
