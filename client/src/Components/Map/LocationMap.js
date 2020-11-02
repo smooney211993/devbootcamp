@@ -6,11 +6,12 @@ import './map.css';
 const locationMap = ({ location, zoomLevel }) => {
   return (
     <div>
-      <h2 className='map-h2'>Come Visit Us At Our Campus</h2>
+      <h2 className='map-h2'>Come Vist Our Campus!</h2>
+      <p>{location.address}</p>
 
       <div className='google-map'>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyA82CizYahUkhKpE4s3ouGM47uM6CRLCQI' }}
+          bootstrapURLKeys={{ key: process.env.GOOGLE_MAP_API_KEY }}
           defaultCenter={location}
           defaultZoom={zoomLevel}>
           <LocationPin

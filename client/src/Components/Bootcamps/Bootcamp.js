@@ -48,7 +48,7 @@ const Bootcamp = ({ match }) => {
   ) : (
     <>
       <Row>
-        <Col md={4}>
+        <Col md={5}>
           <Card className='my-2'>
             <Card.Img variant='top' src={photo} />
             <Card.Body>
@@ -86,6 +86,7 @@ const Bootcamp = ({ match }) => {
                 <ListGroup.Item>
                   {bootcamp && location && (
                     <LocationMap
+                      style={{ height: '20vh' }}
                       location={{
                         address: location.formattedAddress,
                         lat: location.coordinates[1],
@@ -99,7 +100,7 @@ const Bootcamp = ({ match }) => {
             </Card.Body>
           </Card>
         </Col>
-        <Col>
+        <Col md={7}>
           <ListGroup className='my-2'>
             <ListGroup.Item className='my-2'>
               <h3>Description</h3>
