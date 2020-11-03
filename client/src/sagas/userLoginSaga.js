@@ -12,6 +12,7 @@ function* getUserAccessToken(action) {
   try {
     const token = yield call(fetchUserToken, email, password);
     yield put({ type: USER_LOGIN_SUCCESS, payload: token });
+    yield put({ type: LOAD_USER_REQUEST });
   } catch (error) {
     yield put({
       type: USER_LOGIN_FAIL,

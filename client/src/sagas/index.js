@@ -3,6 +3,7 @@ import bootcampListSaga from './bootcampListSaga';
 import bootcampSaga from './bootcampSaga';
 import bootcampReviewSaga from './bootcampReviewsSaga';
 import userLoginSaga from './userLoginSaga';
+import userRegisterSaga from './userRegisterSaga';
 import loadUserSaga from './loadUserSaga';
 
 export default function* rootSaga() {
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     bootcampReviewSaga(),
     userLoginSaga(),
     loadUserSaga(),
+    userRegisterSaga(),
   ]);
 }
