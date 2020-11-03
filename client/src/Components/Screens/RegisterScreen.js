@@ -4,6 +4,8 @@ import { Form, Button, Col, Row, Container } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { userRegister } from '../..//actions/userActions';
 
+import Message from '../Layout/Message';
+import Spinner from '../Layout/Spinner';
 const RegisterScreen = ({ history }) => {
   const dispatch = useDispatch();
   const { isAuthenticated, error, loading } = useSelector(
@@ -26,7 +28,11 @@ const RegisterScreen = ({ history }) => {
       history.push('/');
     }
   }, [history, isAuthenticated]);
-  return (
+  return loading ? (
+    <Spinner />
+  ) : error ? (
+    <Message>{error.msg}</Message>
+  ) : (
     <Container>
       <Form className='my-2' onSubmit={submitHandler}>
         <Form.Group controlId='name'>
