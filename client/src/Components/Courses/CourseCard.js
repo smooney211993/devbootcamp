@@ -60,6 +60,14 @@ const CourseCard = ({ course, bootcampId }) => {
       <ListGroup>
         <ListGroup.Item>Duration: {`${course.weeks} weeks`}</ListGroup.Item>
         <ListGroup.Item>
+          Scholarship Available{' '}
+          {course.scholarhipsAvailable ? (
+            <i className='fas fa-check'></i>
+          ) : (
+            <i className='fas fa-times'></i>
+          )}
+        </ListGroup.Item>
+        <ListGroup.Item>
           <em>Cost : ${course.tuition}</em>
         </ListGroup.Item>
         <ListGroup.Item>
