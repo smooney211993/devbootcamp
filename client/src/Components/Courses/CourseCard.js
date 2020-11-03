@@ -58,6 +58,7 @@ const CourseCard = ({ course, bootcampId }) => {
       </Card.Header>
 
       <ListGroup>
+        <ListGroup.Item>Duration: {`${course.weeks} weeks`}</ListGroup.Item>
         <ListGroup.Item>
           <em>Cost : ${course.tuition}</em>
         </ListGroup.Item>
