@@ -12,7 +12,8 @@ const Landing = ({ match, history }) => {
   const keyword = match.params.keyword || '';
   const pageNumber = match.params.pageNumber || 1;
   const [search, setSearch] = useState('');
-  const [rating, setRating] = useState(0);
+  const [rating, setRating] = useState(10);
+  const [budget, setBudget] = useState(15000);
   const dispatch = useDispatch();
   const { bootcampList, loading, error, page, pages } = useSelector(
     (state) => state.bootcampList
@@ -50,10 +51,10 @@ const Landing = ({ match, history }) => {
                     <Button
                       variant='primary'
                       size='sm'
-                      className='m-2'
+                      className='my-2'
                       block
                       type='submit'>
-                      Search
+                      <i className='fas fa-search my-2'></i>
                     </Button>
                   </Form>
                 </Col>
@@ -73,6 +74,7 @@ const Landing = ({ match, history }) => {
                         as='select'
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}>
+                        <option value='Select..'>Select...</option>
                         {[...Array(10).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
@@ -80,6 +82,26 @@ const Landing = ({ match, history }) => {
                         ))}
                       </Form.Control>
                     </Form.Group>
+                    <Form.Group>
+                      <Form.Label>Budget</Form.Label>
+                      <Form.Control
+                        as='select'
+                        value={budget}
+                        onChange={(e) => setBudget(e.target.value)}>
+                        <option value='Select...'>Select...</option>
+                        <option value={15000}>$15000</option>
+                        <option value={10000}>$10000</option>
+                        <option value={5000}>$5000</option>
+                      </Form.Control>
+                    </Form.Group>
+                    <Button
+                      variant='primary'
+                      size='sm'
+                      className='my-2'
+                      block
+                      type='submit'>
+                      <i className='fas fa-search my-2'></i>
+                    </Button>
                   </Form>
                 </Container>
               </Row>
