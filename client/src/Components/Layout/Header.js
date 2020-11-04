@@ -9,7 +9,7 @@ const Header = () => {
     (state) => state.userLoginRegister
   );
   return (
-    <header>
+    <header className='mb-2'>
       <Navbar bg='light' expand='lg' collapseOnSelect>
         <Container>
           <LinkContainer to='/'>

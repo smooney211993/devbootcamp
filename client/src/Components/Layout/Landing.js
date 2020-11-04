@@ -78,7 +78,6 @@ const Landing = ({ match, history }) => {
                         as='select'
                         value={rating}
                         onChange={(e) => setRating(e.target.value)}>
-                        <option value='Select..'>Select...</option>
                         {[...Array(10).keys()].map((x) => (
                           <option key={x + 1} value={x + 1}>
                             {x + 1}
@@ -92,7 +91,6 @@ const Landing = ({ match, history }) => {
                         as='select'
                         value={budget}
                         onChange={(e) => setBudget(e.target.value)}>
-                        <option value='Select...'>Select...</option>
                         <option value={15000}>$15000</option>
                         <option value={10000}>$10000</option>
                         <option value={5000}>$5000</option>
@@ -116,11 +114,13 @@ const Landing = ({ match, history }) => {
           {loading ? (
             <Spinner />
           ) : error ? (
-            <Message variant='danger'>{error.msg}</Message>
+            <Message variant='danger' className='my-2'>
+              {error.msg}
+            </Message>
           ) : (
             <>
               {bootcampList.length === 0 ? (
-                <Message>No Results Found</Message>
+                <Message className='my-2'>No Results Found</Message>
               ) : (
                 bootcampList.map((bootcamp) => (
                   <Row key={bootcamp._id} className='my-2 p-2'>
