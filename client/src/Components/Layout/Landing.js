@@ -22,13 +22,15 @@ const Landing = ({ match, history }) => {
   );
   useEffect(() => {
     dispatch(getBootcamps(keyword, averageCost, averageRating, pageNumber));
-  }, [dispatch, keyword, pageNumber]);
+  }, [dispatch, keyword, pageNumber, averageCost, averageRating]);
   const onSubmitHandler = (e) => {
     e.preventDefault();
     if (search.trim()) {
-      history.push(`/search/${search}`);
+      history.push(
+        `/search/${search}/averageCost/${budget}/averageRating/${rating}`
+      );
     } else {
-      history.push('/');
+      history.push(`/averageCost/${budget}/averageRating/${rating}`);
     }
   };
   return (
@@ -69,7 +71,7 @@ const Landing = ({ match, history }) => {
               <Card.Title>Filter</Card.Title>
               <Row>
                 <Container>
-                  <Form>
+                  <Form onSubmit={onSubmitHandler}>
                     <Form.Group>
                       <Form.Label>Rating</Form.Label>
                       <Form.Control
@@ -117,15 +119,24 @@ const Landing = ({ match, history }) => {
             <Message variant='danger'>{error.msg}</Message>
           ) : (
             <>
-              {bootcampList.length > 0 &&
+              {bootcampList.length === 0 ? (
+                <Message>No Results Found</Message>
+              ) : (
                 bootcampList.map((bootcamp) => (
                   <Row key={bootcamp._id} className='my-2 p-2'>
                     <BootcampCard bootcamp={bootcamp} />
                   </Row>
-                ))}
+                ))
+              )}
             </>
           )}
-          <Paginate pages={pages} page={page} keyword={keyword} />
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword}
+            averageCost={averageCost}
+            averageRating={averageRating}
+          />
         </Col>
       </Row>
     </Container>

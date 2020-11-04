@@ -2,7 +2,7 @@ import axios from 'axios';
 export const fetchBootcamps = async (keyword, budget, rating, pageNumber) => {
   try {
     const { data } = await axios.get(
-      `/api/v1/bootcamps/?keyword=${keyword}&pageNumber=${pageNumber}`
+      `/api/v1/bootcamps/?keyword=${keyword}&averageCost[lte]=${budget}&averageRating[lte]=${rating}&pageNumber=${pageNumber}`
     );
     return data;
   } catch (error) {

@@ -21,10 +21,28 @@ const App = () => {
       <Header />
       <Container>
         <Switch>
+          <Route
+            exact
+            path='/search/:keyword/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
+            component={Landing}
+          />
           <Route exact path='/' component={Landing} />
-          <Route path='/search/:keyword/page/:pageNumber' component={Landing} />
-          <Route path='/search/:keyword' component={Landing} />
+          <Route
+            path='/search/:keyword/averageCost/:averageCost/averageRating/:averageRating'
+            component={Landing}
+          />
           <Route path='/page/:pageNumber' component={Landing} />
+          <Route
+            exact
+            path='/averageCost/:averageCost/averageRating/:averageRating'
+            component={Landing}
+          />
+          <Route
+            exact
+            path='/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
+            component={Landing}
+          />
+
           <Route path='/bootcamp/:id' component={Bootcamp} />
           <Route exact path='/login' component={LoginScreen} />
           <Route exact path='/register' component={RegisterScreen} />
