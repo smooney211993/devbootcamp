@@ -9,9 +9,15 @@ import { fetchBootcamps } from '../api/bootcamps';
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 function* getAllBootCamps(action) {
-  const { keyword, pageNumber } = action.payload;
+  const { keyword, pageNumber, budget, rating } = action.payload;
   try {
-    const bootcamps = yield call(fetchBootcamps, keyword, pageNumber);
+    const bootcamps = yield call(
+      fetchBootcamps,
+      keyword,
+      pageNumber,
+      budget,
+      rating
+    );
     yield put({ type: BOOTCAMPS_LIST_SUCCESS, payload: bootcamps });
     yield put({ type: LOAD_USER_REQUEST });
   } catch (error) {

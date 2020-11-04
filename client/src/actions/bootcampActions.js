@@ -5,11 +5,18 @@ import {
   BOOTCAMP_REVIEWS_REQUEST,
 } from './types';
 
-export const getBootcamps = (keyword = '', pageNumber = '') => ({
+export const getBootcamps = (
+  keyword = '',
+  pageNumber = '',
+  budget,
+  rating
+) => ({
   type: BOOTCAMPS_LIST_REQUEST,
   payload: {
     keyword,
     pageNumber,
+    budget,
+    rating,
   },
 });
 

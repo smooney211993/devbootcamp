@@ -1,5 +1,5 @@
 import axios from 'axios';
-export const fetchBootcamps = async (keyword, pageNumber) => {
+export const fetchBootcamps = async (keyword, budget, rating, pageNumber) => {
   try {
     const { data } = await axios.get(
       `/api/v1/bootcamps/?keyword=${keyword}&pageNumber=${pageNumber}`

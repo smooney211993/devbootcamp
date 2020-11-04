@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from 'react-redux';
 const Landing = ({ match, history }) => {
   const keyword = match.params.keyword || '';
   const pageNumber = match.params.pageNumber || 1;
+  const averageCost = match.params.averageCost || 150000;
+  const averageRating = match.params.averageRating || 10;
   const [search, setSearch] = useState('');
   const [rating, setRating] = useState(10);
   const [budget, setBudget] = useState(15000);
@@ -19,7 +21,7 @@ const Landing = ({ match, history }) => {
     (state) => state.bootcampList
   );
   useEffect(() => {
-    dispatch(getBootcamps(keyword, pageNumber));
+    dispatch(getBootcamps(keyword, averageCost, averageRating, pageNumber));
   }, [dispatch, keyword, pageNumber]);
   const onSubmitHandler = (e) => {
     e.preventDefault();
