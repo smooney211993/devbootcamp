@@ -28,7 +28,7 @@ const CourseCard = ({ course, bootcampId }) => {
         <i className='fab fa-css3-alt' key={8}></i>,
       ];
     if (title.includes('UI/UX'))
-      icons = [...icons, <i className='fab fa-uikit p-2'></i>];
+      icons = [...icons, <i className='fab fa-uikit p-2' key={10}></i>];
     if (title.includes('Web Design & Development'))
       icons = [
         <i className='fab fa-js-square p-2' key={1}></i>,

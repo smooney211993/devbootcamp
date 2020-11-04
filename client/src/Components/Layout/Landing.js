@@ -12,6 +12,7 @@ const Landing = ({ match, history }) => {
   const keyword = match.params.keyword || '';
   const pageNumber = match.params.pageNumber || 1;
   const [search, setSearch] = useState('');
+  const [rating, setRating] = useState(0);
   const dispatch = useDispatch();
   const { bootcampList, loading, error, page, pages } = useSelector(
     (state) => state.bootcampList
@@ -58,6 +59,30 @@ const Landing = ({ match, history }) => {
                 </Col>
               </Row>
               <Row></Row>
+            </Card.Body>
+          </Card>
+          <Card>
+            <Card.Body>
+              <Card.Title>Filter</Card.Title>
+              <Row>
+                <Container>
+                  <Form>
+                    <Form.Group>
+                      <Form.Label>Rating</Form.Label>
+                      <Form.Control
+                        as='select'
+                        value={rating}
+                        onChange={(e) => setRating(e.target.value)}>
+                        {[...Array(10).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Form.Group>
+                  </Form>
+                </Container>
+              </Row>
             </Card.Body>
           </Card>
         </Col>
