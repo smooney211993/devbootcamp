@@ -2,9 +2,11 @@ import React from 'react';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { userLogOut } from '../../actions/userActions';
 
 const Header = () => {
+  const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector(
     (state) => state.userLoginRegister
   );
@@ -25,7 +27,9 @@ const Header = () => {
                       <i className='fas fa-user'></i>Profile
                     </NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item>Log Out</NavDropdown.Item>
+                  <NavDropdown.Item onClick={(e) => dispatch(userLogOut())}>
+                    Log Out
+                  </NavDropdown.Item>
                 </NavDropdown>
               ) : (
                 <NavDropdown title={'Account'}>

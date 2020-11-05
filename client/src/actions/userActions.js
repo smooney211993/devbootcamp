@@ -2,6 +2,7 @@ import {
   USER_LOGIN_REQUEST,
   LOAD_USER_REQUEST,
   USER_REGISTER_REQUEST,
+  USER_LOGIN_RESET,
 } from '../actions/types';
 
 export const loadUser = () => ({
@@ -23,4 +24,8 @@ export const userRegister = (name, email, password) => ({
     email,
     password,
   },
+});
+
+export const userLogOut = () => ({
+  type: USER_LOGIN_RESET,
 });
