@@ -1,12 +1,10 @@
 import React from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Rating from '../Layout/Rating';
 
 const CourseCard = ({ course, bootcampId }) => {
   const renderIcon = () => {
     const title = course.title;
-    const description = course.description;
     let icons = [];
     if (title.includes('Web Development'))
       icons = [
@@ -49,12 +47,10 @@ const CourseCard = ({ course, bootcampId }) => {
   return (
     <Card className='text-center'>
       <Card.Header>
-        <Link to={`/${bootcampId}/course/${course._id}`}>
-          <Card.Header>
-            {renderIcon()}
-            {course.title}
-          </Card.Header>
-        </Link>
+        <Card.Header className='text-primary'>
+          {renderIcon()}
+          {course.title}
+        </Card.Header>
       </Card.Header>
 
       <ListGroup>

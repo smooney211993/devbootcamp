@@ -10,6 +10,9 @@ const Header = () => {
   const { isAuthenticated, user } = useSelector(
     (state) => state.userLoginRegister
   );
+  const signOutHandler = () => {
+    dispatch(userLogOut());
+  };
   return (
     <header className='mb-2'>
       <Navbar bg='light' expand='lg' collapseOnSelect>
@@ -27,7 +30,7 @@ const Header = () => {
                       <i className='fas fa-user'></i>Profile
                     </NavDropdown.Item>
                   </LinkContainer>
-                  <NavDropdown.Item onClick={(e) => dispatch(userLogOut())}>
+                  <NavDropdown.Item onClick={signOutHandler}>
                     Log Out
                   </NavDropdown.Item>
                 </NavDropdown>

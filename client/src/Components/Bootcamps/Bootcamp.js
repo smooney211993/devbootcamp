@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Row, Col, Card, ListGroup } from 'react-bootstrap';
+import { Row, Col, Card, ListGroup, Form, Button } from 'react-bootstrap';
 
 import Spinner from '../Layout/Spinner';
 import Rating from '../Layout/Rating';
@@ -7,12 +7,6 @@ import CourseCard from '../Courses/CourseCard';
 import LocationMap from '../Map/LocationMap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBootcamp, getBootCampReview } from '../../actions/bootcampActions';
-
-const location = {
-  address: '1600 Amphitheatre Parkway, Mountain View, california.',
-  lat: 37.42216,
-  lng: -122.08427,
-};
 
 const Bootcamp = ({ match }) => {
   const id = match.params.id;
@@ -39,6 +33,7 @@ const Bootcamp = ({ match }) => {
   const { reviews, loading: loadingReviews, error: errorReviews } = useSelector(
     (state) => state.bootcampReviews
   );
+  const { isAuthenticated } = useSelector((state) => state.userLoginRegister);
   useEffect(() => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));
@@ -49,7 +44,7 @@ const Bootcamp = ({ match }) => {
     <>
       <Row>
         <Col md={5}>
-          <Card className='my-2'>
+          <Card className='m-2'>
             <Card.Img variant='top' src={photo} />
             <Card.Body>
               <ListGroup variant='flush'>
@@ -83,6 +78,7 @@ const Bootcamp = ({ match }) => {
                 <ListGroup.Item>
                   {bootcamp && <> Average Cost: ${averageCost}</>}
                 </ListGroup.Item>
+                <ListGroup.Item>View Reviews</ListGroup.Item>
                 <ListGroup.Item>
                   {bootcamp && location && (
                     <LocationMap
@@ -99,28 +95,51 @@ const Bootcamp = ({ match }) => {
               </ListGroup>
             </Card.Body>
           </Card>
+          {isAuthenticated && (
+            <Card className='m-2 p-2'>
+              <Card.Header>
+                <i className='fas fa-pen m-2'></i> Write A Review
+              </Card.Header>
+              <Card.Body>
+                <Form>
+                  <Form.Group>
+                    <Form.Label>Please Leave A Review</Form.Label>
+                    <Form.Control as='textarea' rows={6}></Form.Control>
+                  </Form.Group>
+                  <Button type='submit' block>
+                    Submit Review
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          )}
         </Col>
         <Col md={7}>
-          <ListGroup className='my-2'>
-            <ListGroup.Item className='my-2'>
-              <h3>Description</h3>
-              <p>{description}</p>
-            </ListGroup.Item>
-
-            <ListGroup.Item>
-              <h3 className='my-2'>Careers</h3>
-              {careers &&
-                careers.length > 0 &&
-                careers.map((career, i) => (
-                  <Row key={i}>
-                    <ul id='careers-list'>
-                      <li>{career}</li>
-                    </ul>
-                  </Row>
-                ))}
-            </ListGroup.Item>
-          </ListGroup>
-          <Card>
+          <Card className='m-2'>
+            <Card.Header>Description</Card.Header>
+            <Card.Body>
+              <Card.Text>
+                <p>{description}</p>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card className='m-2 '>
+            <Card.Header>Careers</Card.Header>
+            <Card.Body>
+              <Card.Text>
+                {careers &&
+                  careers.length > 0 &&
+                  careers.map((career, i) => (
+                    <Row key={i}>
+                      <ul id='careers-list'>
+                        <li>{career}</li>
+                      </ul>
+                    </Row>
+                  ))}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+          <Card className='m-2 '>
             <Card.Header>Featured Review</Card.Header>
             <Card.Body>
               <Card.Title className='my-2'>
@@ -135,12 +154,13 @@ const Bootcamp = ({ match }) => {
             <Card.Footer>
               {reviews && (
                 <>
-                  <i className='fas fa-user'> {reviews[0].user.name}</i>
+                  <i className='fas fa-user m-2'> </i>
+                  {reviews[0].user.name}
                 </>
               )}
             </Card.Footer>
           </Card>
-          <Card className='my-2'>
+          <Card className='m-2 p-2'>
             <Card.Header>Courses</Card.Header>
             <Card.Body>
               <Row>
