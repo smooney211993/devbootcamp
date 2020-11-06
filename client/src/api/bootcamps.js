@@ -30,3 +30,18 @@ export const fetchBootcampReviewById = async (id) => {
     throw error;
   }
 };
+
+export const postBootcampReview = async (id, formData) => {
+  const config = {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
+  const body = JSON.stringify(formData);
+  try {
+    await axios.post(`'/api/v1/bootcamps/${id}/reviews`, body, config);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

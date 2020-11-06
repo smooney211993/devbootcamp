@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import Rating from '../Layout/Rating';
 
-import { Container, Row, Card, Col, ListGroup } from 'react-bootstrap';
+import { Container, Row, Card, Col, Form, Button } from 'react-bootstrap';
 
 import Message from '../Layout/Message';
 import Spinner from '../Layout/Spinner';
@@ -15,6 +15,8 @@ const BootcampReviews = ({ match }) => {
   const { reviews, loading, error } = useSelector(
     (state) => state.bootcampReviews
   );
+
+  const { isAuthenticated } = useSelector((state) => state.userLoginRegister);
 
   useEffect(() => {
     dispatch(getBootCampReview(id));
@@ -60,6 +62,24 @@ const BootcampReviews = ({ match }) => {
         ) : (
           <Message>There Are No Reviews Posted</Message>
         )}{' '}
+        {isAuthenticated && (
+          <Card>
+            <Card.Header>
+              <i className='fas fa-pen m-2'></i> Write A Review
+            </Card.Header>
+            <Card.Body>
+              <Form>
+                <Form.Group>
+                  <Form.Label>Please Leave A Review</Form.Label>
+                  <Form.Control as='textarea' rows={6}></Form.Control>
+                </Form.Group>
+                <Button type='submit' block>
+                  Submit Review
+                </Button>
+              </Form>
+            </Card.Body>
+          </Card>
+        )}
       </Container>
     </>
   );

@@ -22,6 +22,8 @@ function* getBootcampReview(action) {
   }
 }
 
+function* createBootcampReview(bootcampId, text) {}
+
 export default function* bootcampReviewSage() {
   yield takeEvery(BOOTCAMP_REVIEWS_REQUEST, getBootcampReview);
 }
