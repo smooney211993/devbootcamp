@@ -30,7 +30,7 @@ const BootcampReviews = ({ match }) => {
       <Container>
         {reviews && reviews.length > 0 ? (
           reviews.map((review) => (
-            <Row id={review._id} className='my-2 py-2'>
+            <Row key={review._id} className='my-2 py-2'>
               <Col>
                 <Card>
                   <Card.Header className='d-flex'>
@@ -42,11 +42,7 @@ const BootcampReviews = ({ match }) => {
                     <Card.Title className='d-flex'>
                       Rating <Rating value={review.rating} />
                     </Card.Title>
-                    <Card.Text>
-                      <span>
-                        <p>{`"${review.text}"`}</p>
-                      </span>
-                    </Card.Text>
+                    <Card.Text>{`"${review.text}"`}</Card.Text>
                   </Card.Body>
                   <Card.Footer>
                     <Card.Footer>

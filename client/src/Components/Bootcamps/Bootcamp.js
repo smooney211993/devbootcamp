@@ -124,9 +124,7 @@ const Bootcamp = ({ match }) => {
               <h3>Description</h3>
             </Card.Header>
             <Card.Body>
-              <Card.Text>
-                <p>{description}</p>
-              </Card.Text>
+              <Card.Text>{description}</Card.Text>
             </Card.Body>
           </Card>
           <Card className='m-2 '>
@@ -159,7 +157,7 @@ const Bootcamp = ({ match }) => {
                   </>
                 )}
               </Card.Title>
-              <p>{reviews && reviews[0].text}</p>
+              {reviews && reviews[0].text}
             </Card.Body>
             <Card.Footer>
               {reviews && (
