@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 
 const CourseCard = ({ course, bootcampId }) => {
   const renderIcon = () => {

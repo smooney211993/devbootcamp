@@ -7,6 +7,7 @@ import Landing from './Components/Layout/Landing';
 import Bootcamp from './Components/Bootcamps/Bootcamp';
 import LoginScreen from './Components/Screens/LoginScreen';
 import RegisterScreen from './Components/Screens/RegisterScreen';
+import BootcampReviews from './Components/Reviews/BootcampReviews';
 
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/userActions';
@@ -42,8 +43,9 @@ const App = () => {
             path='/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
             component={Landing}
           />
-
+          <Route path='/bootcamp/:id/reviews' component={BootcampReviews} />
           <Route path='/bootcamp/:id' component={Bootcamp} />
+
           <Route exact path='/login' component={LoginScreen} />
           <Route exact path='/register' component={RegisterScreen} />
         </Switch>

@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { Row, Col, Card, ListGroup, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 
 import Spinner from '../Layout/Spinner';
 import Rating from '../Layout/Rating';
@@ -78,7 +80,9 @@ const Bootcamp = ({ match }) => {
                 <ListGroup.Item>
                   {bootcamp && <> Average Cost: ${averageCost}</>}
                 </ListGroup.Item>
-                <ListGroup.Item>View Reviews</ListGroup.Item>
+                <ListGroup.Item>
+                  <Link to={`/bootcamp/${id}/reviews`}>View Reviews</Link>
+                </ListGroup.Item>
                 <ListGroup.Item>
                   {bootcamp && location && (
                     <LocationMap
@@ -116,7 +120,9 @@ const Bootcamp = ({ match }) => {
         </Col>
         <Col md={7}>
           <Card className='m-2'>
-            <Card.Header>Description</Card.Header>
+            <Card.Header>
+              <h3>Description</h3>
+            </Card.Header>
             <Card.Body>
               <Card.Text>
                 <p>{description}</p>
@@ -124,7 +130,9 @@ const Bootcamp = ({ match }) => {
             </Card.Body>
           </Card>
           <Card className='m-2 '>
-            <Card.Header>Careers</Card.Header>
+            <Card.Header>
+              <h3>Careers</h3>
+            </Card.Header>
             <Card.Body>
               <Card.Text>
                 {careers &&
@@ -140,7 +148,9 @@ const Bootcamp = ({ match }) => {
             </Card.Body>
           </Card>
           <Card className='m-2 '>
-            <Card.Header>Featured Review</Card.Header>
+            <Card.Header>
+              <h3>Featured Review</h3>
+            </Card.Header>
             <Card.Body>
               <Card.Title className='my-2'>
                 {reviews && (
@@ -161,7 +171,9 @@ const Bootcamp = ({ match }) => {
             </Card.Footer>
           </Card>
           <Card className='m-2 p-2'>
-            <Card.Header>Courses</Card.Header>
+            <Card.Header>
+              <h3>Courses</h3>
+            </Card.Header>
             <Card.Body>
               <Row>
                 {courses.length > 0 &&
