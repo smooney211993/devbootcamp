@@ -132,17 +132,15 @@ const Bootcamp = ({ match }) => {
               <h3>Careers</h3>
             </Card.Header>
             <Card.Body>
-              <Card.Text>
-                {careers &&
-                  careers.length > 0 &&
-                  careers.map((career, i) => (
-                    <Row key={i}>
-                      <ul id='careers-list'>
-                        <li>{career}</li>
-                      </ul>
-                    </Row>
-                  ))}
-              </Card.Text>
+              {careers &&
+                careers.length > 0 &&
+                careers.map((career, i) => (
+                  <Row key={i}>
+                    <ul id='careers-list'>
+                      <li>{career}</li>
+                    </ul>
+                  </Row>
+                ))}
             </Card.Body>
           </Card>
           <Card className='m-2 '>
