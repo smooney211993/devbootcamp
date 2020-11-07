@@ -42,7 +42,7 @@ const BootcampReviews = ({ match }) => {
                     <Card.Title className='d-flex'>
                       Rating <Rating value={review.rating} />
                     </Card.Title>
-                    <Card.Text>{`"${review.text}"`}</Card.Text>
+                    {`"${review.text}"`}
                   </Card.Body>
                   <Card.Footer>
                     <Card.Footer>
@@ -68,7 +68,7 @@ const BootcampReviews = ({ match }) => {
                 <Form.Group className='p-2'>
                   <Form.Label>Please Enter Title</Form.Label>
                   <Form.Control
-                    as='text'
+                    type='text'
                     placeholder='Please Add A Title'
                     className='p-2'></Form.Control>
                   <Form.Label>Please Leave A Review</Form.Label>

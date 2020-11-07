@@ -43,10 +43,19 @@ const Bootcamp = ({ match }) => {
     courses,
   } = useSelector((state) => state.bootcamp);
 
-  const { reviews, loading: loadingReviews, error: errorReviews } = useSelector(
+  const { reviews, loading: loadingReviews } = useSelector(
     (state) => state.bootcampReviews
   );
-  const { isAuthenticated } = useSelector((state) => state.userLoginRegister);
+  const { isAuthenticated, user } = useSelector(
+    (state) => state.userLoginRegister
+  );
+
+  const alreadyReviewed =
+    isAuthenticated && user
+      ? reviews.find((review) => review.user._id === user._id)
+      : null;
+
+  console.log(alreadyReviewed);
   useEffect(() => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));
@@ -139,17 +148,19 @@ const Bootcamp = ({ match }) => {
                       type='text'
                       placeholder='Please Add A Title'
                       name='title'
-                      onChange={formHandler}></Form.Control>
+                      onChange={formHandler}
+                      disabled={alreadyReviewed ? true : false}></Form.Control>
                   </Form.Group>
                   <Form.Group>
                     <Form.Control
                       as='textarea'
                       rows={6}
                       name='text'
-                      onChange={formHandler}></Form.Control>
+                      onChange={formHandler}
+                      disabled={alreadyReviewed ? true : false}></Form.Control>
                   </Form.Group>
                   <Button type='submit' block>
-                    Submit Review
+                    {alreadyReviewed ? 'Thanks For Reviewing' : 'Submit Review'}
                   </Button>
                 </Form>
               </Card.Body>
