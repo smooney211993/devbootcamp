@@ -18,3 +18,7 @@ li {
 #careers-list li:before {
   content: '✓';
 }
+
+.add-rating i {
+  cursor: pointer;
+}

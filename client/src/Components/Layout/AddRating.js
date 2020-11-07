@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const AddRating = ({ color, value, setRating }) => {
   return (
-    <div className='rating'>
+    <div className='rating add-rating'>
       <span>
         <i
           onClick={() => setRating(1)}
