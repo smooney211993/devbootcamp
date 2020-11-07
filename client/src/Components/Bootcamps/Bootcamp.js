@@ -9,7 +9,11 @@ import AddRating from '../Layout/AddRating';
 import CourseCard from '../Courses/CourseCard';
 import LocationMap from '../Map/LocationMap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBootcamp, getBootCampReview } from '../../actions/bootcampActions';
+import {
+  getBootcamp,
+  getBootCampReview,
+  createBootcampReview,
+} from '../../actions/bootcampActions';
 
 const Bootcamp = ({ match }) => {
   const id = match.params.id;
@@ -50,6 +54,12 @@ const Bootcamp = ({ match }) => {
 
   const formHandler = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
+
+  const reviewHandler = (e) => {
+    e.preventDefault();
+    const body = { ...formState, rating };
+    dispatch(createBootcampReview(id, body));
   };
   return loading || loadingReviews ? (
     <Spinner />
@@ -122,7 +132,7 @@ const Bootcamp = ({ match }) => {
                   value={rating}
                   setRating={(rating) => setRating(rating)}
                 />
-                <Form className='my-2'>
+                <Form className='my-2' onSubmit={reviewHandler}>
                   <Form.Group>
                     <Form.Label>Please Leave A Review</Form.Label>
                     <Form.Control
