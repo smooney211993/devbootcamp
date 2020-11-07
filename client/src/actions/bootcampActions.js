@@ -3,6 +3,8 @@ import {
   BOOTCAMPS_LIST_RESET,
   BOOTCAMP_REQUEST,
   BOOTCAMP_REVIEWS_REQUEST,
+  CREATE_BOOTCAMP_REVIEW_REQUEST,
+  CREATE_BOOTCAMP_REVIEW_RESET,
 } from './types';
 
 export const getBootcamps = (
@@ -36,4 +38,16 @@ export const getBootCampReview = (id) => ({
   payload: {
     id,
   },
+});
+
+export const createBootcampReview = (id, formData) => ({
+  type: CREATE_BOOTCAMP_REVIEW_REQUEST,
+  payload: {
+    id,
+    formData,
+  },
+});
+
+export const resetCreatebootcampReview = () => ({
+  type: CREATE_BOOTCAMP_REVIEW_RESET,
 });

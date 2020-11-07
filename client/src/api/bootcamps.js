@@ -39,7 +39,12 @@ export const postBootcampReview = async (id, formData) => {
   };
   const body = JSON.stringify(formData);
   try {
-    await axios.post(`'/api/v1/bootcamps/${id}/reviews`, body, config);
+    const { data } = await axios.post(
+      `'/api/v1/bootcamps/${id}/reviews`,
+      body,
+      config
+    );
+    return data;
   } catch (error) {
     console.log(error);
     throw error;

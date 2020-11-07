@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, Card, ListGroup, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import Spinner from '../Layout/Spinner';
 import Rating from '../Layout/Rating';
+import AddRating from '../Layout/AddRating';
 import CourseCard from '../Courses/CourseCard';
 import LocationMap from '../Map/LocationMap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +13,13 @@ import { getBootcamp, getBootCampReview } from '../../actions/bootcampActions';
 
 const Bootcamp = ({ match }) => {
   const id = match.params.id;
+
   const dispatch = useDispatch();
+  const [formState, setFormState] = useState({
+    title: '',
+    text: '',
+  });
+  const [rating, setRating] = useState(1);
   const {
     bootcamp,
     bootcamp: {
@@ -40,6 +47,10 @@ const Bootcamp = ({ match }) => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));
   }, [dispatch, id]);
+
+  const formHandler = (e) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
   return loading || loadingReviews ? (
     <Spinner />
   ) : (
@@ -100,15 +111,32 @@ const Bootcamp = ({ match }) => {
             </Card.Body>
           </Card>
           {isAuthenticated && (
-            <Card className='m-2 p-2'>
+            <Card>
               <Card.Header>
                 <i className='fas fa-pen m-2'></i> Write A Review
               </Card.Header>
               <Card.Body>
-                <Form>
+                Please Rate
+                <AddRating
+                  className='m-2'
+                  value={rating}
+                  setRating={(rating) => setRating(rating)}
+                />
+                <Form className='my-2'>
                   <Form.Group>
                     <Form.Label>Please Leave A Review</Form.Label>
-                    <Form.Control as='textarea' rows={6}></Form.Control>
+                    <Form.Control
+                      type='text'
+                      placeholder='Please Add A Title'
+                      name='title'
+                      onChange={formHandler}></Form.Control>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Control
+                      as='textarea'
+                      rows={6}
+                      name='text'
+                      onChange={formHandler}></Form.Control>
                   </Form.Group>
                   <Button type='submit' block>
                     Submit Review

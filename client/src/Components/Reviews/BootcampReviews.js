@@ -65,9 +65,17 @@ const BootcampReviews = ({ match }) => {
             </Card.Header>
             <Card.Body>
               <Form>
-                <Form.Group>
+                <Form.Group className='p-2'>
+                  <Form.Label>Please Enter Title</Form.Label>
+                  <Form.Control
+                    as='text'
+                    placeholder='Please Add A Title'
+                    className='p-2'></Form.Control>
                   <Form.Label>Please Leave A Review</Form.Label>
-                  <Form.Control as='textarea' rows={6}></Form.Control>
+                  <Form.Control
+                    as='textarea'
+                    className='p-2'
+                    rows={6}></Form.Control>
                 </Form.Group>
                 <Button type='submit' block>
                   Submit Review
