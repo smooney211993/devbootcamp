@@ -52,12 +52,16 @@ const addReview = asyncHandler(async (req, res) => {
     throw new Error('Bootcamp Does Not Exist');
   }
 
-  const reviewExists = await Review.findOne({ user: req.user.id });
+  const reviewExists = await Review.findOne({
+    bootcamp: bootcampId,
+    user: req.user.id,
+  });
+  console.log(reviewExists);
   if (reviewExists) {
     res.status(400);
     throw new Error('User Already Submitted A Review');
   }
-
+  console.log(reviewExists);
   const newReview = new Review({
     title,
     text,

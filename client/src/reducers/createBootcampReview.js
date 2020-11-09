@@ -19,10 +19,16 @@ export default function (state = initialState, action) {
       return { ...state, loading: true };
 
     case CREATE_BOOTCAMP_REVIEW_SUCCESS:
-      return { ...state, loading: false, review: payload.data };
+      return { ...state, loading: false, review: payload.data, success: true };
     case CREATE_BOOTCAMP_REVIEW_FAIL:
       return { ...state, loading: false, error: payload };
-
+    case CREATE_BOOTCAMP_REVIEW_RESET:
+      return {
+        loading: null,
+        success: null,
+        error: null,
+        review: {},
+      };
     default:
       return state;
   }

@@ -59,9 +59,9 @@ const Bootcamp = ({ match }) => {
   );
 
   const alreadyReviewed =
-    isAuthenticated && user
+    isAuthenticated && user && reviews
       ? reviews.find((review) => review.user._id === user._id)
-      : null;
+      : false;
 
   console.log(alreadyReviewed);
   useEffect(() => {
@@ -110,7 +110,6 @@ const Bootcamp = ({ match }) => {
                 <ListGroup.Item className='d-flex'>
                   {bootcamp && (
                     <>
-                      {averageRating}
                       <Rating className='my-2' value={averageRating} />
                     </>
                   )}
@@ -141,7 +140,10 @@ const Bootcamp = ({ match }) => {
             alreadyReviewed ? (
               <Card>
                 <Card.Body>
-                  <Alert>Thanks For Reviewing</Alert>
+                  <Alert className='m0 text-center' variant='primary'>
+                    {' '}
+                    Thanks For Reviewing
+                  </Alert>
                 </Card.Body>
               </Card>
             ) : (

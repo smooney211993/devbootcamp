@@ -1,26 +1,69 @@
-import React, { useEffect } from 'react';
-import { getBootCampReview } from '../../actions/bootcampActions';
+import React, { useEffect, useState } from 'react';
+import {
+  getBootCampReview,
+  resetCreatebootcampReview,
+  createBootcampReview,
+} from '../../actions/bootcampActions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Rating from '../Layout/Rating';
+import AddRating from '../Layout/AddRating';
 
-import { Container, Row, Card, Col, Form, Button } from 'react-bootstrap';
+import {
+  Container,
+  Row,
+  Card,
+  Col,
+  Form,
+  Button,
+  Alert,
+} from 'react-bootstrap';
 
 import Message from '../Layout/Message';
 import Spinner from '../Layout/Spinner';
 
 const BootcampReviews = ({ match }) => {
   const id = match.params.id;
+  const [formState, setFormState] = useState({
+    title: '',
+    text: '',
+  });
+  const [rating, setRating] = useState(1);
   const dispatch = useDispatch();
   const { reviews, loading, error } = useSelector(
     (state) => state.bootcampReviews
   );
 
-  const { isAuthenticated } = useSelector((state) => state.userLoginRegister);
+  const {
+    loading: createReviewLoading,
+    success: createReviewSuccess,
+    error: createReviewError,
+  } = useSelector((state) => state.createBootcampReview);
+  const { isAuthenticated, user } = useSelector(
+    (state) => state.userLoginRegister
+  );
+  const alreadyReviewed =
+    isAuthenticated && user && reviews
+      ? reviews.find((review) => review.user._id === user._id)
+      : false;
 
   useEffect(() => {
+    dispatch(resetCreatebootcampReview());
     dispatch(getBootCampReview(id));
-  }, [dispatch, id]);
+    if (createReviewSuccess) {
+      dispatch(getBootCampReview(id));
+    }
+  }, [dispatch, id, createReviewSuccess]);
+
+  const formHandler = (e) => {
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
+
+  const reviewHandler = (e) => {
+    e.preventDefault();
+    const body = { ...formState, rating };
+    dispatch(createBootcampReview(id, body));
+  };
   return error ? (
     <Message>{error.msg}</Message>
   ) : loading ? (
@@ -58,31 +101,56 @@ const BootcampReviews = ({ match }) => {
         ) : (
           <Message>There Are No Reviews Posted</Message>
         )}{' '}
-        {isAuthenticated && (
-          <Card>
-            <Card.Header>
-              <i className='fas fa-pen m-2'></i> Write A Review
-            </Card.Header>
-            <Card.Body>
-              <Form>
-                <Form.Group className='p-2'>
-                  <Form.Label>Please Enter Title</Form.Label>
-                  <Form.Control
-                    type='text'
-                    placeholder='Please Add A Title'
-                    className='p-2'></Form.Control>
-                  <Form.Label>Please Leave A Review</Form.Label>
-                  <Form.Control
-                    as='textarea'
-                    className='p-2'
-                    rows={6}></Form.Control>
-                </Form.Group>
-                <Button type='submit' block>
-                  Submit Review
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
+        {createReviewLoading && <Spinner />}
+        {isAuthenticated ? (
+          alreadyReviewed ? (
+            <Card>
+              <Card.Body>
+                <Alert className='m0 text-center' variant='primary'>
+                  {' '}
+                  Thanks For Reviewing
+                </Alert>
+              </Card.Body>
+            </Card>
+          ) : (
+            <Card>
+              <Card.Header>
+                <i className='fas fa-pen m-2'></i> Write A Review
+              </Card.Header>
+              <Card.Body>
+                Please Rate
+                <AddRating
+                  className='m-2'
+                  value={rating}
+                  setRating={(rating) => setRating(rating)}
+                />
+                <Form className='my-2' onSubmit={reviewHandler}>
+                  <Form.Group>
+                    <Form.Label>Please Leave A Review</Form.Label>
+                    <Form.Control
+                      type='text'
+                      placeholder='Please Add A Title'
+                      name='title'
+                      onChange={formHandler}
+                      disabled={alreadyReviewed ? true : false}></Form.Control>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Control
+                      as='textarea'
+                      rows={6}
+                      name='text'
+                      onChange={formHandler}
+                      disabled={alreadyReviewed ? true : false}></Form.Control>
+                  </Form.Group>
+                  <Button type='submit' block>
+                    {alreadyReviewed ? 'Thanks For Reviewing' : 'Submit Review'}
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          )
+        ) : (
+          <></>
         )}
       </Container>
     </>

@@ -30,8 +30,6 @@ const RegisterScreen = ({ history }) => {
   }, [history, isAuthenticated]);
   return loading ? (
     <Spinner />
-  ) : error ? (
-    <Message>{error.msg}</Message>
   ) : (
     <Container>
       <Form className='my-2' onSubmit={submitHandler}>
