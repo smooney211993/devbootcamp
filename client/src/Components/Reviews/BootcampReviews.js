@@ -102,6 +102,7 @@ const BootcampReviews = ({ match }) => {
           <Message>There Are No Reviews Posted</Message>
         )}{' '}
         {createReviewLoading && <Spinner />}
+        {createReviewError && <Message>{createReviewError.msg}</Message>}
         {isAuthenticated ? (
           alreadyReviewed ? (
             <Card>

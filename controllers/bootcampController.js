@@ -113,20 +113,23 @@ const getBootcampsViaRadius = asyncHandler(async (req, res) => {
 const bootcampPhotoUpload = asyncHandler(async (req, res) => {
   const bootcamp = await Bootcamp.findById(req.params.id);
   const user = await User.findById(req.user.id);
-  if (bootcamp.user.toString() !== req.user.id && user.role !== 'admin') {
-    res.status(401);
-    throw new Error('Not Authorized To Update This BootCamp');
-  }
+  console.log(req.files);
+
   if (!bootcamp) {
     res.status(404);
     throw new Error('Bootcamp Not Found');
+  }
+
+  if (bootcamp.user.toString() !== req.user.id && user.role !== 'admin') {
+    res.status(401);
+    throw new Error('Not Authorized To Update This BootCamp');
   }
 
   if (!req.files) {
     res.status(400);
     throw new Error('Please Upload File');
   }
-  const file = req.files.file;
+  const file = req.files[''];
 
   if (!file.mimetype.startsWith('image')) {
     res.status(400);

@@ -28,7 +28,9 @@ const BootcampCard = ({ bootcamp }) => {
                 Average Cost ${bootcamp.averageCost}
               </ListGroup.Item>
               <ListGroup.Item className='d-flex'>
-                <strong className='mr-2'>{bootcamp.averageRating}</strong>{' '}
+                <strong className='mr-2'>
+                  {bootcamp.averageRating.toFixed()}
+                </strong>{' '}
                 <Rating value={bootcamp.averageRating} />
               </ListGroup.Item>
               <ListGroup.Item>{`${bootcamp.courses.length} Courses Available`}</ListGroup.Item>

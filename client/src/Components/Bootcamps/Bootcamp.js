@@ -58,6 +58,10 @@ const Bootcamp = ({ match }) => {
     (state) => state.userLoginRegister
   );
 
+  const { success: createReviewSuccess } = useSelector(
+    (state) => state.createBootcampReview
+  );
+
   const alreadyReviewed =
     isAuthenticated && user && reviews
       ? reviews.find((review) => review.user._id === user._id)
@@ -67,7 +71,11 @@ const Bootcamp = ({ match }) => {
   useEffect(() => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));
-  }, [dispatch, id]);
+    if (createReviewSuccess) {
+      dispatch(getBootcamp(id));
+      dispatch(getBootCampReview(id));
+    }
+  }, [dispatch, id, createReviewSuccess]);
 
   const formHandler = (e) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
