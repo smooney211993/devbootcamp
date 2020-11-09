@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Row, Col, Card, ListGroup, Form, Button } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Card,
+  ListGroup,
+  Form,
+  Button,
+  Alert,
+} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
@@ -129,42 +137,58 @@ const Bootcamp = ({ match }) => {
               </ListGroup>
             </Card.Body>
           </Card>
-          {isAuthenticated && (
-            <Card>
-              <Card.Header>
-                <i className='fas fa-pen m-2'></i> Write A Review
-              </Card.Header>
-              <Card.Body>
-                Please Rate
-                <AddRating
-                  className='m-2'
-                  value={rating}
-                  setRating={(rating) => setRating(rating)}
-                />
-                <Form className='my-2' onSubmit={reviewHandler}>
-                  <Form.Group>
-                    <Form.Label>Please Leave A Review</Form.Label>
-                    <Form.Control
-                      type='text'
-                      placeholder='Please Add A Title'
-                      name='title'
-                      onChange={formHandler}
-                      disabled={alreadyReviewed ? true : false}></Form.Control>
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Control
-                      as='textarea'
-                      rows={6}
-                      name='text'
-                      onChange={formHandler}
-                      disabled={alreadyReviewed ? true : false}></Form.Control>
-                  </Form.Group>
-                  <Button type='submit' block>
-                    {alreadyReviewed ? 'Thanks For Reviewing' : 'Submit Review'}
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
+          {isAuthenticated ? (
+            alreadyReviewed ? (
+              <Card>
+                <Card.Body>
+                  <Alert>Thanks For Reviewing</Alert>
+                </Card.Body>
+              </Card>
+            ) : (
+              <Card>
+                <Card.Header>
+                  <i className='fas fa-pen m-2'></i> Write A Review
+                </Card.Header>
+                <Card.Body>
+                  Please Rate
+                  <AddRating
+                    className='m-2'
+                    value={rating}
+                    setRating={(rating) => setRating(rating)}
+                  />
+                  <Form className='my-2' onSubmit={reviewHandler}>
+                    <Form.Group>
+                      <Form.Label>Please Leave A Review</Form.Label>
+                      <Form.Control
+                        type='text'
+                        placeholder='Please Add A Title'
+                        name='title'
+                        onChange={formHandler}
+                        disabled={
+                          alreadyReviewed ? true : false
+                        }></Form.Control>
+                    </Form.Group>
+                    <Form.Group>
+                      <Form.Control
+                        as='textarea'
+                        rows={6}
+                        name='text'
+                        onChange={formHandler}
+                        disabled={
+                          alreadyReviewed ? true : false
+                        }></Form.Control>
+                    </Form.Group>
+                    <Button type='submit' block>
+                      {alreadyReviewed
+                        ? 'Thanks For Reviewing'
+                        : 'Submit Review'}
+                    </Button>
+                  </Form>
+                </Card.Body>
+              </Card>
+            )
+          ) : (
+            <></>
           )}
         </Col>
         <Col md={7}>
