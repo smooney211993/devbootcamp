@@ -9,9 +9,12 @@ import Spinner from '../Layout/Spinner';
 
 const LoginScreen = ({ history }) => {
   const dispatch = useDispatch();
-  const { isAuthenticated, error, loading } = useSelector(
-    (state) => state.userLoginRegister
-  );
+  const {
+    isAuthenticated,
+    error,
+    loading,
+    user: { role },
+  } = useSelector((state) => state.userLoginRegister);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const onSubmitHandler = (e) => {
@@ -19,10 +22,12 @@ const LoginScreen = ({ history }) => {
     dispatch(userLogin(email, password));
   };
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && role === 'admin') {
       history.push('/');
+    } else if (isAuthenticated) {
+      history.push('/admin');
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, role]);
 
   return (
     <Container className='my-2'>
