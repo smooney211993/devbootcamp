@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
+// routing
+import PrivateAdminRoute from './Components/Routes/PrivateAdminRoute';
+
+// components
 import Header from './Components/Layout/Header';
 import Landing from './Components/Layout/Landing';
 import Bootcamp from './Components/Bootcamps/Bootcamp';
@@ -23,6 +27,7 @@ const App = () => {
       <Header />
       <Container>
         <Switch>
+          <Route exact path='/' component={Landing} />
           <Route
             exact
             path='/search/:keyword/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
@@ -49,7 +54,7 @@ const App = () => {
 
           <Route exact path='/login' component={LoginScreen} />
           <Route exact path='/register' component={RegisterScreen} />
-          <Route exact path='/admin' component={AdminScreen} />
+          <PrivateAdminRoute path='/admin' component={AdminScreen} />
         </Switch>
       </Container>
     </Router>

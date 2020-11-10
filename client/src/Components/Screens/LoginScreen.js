@@ -22,10 +22,10 @@ const LoginScreen = ({ history }) => {
     dispatch(userLogin(email, password));
   };
   useEffect(() => {
-    if (isAuthenticated && role === 'admin') {
-      history.push('/');
-    } else if (isAuthenticated) {
+    if (isAuthenticated && role && role === 'admin') {
       history.push('/admin');
+    } else if (isAuthenticated && role && role !== 'admin') {
+      history.push('/');
     }
   }, [isAuthenticated, role]);
 
