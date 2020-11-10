@@ -141,7 +141,7 @@ const bootcampPhotoUpload = asyncHandler(async (req, res) => {
     throw new Error('File Size Limit Exceeded ');
   }
 
-  file.name = `photo_${bootcamp._id}${path.parse(file.name).ext}`;
+  file.name = `/photo_${bootcamp._id}${path.parse(file.name).ext}`;
   // custom file name
 
   file.mv(`${process.env.FILE_UPLOAD_PATH}/${file.name}`, async (error) => {
