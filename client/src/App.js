@@ -12,7 +12,10 @@ import Bootcamp from './Components/Bootcamps/Bootcamp';
 import LoginScreen from './Components/Screens/LoginScreen';
 import RegisterScreen from './Components/Screens/RegisterScreen';
 import BootcampReviews from './Components/Reviews/BootcampReviews';
+
+// admin screens
 import AdminScreen from './Components/Screens/AdminScreen';
+import BootcampListScreen from './Components/Screens/BootcampListScreen';
 
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/userActions';
@@ -54,6 +57,10 @@ const App = () => {
 
           <Route exact path='/login' component={LoginScreen} />
           <Route exact path='/register' component={RegisterScreen} />
+          <PrivateAdminRoute
+            path='/admin/bootcamps'
+            component={BootcampListScreen}
+          />
           <PrivateAdminRoute path='/admin' component={AdminScreen} />
         </Switch>
       </Container>

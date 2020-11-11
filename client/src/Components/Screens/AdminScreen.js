@@ -1,11 +1,12 @@
 import React from 'react';
 import { Col, Row, Button, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const AdminScreen = () => {
   return (
-    <header className='py-2 bg-primary text-white expand-sm'>
+    <>
       <Container>
-        <Row>
+        <Row className='my-2'>
           <Col>
             <h4>
               <i className='fas fa-users-cog'></i> Dashboard
@@ -13,7 +14,33 @@ const AdminScreen = () => {
           </Col>
         </Row>
       </Container>
-    </header>
+
+      <Container>
+        <Row>
+          <Col>
+            <Link to='/admin/bootcamps'>
+              <Button className='m2' variant='success' block>
+                <i className='fas fa-campground'></i> Bootcamps
+              </Button>
+            </Link>
+          </Col>
+          <Col>
+            <Link to='/admin/courses'>
+              <Button className='m2' variant='warning' block>
+                <i className='fas fa-book'></i> Courses
+              </Button>
+            </Link>
+          </Col>
+          <Col>
+            <Link to='/admin/users'>
+              <Button className='m2' variant='danger' block>
+                <i className='fas fa-users'></i> Users
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

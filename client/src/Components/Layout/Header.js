@@ -7,9 +7,11 @@ import { userLogOut } from '../../actions/userActions';
 
 const Header = () => {
   const dispatch = useDispatch();
-  const { isAuthenticated, user } = useSelector(
-    (state) => state.userLoginRegister
-  );
+  const {
+    isAuthenticated,
+    user,
+    user: { role },
+  } = useSelector((state) => state.userLoginRegister);
   const signOutHandler = () => {
     dispatch(userLogOut());
   };
@@ -50,9 +52,13 @@ const Header = () => {
                   </LinkContainer>
                 </NavDropdown>
               )}
-              <LinkContainer to='/homepage'>
-                <Nav.Link>Browse BootCamps</Nav.Link>
-              </LinkContainer>
+              {isAuthenticated && user && role === 'admin' && (
+                <NavDropdown title='Admin' id='adminmenu'>
+                  <LinkContainer to='/admin'>
+                    <NavDropdown.Item>Dashboard</NavDropdown.Item>
+                  </LinkContainer>
+                </NavDropdown>
+              )}
             </Nav>
           </Navbar.Collapse>
         </Container>

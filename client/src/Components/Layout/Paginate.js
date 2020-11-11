@@ -4,7 +4,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 const Paginate = ({
   pages,
   page,
-  isAdmin = false,
   keyword = '',
   averageCost,
   averageRating,
@@ -16,17 +15,15 @@ const Paginate = ({
           <LinkContainer
             key={x + 1}
             to={
-              !isAdmin
-                ? keyword.length > 0
-                  ? `/search/${keyword}/averageCost/${averageCost}/averageRating/${averageRating}/page/${
-                      x + 1
-                    }`
-                  : keyword.length === 0 && averageRating && averageCost
-                  ? `/averageCost/${averageCost}/averageRating/${averageRating}/page/${
-                      x + 1
-                    }`
-                  : `/page/${x + 1}`
-                : `/admin/bootcamplist/${x + 1}`
+              keyword.length > 0
+                ? `/search/${keyword}/averageCost/${averageCost}/averageRating/${averageRating}/page/${
+                    x + 1
+                  }`
+                : keyword.length === 0 && averageRating && averageCost
+                ? `/averageCost/${averageCost}/averageRating/${averageRating}/page/${
+                    x + 1
+                  }`
+                : `/page/${x + 1}`
             }>
             <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item>
           </LinkContainer>
