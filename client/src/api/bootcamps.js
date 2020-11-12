@@ -50,3 +50,12 @@ export const postBootcampReview = async (id, formData) => {
     throw error;
   }
 };
+
+export const deleteBootcamp = async (id) => {
+  try {
+    await axios.delete(`/api/bootcamps/${id}`);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

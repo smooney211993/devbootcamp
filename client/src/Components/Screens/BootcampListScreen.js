@@ -101,6 +101,12 @@ const BootcampListScreen = ({ match, history }) => {
                       <td>{bootcamp._id}</td>
                       <td>{bootcamp.name}</td>
                       <td>{bootcamp.createdAt.substring(0, 10)}</td>
+                      <Button type='button' className='m-2 '>
+                        <i className='fas fa-edit '></i>
+                      </Button>
+                      <Button type='button' className='m-2 '>
+                        <i className='fas fa-trash-alt '></i>
+                      </Button>
                     </tr>
                   ))}
               </tbody>
