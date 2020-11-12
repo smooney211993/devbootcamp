@@ -5,6 +5,7 @@ import bootcampReviews from './bootcampReviews';
 import userLoginRegister from './userLoginRegister';
 import createBootcampReview from './createBootcampReview';
 import deleteBootcamp from './deleteBootcamp';
+import updateBootcamp from './updatebootcamp';
 
 export default combineReducers({
   bootcampList,
@@ -13,4 +14,5 @@ export default combineReducers({
   userLoginRegister,
   createBootcampReview,
   deleteBootcamp,
+  updateBootcamp,
 });

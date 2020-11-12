@@ -7,6 +7,8 @@ import {
   CREATE_BOOTCAMP_REVIEW_RESET,
   DELETE_BOOTCAMP_REQUEST,
   DELETE_BOOTCAMP_RESET,
+  UPDATE_BOOTCAMP_REQUEST,
+  UPDATE_BOOTCAMP_RESET,
 } from './types';
 
 export const getBootcamps = (
@@ -63,4 +65,16 @@ export const deleteBootcamp = (id) => ({
 
 export const resetDeleteBootcamp = () => ({
   type: DELETE_BOOTCAMP_RESET,
+});
+
+export const updateBootcamp = (id, formData) => ({
+  type: UPDATE_BOOTCAMP_REQUEST,
+  payload: {
+    id,
+    formData,
+  },
+});
+
+export const resetUpdateBootcamp = () => ({
+  type: UPDATE_BOOTCAMP_RESET,
 });
