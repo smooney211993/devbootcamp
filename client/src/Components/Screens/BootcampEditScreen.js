@@ -25,6 +25,8 @@ const BootcampEditScreen = ({ match, history }) => {
     website: '',
     jobGuarantee: null,
     photo: '',
+    phone: '',
+    acceptGi: null,
   });
   const handleFormData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -69,6 +71,8 @@ const BootcampEditScreen = ({ match, history }) => {
         website: bootcamp.website,
         jobGuarantee: bootcamp.jobGuarantee,
         photo: bootcamp.photo,
+        phone: bootcamp.phone,
+        acceptGi: bootcamp.acceptGi,
       });
     }
   }, [dispatch, id, bootcamp]);
@@ -111,7 +115,16 @@ const BootcampEditScreen = ({ match, history }) => {
                     value={formData.website}
                     onChange={handleFormData}></Form.Control>
                 </Form.Group>
-                <Form.Group>
+                <Form.Group controlId='number'>
+                  <Form.Label>Phone Number</Form.Label>
+                  <Form.Control
+                    type='text'
+                    placeholder='Enter The Number'
+                    name='phone'
+                    value={formData.phone}
+                    onChange={handleFormData}></Form.Control>
+                </Form.Group>
+                <Form.Group controlId='image'>
                   <Form.Label>Image</Form.Label>
                   <Form.Control
                     type='text'
@@ -216,6 +229,27 @@ const BootcampEditScreen = ({ match, history }) => {
                       setFormData({ ...formData, jobGuarantee: true })
                     }></Form.Check>
                 </Form.Group>
+                <Form.Group controlId='acceptGi'>
+                  <Form.Label>Accepts Gi</Form.Label>
+                  <Form.Check
+                    label='true'
+                    type='radio'
+                    id='true'
+                    name='acceptGi'
+                    checked={formData.acceptGi === true ? true : false}
+                    onChange={(e) =>
+                      setFormData({ ...formData, acceptGi: true })
+                    }></Form.Check>
+                  <Form.Check
+                    label='false'
+                    type='radio'
+                    id='false'
+                    name='acceptGi'
+                    checked={formData.acceptGi === false ? true : false}
+                    onChange={(e) =>
+                      setFormData({ ...formData, acceptGi: false })
+                    }></Form.Check>
+                </Form.Group>
                 <Form.Group controlId='description'>
                   <Form.Label>Description</Form.Label>
                   <Form.Control
@@ -226,6 +260,9 @@ const BootcampEditScreen = ({ match, history }) => {
                     value={formData.description}
                     onChange={handleFormData}></Form.Control>
                 </Form.Group>
+                <Button variat='primary' type='submit'>
+                  Submit
+                </Button>
               </Form>
             </Col>
           </Row>
