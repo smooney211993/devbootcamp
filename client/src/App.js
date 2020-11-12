@@ -58,9 +58,36 @@ const App = () => {
           <Route exact path='/login' component={LoginScreen} />
           <Route exact path='/register' component={RegisterScreen} />
           <PrivateAdminRoute
+            exact
+            path='/admin/bootcamps/search/:keyword/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
+            component={BootcampListScreen}
+          />
+          <PrivateAdminRoute
+            exact
+            path='/admin/bootcamps/search/:keyword/averageCost/:averageCost/averageRating/:averageRating'
+            component={BootcampListScreen}
+          />
+          <PrivateAdminRoute
+            exact
+            path='/admin/bootcamps/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
+            component={BootcampListScreen}
+          />
+          <PrivateAdminRoute
+            exact
+            path='/admin/bootcamps/averageCost/:averageCost/averageRating/:averageRating'
+            component={BootcampListScreen}
+          />
+
+          <PrivateAdminRoute
+            exact
+            path='/admin/bootcamps/page/:pageNumber'
+            component={BootcampListScreen}
+          />
+          <PrivateAdminRoute
             path='/admin/bootcamps'
             component={BootcampListScreen}
           />
+
           <PrivateAdminRoute path='/admin' component={AdminScreen} />
         </Switch>
       </Container>

@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
-import { Table, Button, Row, Col, Container } from 'react-bootstrap';
+import { Table, Button, Row, Col, Container, Form } from 'react-bootstrap';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { getBootcamps } from '../../actions/bootcampActions';
 
 import Spinner from '../Layout/Spinner';
 import Message from '../Layout/Message';
+import AdminBootcampPaginate from '../Layout/AdminBootcampPaginate';
 
 const BootcampListScreen = ({ match, history }) => {
   const keyword = match.params.keyword || '';
@@ -19,6 +20,23 @@ const BootcampListScreen = ({ match, history }) => {
   const { bootcampList, loading, error, page, pages } = useSelector(
     (state) => state.bootcampList
   );
+
+  const [search, setSearch] = useState('');
+  const [rating, setRating] = useState(10);
+  const [budget, setBudget] = useState(15000);
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (search.trim()) {
+      history.push(
+        `/admin/bootcamps/search/${search}/averageCost/${budget}/averageRating/${rating}`
+      );
+    }
+  };
+
+  const clearSearch = () => {
+    history.push('/admin/bootcamps');
+  };
 
   useEffect(() => {
     dispatch(getBootcamps(keyword, averageCost, averageRating, pageNumber));
@@ -39,13 +57,35 @@ const BootcampListScreen = ({ match, history }) => {
             </Link>
           </Col>
         </Row>
+        <Row>
+          <Form onSubmit={onSubmitHandler} inline className='ml-3'>
+            <Form.Group>
+              <Form.Control
+                type='text'
+                placeholder='Search'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}></Form.Control>
+            </Form.Group>
+            <Button variant='primary' size='sm' className='ml-2 ' type='submit'>
+              Search
+            </Button>
+            <Button
+              variant='primary'
+              size='sm'
+              className='ml-2 '
+              type='button'
+              onClick={clearSearch}>
+              Clear
+            </Button>
+          </Form>
+        </Row>
         {loading ? (
           <Spinner />
         ) : error ? (
           <Message>{error.msg}</Message>
         ) : (
           <>
-            <Table striped bordered hover variant='light'>
+            <Table striped bordered hover variant='light' className='my-2'>
               <thead>
                 <tr>
                   <th>Id</th>
@@ -67,6 +107,13 @@ const BootcampListScreen = ({ match, history }) => {
             </Table>
           </>
         )}
+        <AdminBootcampPaginate
+          pages={pages}
+          page={page}
+          keyword={keyword}
+          averageCost={averageCost}
+          averageRating={averageRating}
+        />
       </Container>
     </>
   );
