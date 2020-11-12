@@ -114,9 +114,11 @@ const BootcampListScreen = ({ match, history }) => {
                       <td>{bootcamp.name}</td>
                       <td>{bootcamp.createdAt.substring(0, 10)}</td>
                       <td>
-                        <Button type='button' className='m-2 '>
-                          <i className='fas fa-edit '></i>
-                        </Button>
+                        <Link to={`/admin/bootcamp/${bootcamp._id}`}>
+                          <Button type='button' className='m-2 '>
+                            <i className='fas fa-edit '></i>
+                          </Button>
+                        </Link>
                         <Button
                           type='button'
                           className='m-2 '
