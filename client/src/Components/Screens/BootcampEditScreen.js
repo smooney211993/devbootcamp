@@ -16,6 +16,10 @@ const BootcampEditScreen = ({ match, history }) => {
   const [formData, setFormData] = useState({
     name: '',
     formattedAddress: '',
+    careers: '',
+    housing: null,
+    description: '',
+    jobAssistance: null,
   });
   const handleFormData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,6 +31,10 @@ const BootcampEditScreen = ({ match, history }) => {
       setFormData({
         name: bootcamp.name,
         formattedAddress: bootcamp.location.formattedAddress,
+        careers: bootcamp.careers.join(', '),
+        housing: bootcamp.housing,
+        description: bootcamp.description,
+        jobAssistance: bootcamp.jobAssistance,
       });
     }
   }, [dispatch, id, bootcamp]);
@@ -51,7 +59,7 @@ const BootcampEditScreen = ({ match, history }) => {
           <Row className='justify-content-md-center'>
             <Col>
               <Form>
-                <Form.Group>
+                <Form.Group controlId='name'>
                   <Form.Label>Name</Form.Label>
                   <Form.Control
                     type='text'
@@ -60,13 +68,83 @@ const BootcampEditScreen = ({ match, history }) => {
                     value={formData.name}
                     onChange={handleFormData}></Form.Control>
                 </Form.Group>
-                <Form.Group>
+                <Form.Group controlid='address'>
                   <Form.Label>Address</Form.Label>
                   <Form.Control
                     type='text'
+                    rows={6}
                     placeholder='Enter Address'
                     name='formattedAddress'
                     value={formData.formattedAddress}
+                    onChange={handleFormData}></Form.Control>
+                </Form.Group>
+                <Form.Group controlId='careers'>
+                  <Form.Label>Careers</Form.Label>
+                  <Form.Control
+                    type='text'
+                    placeholder='Enter Careers'
+                    name='careers'
+                    value={formData.careers}
+                    onChange={handleFormData}></Form.Control>
+                </Form.Group>
+                <Form.Group controlId='housing'>
+                  <Form.Label>Housing Available</Form.Label>
+                  <Form.Check
+                    label='false'
+                    type='radio'
+                    id='true'
+                    name='housing'
+                    onChange={(e) =>
+                      setFormData({ ...formData, housing: false })
+                    }
+                    checked={
+                      formData.housing === false ? true : false
+                    }></Form.Check>
+                  <Form.Check
+                    label='true'
+                    type='radio'
+                    id='true'
+                    name='housing'
+                    onChange={(e) =>
+                      setFormData({ ...formData, housing: true })
+                    }
+                    checked={
+                      formData.housing === true ? true : false
+                    }></Form.Check>
+                </Form.Group>
+                <Form.Group controlId='jobassistance'>
+                  <Form.Label>Job Assistance</Form.Label>
+                  <Form.Check
+                    label='true'
+                    type='radio'
+                    id='true'
+                    name='jobAssistance'
+                    onChange={(e) =>
+                      setFormData({ ...formData, jobAssistance: true })
+                    }
+                    checked={
+                      formData.jobAssistance === true ? true : false
+                    }></Form.Check>
+                  <Form.Check
+                    label='false'
+                    type='radio'
+                    id='true'
+                    name='jobAssistance'
+                    onChange={(e) =>
+                      setFormData({ ...formData, jobAssistance: false })
+                    }
+                    checked={
+                      formData.jobAssistance === false ? true : false
+                    }></Form.Check>
+                </Form.Group>
+                <Form.Group controlId='description'>
+                  <Form.Label>Description</Form.Label>
+                  <Form.Control
+                    as='textarea'
+                    placeholder='Enter Description'
+                    rows={6}
+                    name='description'
+                    value={formData.description}
                     onChange={handleFormData}></Form.Control>
                 </Form.Group>
               </Form>
