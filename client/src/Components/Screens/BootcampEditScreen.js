@@ -6,13 +6,20 @@ import axios from 'axios';
 
 import Spinner from '../Layout/Spinner';
 
-import { getBootcamp } from '../../actions/bootcampActions';
+import {
+  getBootcamp,
+  updateBootcamp,
+  resetUpdateBootcamp,
+} from '../../actions/bootcampActions';
 
 const BootcampEditScreen = ({ match, history }) => {
   const id = match.params.bootcampId;
   const dispatch = useDispatch();
 
   const { bootcamp, loading, error } = useSelector((state) => state.bootcamp);
+  const { loading: updateLoading, success, error: updateError } = useSelector(
+    (state) => state.updateBootcamp
+  );
   const [uploading, setUploading] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -57,8 +64,18 @@ const BootcampEditScreen = ({ match, history }) => {
       setUploading(false);
     }
   };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    const body = {
+      ...formData,
+      careers: formData.careers.split(',').map((career) => career.trim()),
+    };
+    dispatch(updateBootcamp(id, body));
+  };
   useEffect(() => {
-    if (bootcamp === null || id !== bootcamp._id) {
+    dispatch(resetUpdateBootcamp());
+    if (bootcamp === null || bootcamp._id !== id || success) {
       dispatch(getBootcamp(id));
     } else {
       setFormData({
@@ -75,7 +92,7 @@ const BootcampEditScreen = ({ match, history }) => {
         acceptGi: bootcamp.acceptGi,
       });
     }
-  }, [dispatch, id, bootcamp]);
+  }, [dispatch, id, bootcamp, success, bootcamp._id]);
   return (
     <>
       <Container>
@@ -91,12 +108,12 @@ const BootcampEditScreen = ({ match, history }) => {
             </Link>
           </Col>
         </Row>
-        {loading ? (
+        {loading || updateLoading ? (
           <Spinner />
         ) : (
           <Row className='justify-content-md-center'>
             <Col>
-              <Form>
+              <Form onSubmit={submitHandler}>
                 <Form.Group controlId='name'>
                   <Form.Label>Name</Form.Label>
                   <Form.Control

@@ -59,3 +59,19 @@ export const deleteBootcamp = async (id) => {
     throw error;
   }
 };
+
+export const updateBootcampById = async (id, formData) => {
+  const config = {
+    headers: {
+      'Content-type': 'application/json',
+    },
+  };
+
+  const body = JSON.stringify(formData);
+  try {
+    await axios.put(`/api/v1/bootcamps/${id}`, body, config);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};

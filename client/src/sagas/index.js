@@ -7,6 +7,7 @@ import userRegisterSaga from './userRegisterSaga';
 import loadUserSaga from './loadUserSaga';
 import createBootCampReviewSaga from './createBootcampReviewSaga';
 import deleteBootcampSaga from './deleteBootcampSaga';
+import bootcampUpdateSaga from './bootcampUpdateSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -18,5 +19,6 @@ export default function* rootSaga() {
     loadUserSaga(),
     createBootCampReviewSaga(),
     deleteBootcampSaga(),
+    bootcampUpdateSaga(),
   ]);
 }
