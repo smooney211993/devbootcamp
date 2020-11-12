@@ -5,7 +5,11 @@ import { Link } from 'react-router-dom';
 import { Table, Button, Row, Col, Container, Form } from 'react-bootstrap';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getBootcamps } from '../../actions/bootcampActions';
+import {
+  getBootcamps,
+  deleteBootcamp,
+  resetDeleteBootcamp,
+} from '../../actions/bootcampActions';
 
 import Spinner from '../Layout/Spinner';
 import Message from '../Layout/Message';
@@ -19,6 +23,10 @@ const BootcampListScreen = ({ match, history }) => {
   const dispatch = useDispatch();
   const { bootcampList, loading, error, page, pages } = useSelector(
     (state) => state.bootcampList
+  );
+
+  const { loading: deleteLoading, success, error: deleteError } = useSelector(
+    (state) => state.deleteBootcamp
   );
 
   const [search, setSearch] = useState('');
@@ -39,8 +47,12 @@ const BootcampListScreen = ({ match, history }) => {
   };
 
   useEffect(() => {
+    dispatch(resetDeleteBootcamp());
     dispatch(getBootcamps(keyword, averageCost, averageRating, pageNumber));
-  }, [dispatch, keyword, pageNumber, averageCost, averageRating]);
+    if (success) {
+      dispatch(getBootcamps(keyword, averageCost, averageRating, pageNumber));
+    }
+  }, [dispatch, keyword, pageNumber, averageCost, averageRating, success]);
   return (
     <>
       <Container>
@@ -101,12 +113,19 @@ const BootcampListScreen = ({ match, history }) => {
                       <td>{bootcamp._id}</td>
                       <td>{bootcamp.name}</td>
                       <td>{bootcamp.createdAt.substring(0, 10)}</td>
-                      <Button type='button' className='m-2 '>
-                        <i className='fas fa-edit '></i>
-                      </Button>
-                      <Button type='button' className='m-2 '>
-                        <i className='fas fa-trash-alt '></i>
-                      </Button>
+                      <td>
+                        <Button type='button' className='m-2 '>
+                          <i className='fas fa-edit '></i>
+                        </Button>
+                        <Button
+                          type='button'
+                          className='m-2 '
+                          onClick={() =>
+                            dispatch(deleteBootcamp(bootcamp._id))
+                          }>
+                          <i className='fas fa-trash-alt '></i>
+                        </Button>
+                      </td>
                     </tr>
                   ))}
               </tbody>

@@ -53,7 +53,7 @@ export const postBootcampReview = async (id, formData) => {
 
 export const deleteBootcamp = async (id) => {
   try {
-    await axios.delete(`/api/bootcamps/${id}`);
+    await axios.delete(`/api/v1/bootcamps/${id}`);
   } catch (error) {
     console.log(error);
     throw error;
