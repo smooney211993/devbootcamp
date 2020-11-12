@@ -129,7 +129,7 @@ const bootcampPhotoUpload = asyncHandler(async (req, res) => {
     res.status(400);
     throw new Error('Please Upload File');
   }
-  const file = req.files[''];
+  const file = req.files.image;
 
   if (!file.mimetype.startsWith('image')) {
     res.status(400);

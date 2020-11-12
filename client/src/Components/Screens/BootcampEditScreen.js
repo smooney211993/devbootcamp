@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
+import axios from 'axios';
 
 import Spinner from '../Layout/Spinner';
 
@@ -12,6 +13,7 @@ const BootcampEditScreen = ({ match, history }) => {
   const dispatch = useDispatch();
 
   const { bootcamp, loading, error } = useSelector((state) => state.bootcamp);
+  const [uploading, setUploading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -20,9 +22,38 @@ const BootcampEditScreen = ({ match, history }) => {
     housing: null,
     description: '',
     jobAssistance: null,
+    website: '',
+    jobGuarantee: null,
+    photo: '',
   });
   const handleFormData = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('image', file);
+    setFormData({ ...formData, photo: file });
+    setUploading(true);
+    try {
+      const config = {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      };
+      const { data } = await axios.put(
+        `/api/v1/bootcamps/${id}/photo`,
+        formData,
+        config
+      );
+      setFormData({ ...formData, photo: data.data });
+      setUploading(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUploading(false);
+    }
   };
   useEffect(() => {
     if (bootcamp === null || id !== bootcamp._id) {
@@ -35,6 +66,9 @@ const BootcampEditScreen = ({ match, history }) => {
         housing: bootcamp.housing,
         description: bootcamp.description,
         jobAssistance: bootcamp.jobAssistance,
+        website: bootcamp.website,
+        jobGuarantee: bootcamp.jobGuarantee,
+        photo: bootcamp.photo,
       });
     }
   }, [dispatch, id, bootcamp]);
@@ -67,6 +101,30 @@ const BootcampEditScreen = ({ match, history }) => {
                     name='name'
                     value={formData.name}
                     onChange={handleFormData}></Form.Control>
+                </Form.Group>
+                <Form.Group controlId='website'>
+                  <Form.Label>Website</Form.Label>
+                  <Form.Control
+                    type='text'
+                    placeholder='Enter Website'
+                    name='website'
+                    value={formData.website}
+                    onChange={handleFormData}></Form.Control>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Image</Form.Label>
+                  <Form.Control
+                    type='text'
+                    placeholder='Enter Image'
+                    value={formData.photo}
+                    name='photo'
+                    onChange={handleFormData}></Form.Control>
+                  <Form.File
+                    id='image-file'
+                    label='Choose File'
+                    custom
+                    onChange={uploadFileHandler}></Form.File>
+                  {uploading && <Spinner />}
                 </Form.Group>
                 <Form.Group controlid='address'>
                   <Form.Label>Address</Form.Label>
@@ -128,13 +186,34 @@ const BootcampEditScreen = ({ match, history }) => {
                   <Form.Check
                     label='false'
                     type='radio'
-                    id='true'
+                    id='false'
                     name='jobAssistance'
                     onChange={(e) =>
                       setFormData({ ...formData, jobAssistance: false })
                     }
                     checked={
                       formData.jobAssistance === false ? true : false
+                    }></Form.Check>
+                </Form.Group>
+                <Form.Group controlId='jobGuarantee'>
+                  <Form.Label>Job Guarantee</Form.Label>
+                  <Form.Check
+                    label='false'
+                    type='radio'
+                    id='false'
+                    name='jobGuarantee'
+                    checked={formData.jobGuarantee === false ? true : false}
+                    onChange={(e) =>
+                      setFormData({ ...formData, jobGuarantee: false })
+                    }></Form.Check>
+                  <Form.Check
+                    label='true'
+                    type='radio'
+                    id='true'
+                    name='jobGuarantee'
+                    checked={formData.jobGuarantee === true ? true : false}
+                    onChange={(e) =>
+                      setFormData({ ...formData, jobGuarantee: true })
                     }></Form.Check>
                 </Form.Group>
                 <Form.Group controlId='description'>
