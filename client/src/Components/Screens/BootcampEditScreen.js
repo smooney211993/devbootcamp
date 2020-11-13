@@ -277,7 +277,7 @@ const BootcampEditScreen = ({ match, history }) => {
                     value={formData.description}
                     onChange={handleFormData}></Form.Control>
                 </Form.Group>
-                <Button variat='primary' type='submit'>
+                <Button variant='primary' type='submit'>
                   Submit
                 </Button>
               </Form>

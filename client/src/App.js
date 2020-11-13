@@ -4,6 +4,7 @@ import { Container } from 'react-bootstrap';
 
 // routing
 import PrivateAdminRoute from './Components/Routes/PrivateAdminRoute';
+import PrivateRoute from './Components/Routes/PrivateRoute';
 
 // components
 import Header from './Components/Layout/Header';
@@ -61,6 +62,7 @@ const App = () => {
 
           <Route exact path='/login' component={LoginScreen} />
           <Route exact path='/register' component={RegisterScreen} />
+          <PrivateRoute exact path='/profile' component={ProfileScreen} />
 
           <PrivateAdminRoute
             exact
