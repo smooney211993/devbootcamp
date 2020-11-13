@@ -59,9 +59,13 @@ const getMe = asyncHandler(async (req, res) => {
 const updateDetails = asyncHandler(async (req, res) => {
   const { email, name } = req.body;
   const user = await User.findById(req.user.id);
+  if (email) {
+    user.email = email;
+  }
+  if (name) {
+    user.name = name;
+  }
 
-  user.email = email;
-  user.name = name;
   await user.save({ validateBeforeSave: false });
   res.status(200).json({
     success: true,

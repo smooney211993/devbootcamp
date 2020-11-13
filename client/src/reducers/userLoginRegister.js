@@ -8,9 +8,6 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
-  USER_UPDATE_REQUEST,
-  USER_UPDATE_SUCCESS,
-  USER_UPDATE_FAIL,
 } from '../actions/types';
 
 const initialState = {
@@ -24,11 +21,9 @@ const initialState = {
 export default function (state = initialState, action) {
   const { payload, type } = action;
   switch (type) {
-    case USER_UPDATE_REQUEST:
     case USER_LOGIN_REQUEST:
     case USER_REGISTER_REQUEST:
       return { ...state, loading: true };
-    case USER_UPDATE_SUCCESS:
     case USER_LOGIN_SUCCESS:
     case USER_REGISTER_SUCCESS:
       return {
@@ -37,9 +32,10 @@ export default function (state = initialState, action) {
         token: payload.token,
         isAuthenticated: true,
       };
+
     case LOAD_USER_SUCCESS:
       return { ...state, user: payload.data, error: null, loading: false };
-    case USER_UPDATE_FAIL:
+
     case USER_LOGIN_FAIL:
     case USER_REGISTER_FAIL:
       return {
