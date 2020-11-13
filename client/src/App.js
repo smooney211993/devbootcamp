@@ -18,6 +18,9 @@ import AdminScreen from './Components/Screens/AdminScreen';
 import BootcampListScreen from './Components/Screens/BootcampListScreen';
 import BootcampEditScreen from './Components/Screens/BootcampEditScreen';
 
+// profile screen
+import ProfileScreen from './Components/Screens/ProfileScreen';
+
 import { useDispatch } from 'react-redux';
 import { loadUser } from './actions/userActions';
 const App = () => {

@@ -65,8 +65,11 @@ const BootcampListScreen = ({ match, history }) => {
           <Col className='text-right'>
             <Link to='/admin'>
               {' '}
-              <Button variant='light'>Dashboard</Button>
+              <Button variant='light' className='m-2'>
+                Dashboard
+              </Button>
             </Link>
+            <Button variant='success'>Create Bootcamp</Button>
           </Col>
         </Row>
         <Row>
