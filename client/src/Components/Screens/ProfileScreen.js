@@ -72,6 +72,7 @@ const ProfileScreen = () => {
                               <Form.Group controlId='name'>
                                 <Form.Label>Name</Form.Label>
                                 <Form.Control
+                                  name='name'
                                   type='text'
                                   value={formData.name}
                                   onChange={formHandler}></Form.Control>
