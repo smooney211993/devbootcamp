@@ -3,7 +3,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './reducers';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas/index';
-import setAuthToken from './utils/authToken';
+import { setAuthToken } from './utils/authToken';
 
 const sagaMiddleware = createSagaMiddleware();
 const initialState = {};

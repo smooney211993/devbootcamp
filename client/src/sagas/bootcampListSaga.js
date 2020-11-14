@@ -4,21 +4,21 @@ import {
   BOOTCAMPS_LIST_FAIL,
   LOAD_USER_REQUEST,
 } from '../actions/types';
-import { fetchBootcamps } from '../api/bootcamps';
+import { fetchBootcamps, fetchBootcampsWithApiCaller } from '../api/bootcamps';
 
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 function* getAllBootCamps(action) {
   const { keyword, pageNumber, budget, rating } = action.payload;
   try {
-    const bootcamps = yield call(
-      fetchBootcamps,
+    const { data } = yield call(
+      fetchBootcampsWithApiCaller,
       keyword,
       pageNumber,
       budget,
       rating
     );
-    yield put({ type: BOOTCAMPS_LIST_SUCCESS, payload: bootcamps });
+    yield put({ type: BOOTCAMPS_LIST_SUCCESS, payload: data });
     yield put({ type: LOAD_USER_REQUEST });
   } catch (error) {
     yield put({

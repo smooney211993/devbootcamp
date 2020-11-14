@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { apiCaller } from '../utils/authToken';
+
 export const fetchBootcamps = async (keyword, budget, rating, pageNumber) => {
   try {
     const { data } = await axios.get(
@@ -9,6 +11,18 @@ export const fetchBootcamps = async (keyword, budget, rating, pageNumber) => {
     console.log(error);
     throw error;
   }
+};
+
+export const fetchBootcampsWithApiCaller = (
+  keyword,
+  budget,
+  rating,
+  pageNumber
+) => {
+  return apiCaller({
+    method: 'get',
+    url: `/api/v1/bootcamps/?keyword=${keyword}&averageCost[lte]=${budget}&averageRating[lte]=${rating}&pageNumber=${pageNumber}`,
+  });
 };
 
 export const fetchBootcampById = async (id) => {
@@ -29,6 +43,17 @@ export const fetchBootcampReviewById = async (id) => {
     console.log(error);
     throw error;
   }
+};
+
+export const postBootcampReviewWithApiCaller = (id, formData, authToken) => {
+  return apiCaller({
+    method: 'post',
+    url: `/api/v1/bootcamps/${id}/reviews`,
+    data: { ...formData },
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
 };
 
 export const postBootcampReview = async (id, formData) => {
