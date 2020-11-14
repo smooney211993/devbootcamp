@@ -1,6 +1,7 @@
 import axios from 'axios';
-export const fetchUserToken = async (email, password) => {
-  const config = {
+import { apiCaller } from '../utils/api';
+export const fetchUserToken = (email, password) => {
+  /*const config = {
     headers: {
       'Content-type': 'application/json',
     },
@@ -15,7 +16,15 @@ export const fetchUserToken = async (email, password) => {
   } catch (error) {
     console.log(error);
     throw error;
-  }
+  } */
+  return apiCaller({
+    method: 'POST',
+    url: `/api/v1/auth/login`,
+    data: { email, password },
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
 };
 
 export const fetchUser = async () => {

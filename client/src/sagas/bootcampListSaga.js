@@ -4,7 +4,7 @@ import {
   BOOTCAMPS_LIST_FAIL,
   LOAD_USER_REQUEST,
 } from '../actions/types';
-import { fetchBootcamps, fetchBootcampsWithApiCaller } from '../api/bootcamps';
+import { fetchBootcamps } from '../api/bootcamps';
 
 import { call, put, takeEvery } from 'redux-saga/effects';
 
@@ -12,7 +12,7 @@ function* getAllBootCamps(action) {
   const { keyword, pageNumber, budget, rating } = action.payload;
   try {
     const { data } = yield call(
-      fetchBootcampsWithApiCaller,
+      fetchBootcamps,
       keyword,
       pageNumber,
       budget,

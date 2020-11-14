@@ -1,27 +1,16 @@
 import axios from 'axios';
-import { apiCaller } from '../utils/authToken';
+import { apiCaller } from '../utils/api';
 
-export const fetchBootcamps = async (keyword, budget, rating, pageNumber) => {
-  try {
-    const { data } = await axios.get(
-      `/api/v1/bootcamps/?keyword=${keyword}&averageCost[lte]=${budget}&averageRating[lte]=${rating}&pageNumber=${pageNumber}`
-    );
-    return data;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
-
-export const fetchBootcampsWithApiCaller = (
-  keyword,
-  budget,
-  rating,
-  pageNumber
-) => {
+export const fetchBootcamps = (keyword, budget, rating, pageNumber) => {
   return apiCaller({
     method: 'get',
-    url: `/api/v1/bootcamps/?keyword=${keyword}&averageCost[lte]=${budget}&averageRating[lte]=${rating}&pageNumber=${pageNumber}`,
+    url: `/api/v1/bootcamps/`,
+    params: {
+      keyword: keyword,
+      'averageCost[lte]': budget,
+      'averageRating[lte]': rating,
+      pageNumber: pageNumber,
+    },
   });
 };
 

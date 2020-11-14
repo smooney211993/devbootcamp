@@ -10,8 +10,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 function* getUserAccessToken(action) {
   const { email, password } = action.payload;
   try {
-    const token = yield call(fetchUserToken, email, password);
-    yield put({ type: USER_LOGIN_SUCCESS, payload: token });
+    const { data } = yield call(fetchUserToken, email, password);
+    yield put({ type: USER_LOGIN_SUCCESS, payload: data });
     yield put({ type: LOAD_USER_REQUEST });
   } catch (error) {
     yield put({
