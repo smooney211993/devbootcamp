@@ -15,13 +15,19 @@ export const fetchBootcamps = (keyword, budget, rating, pageNumber) => {
 };
 
 export const fetchBootcampById = async (id) => {
-  try {
+  /*try {
     const { data } = await axios.get(`/api/v1/bootcamps/${id}`);
     return data;
   } catch (error) {
     console.log(error);
     throw error;
   }
+  */ return apiCaller(
+    {
+      method: 'get',
+      url: `/api/v1/bootcamps/${id}`,
+    }
+  );
 };
 
 export const fetchBootcampReviewById = async (id) => {

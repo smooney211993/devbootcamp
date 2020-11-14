@@ -10,8 +10,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 function* getBootcampById(action) {
   const { id } = action.payload;
   try {
-    const bootcamp = yield call(fetchBootcampById, id);
-    yield put({ type: BOOTCAMP_SUCCESS, payload: bootcamp });
+    const { data } = yield call(fetchBootcampById, id);
+    yield put({ type: BOOTCAMP_SUCCESS, payload: data });
   } catch (error) {
     yield put({
       type: BOOTCAMP_FAIL,
