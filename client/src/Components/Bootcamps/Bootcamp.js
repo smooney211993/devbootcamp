@@ -67,7 +67,6 @@ const Bootcamp = ({ match }) => {
       ? reviews.find((review) => review.user._id === user._id)
       : false;
 
-  console.log(alreadyReviewed);
   useEffect(() => {
     dispatch(getBootcamp(id));
     dispatch(getBootCampReview(id));

@@ -10,8 +10,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 function* postRegisterUser(action) {
   const { name, email, password } = action.payload;
   try {
-    const newUser = yield call(registerUser, name, email, password);
-    yield put({ type: USER_REGISTER_SUCCESS, payload: newUser });
+    const { data } = yield call(registerUser, name, email, password);
+    yield put({ type: USER_REGISTER_SUCCESS, payload: data });
     yield put({ type: LOAD_USER_REQUEST });
   } catch (error) {
     yield put({

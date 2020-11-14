@@ -31,30 +31,32 @@ export const fetchBootcampById = async (id) => {
 };
 
 export const fetchBootcampReviewById = async (id) => {
-  try {
+  /*try {
     const { data } = await axios.get(`/api/v1/bootcamps/${id}/reviews`);
     return data;
   } catch (error) {
     console.log(error);
     throw error;
   }
+  */
+  return apiCaller({
+    method: 'get',
+    url: `/api/v1/bootcamps/${id}/reviews`,
+  });
 };
 
-export const postBootcampReviewWithApiCaller = (id, formData, authToken) => {
-  return apiCaller(
-    {
-      method: 'post',
-      url: `/api/v1/bootcamps/${id}/reviews`,
-      data: { ...formData },
-      headers: {
-        'Content-type': 'application/json',
-      },
+export const postBootcampReview = (id, formData, authToken) => {
+  return apiCaller({
+    method: 'post',
+    url: `/api/v1/bootcamps/${id}/reviews`,
+    data: { ...formData },
+    headers: {
+      'Content-type': 'application/json',
     },
-    authToken
-  );
+  });
 };
 
-export const postBootcampReview = async (id, formData) => {
+/*export const postBootcampReview = async (id, formData) => {
   const config = {
     headers: {
       'Content-type': 'application/json',
@@ -74,17 +76,25 @@ export const postBootcampReview = async (id, formData) => {
   }
 };
 
+*/
+
 export const deleteBootcamp = async (id) => {
-  try {
+  /*try {
     await axios.delete(`/api/v1/bootcamps/${id}`);
   } catch (error) {
     console.log(error);
     throw error;
   }
+
+  */
+  return apiCaller({
+    method: 'delete',
+    url: `/api/v1/bootcamps/${id}`,
+  });
 };
 
 export const updateBootcampById = async (id, formData) => {
-  const config = {
+  /*const config = {
     headers: {
       'Content-type': 'application/json',
     },
@@ -97,4 +107,14 @@ export const updateBootcampById = async (id, formData) => {
     console.log(error);
     throw error;
   }
+
+  */
+  return apiCaller({
+    method: 'put',
+    url: `/api/v1/bootcamps/${id}`,
+    data: { ...formData },
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
 };

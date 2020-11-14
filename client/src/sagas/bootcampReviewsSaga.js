@@ -9,8 +9,8 @@ import { call, put, takeEvery } from 'redux-saga/effects';
 function* getBootcampReview(action) {
   const { id } = action.payload;
   try {
-    const reviews = yield call(fetchBootcampReviewById, id);
-    yield put({ type: BOOTCAMP_REVIEWS_SUCCESS, payload: reviews });
+    const { data } = yield call(fetchBootcampReviewById, id);
+    yield put({ type: BOOTCAMP_REVIEWS_SUCCESS, payload: data });
   } catch (error) {
     yield put({
       type: BOOTCAMP_REVIEWS_FAIL,

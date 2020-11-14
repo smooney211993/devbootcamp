@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { apiCaller } from '../utils/api';
-const authToken = localStorage.getItem('token');
+
 export const fetchUserToken = (email, password) => {
   /*const config = {
     headers: {
@@ -18,17 +18,14 @@ export const fetchUserToken = (email, password) => {
     console.log(error);
     throw error;
   } */
-  return apiCaller(
-    {
-      method: 'POST',
-      url: `/api/v1/auth/login`,
-      data: { email, password },
-      headers: {
-        'Content-type': 'application/json',
-      },
+  return apiCaller({
+    method: 'POST',
+    url: `/api/v1/auth/login`,
+    data: { email, password },
+    headers: {
+      'Content-type': 'application/json',
     },
-    authToken
-  );
+  });
 };
 
 export const fetchUser = () => {
@@ -46,7 +43,7 @@ export const fetchUser = () => {
 };
 
 export const registerUser = async (name, email, password) => {
-  const body = JSON.stringify({
+  /*const body = JSON.stringify({
     name,
     email,
     password,
@@ -63,10 +60,17 @@ export const registerUser = async (name, email, password) => {
     console.log(error);
     throw error;
   }
+  */
+  return apiCaller({
+    method: 'post',
+    url: `/api/v1/auth/register`,
+    data: { name, email, password },
+    headers: { 'Content-type': 'application/json' },
+  });
 };
 
 export const updateUser = async (formData) => {
-  const body = JSON.stringify(formData);
+  /* const body = JSON.stringify(formData);
   const config = {
     headers: {
       'Content-type': 'application/json',
@@ -78,4 +82,11 @@ export const updateUser = async (formData) => {
     console.log(error);
     throw error;
   }
+  */
+  return apiCaller({
+    method: 'put',
+    url: `/api/v1/auth/me/updatedetails`,
+    data: { ...formData },
+    headers: { 'Content-type': 'application/json' },
+  });
 };

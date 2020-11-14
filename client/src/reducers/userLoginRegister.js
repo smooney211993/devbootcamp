@@ -43,13 +43,15 @@ export default function (state = initialState, action) {
         loading: false,
         error: payload,
       };
-    case USER_LOGIN_RESET:
+
     case LOAD_USER_FAIL:
+    case USER_LOGIN_RESET:
       return {
         user: {},
         error: null,
         loading: null,
         isAuthenticated: false,
+        token: '',
       };
     default:
       return state;

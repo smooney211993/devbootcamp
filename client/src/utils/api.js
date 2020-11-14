@@ -4,15 +4,17 @@ import axios from 'axios';
 // if no token we want to delete it from the headers
 export const setAuthToken = (token) => {
   if (token) {
-    axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
-    //localStorage.setItem('token', token);
+    // axios.defaults.headers.common['authorization'] = `Bearer ${token}`;
+
+    localStorage.setItem('token', token);
   } else {
-    delete axios.defaults.headers.common['authorization'];
-    //localStorage.removeItem('token');
+    //delete axios.defaults.headers.common['authorization'];
+
+    localStorage.removeItem('token');
   }
 };
 
-const generateAuthorisedApi = (authToken, customTimeout) => {
+const generateAuthorisedApi = (customTimeout) => {
   const authorisedApi = axios.create();
 
   // Retry a failed service request once
@@ -25,6 +27,7 @@ const generateAuthorisedApi = (authToken, customTimeout) => {
     ) {
       // eslint-disable-next-line no-param-reassign
       err.config.__isRetryRequest = true;
+
       return axios(err.config);
     }
     throw err;
@@ -34,6 +37,7 @@ const generateAuthorisedApi = (authToken, customTimeout) => {
 
   authorisedApi.interceptors.request.use(
     (config) => {
+      const authToken = localStorage.getItem('token');
       const _config = config;
       _config.headers.Accept = '*/*';
       if (authToken) {
@@ -51,10 +55,7 @@ const generateAuthorisedApi = (authToken, customTimeout) => {
   return authorisedApi;
 };
 
-export function apiCaller(
-  { method = '', url = '', data, params, headers },
-  authToken
-) {
-  const authorisedApiCaller = generateAuthorisedApi(authToken);
+export function apiCaller({ method = '', url = '', data, params, headers }) {
+  const authorisedApiCaller = generateAuthorisedApi();
   return authorisedApiCaller({ method, url, data, params, headers });
 }
