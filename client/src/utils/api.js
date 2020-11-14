@@ -56,6 +56,6 @@ const generateAuthorisedApi = (customTimeout) => {
 };
 
 export function apiCaller({ method = '', url = '', data, params, headers }) {
-  const authorisedApiCaller = generateAuthorisedApi();
+  const authorisedApiCaller = generateAuthorisedApi(30000);
   return authorisedApiCaller({ method, url, data, params, headers });
 }

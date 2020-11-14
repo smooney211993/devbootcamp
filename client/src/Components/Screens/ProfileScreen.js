@@ -46,113 +46,117 @@ const ProfileScreen = () => {
   }, [dispatch, user]);
   return (
     <>
-      <Container>
-        <Row>
-          <Col>
-            <Link to='/'>
-              <Button variant='light' type='button' className='my-2'>
-                Back
-              </Button>
-            </Link>
-            <h3>
-              <i className='fas fa-user-circle m-2'></i>
-              General Account Settings
-            </h3>
-            <ListGroup>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Name</Col>
-                  <Col xs={6}>
-                    <Row>
-                      <Col>
-                        <div hidden={showName}>{user.name}</div>
-                        <Card hidden={!showName}>
-                          <Card.Body>
-                            <Form onSubmit={submitHandler}>
-                              <Form.Group controlId='name'>
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control
-                                  name='name'
-                                  type='text'
-                                  value={formData.name}
-                                  onChange={formHandler}></Form.Control>
-                              </Form.Group>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Container>
+          <Row>
+            <Col>
+              <Link to='/'>
+                <Button variant='light' type='button' className='my-2'>
+                  Back
+                </Button>
+              </Link>
+              <h3>
+                <i className='fas fa-user-circle m-2'></i>
+                General Account Settings
+              </h3>
+              <ListGroup>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Name</Col>
+                    <Col xs={6}>
+                      <Row>
+                        <Col>
+                          <div hidden={showName}>{user.name}</div>
+                          <Card hidden={!showName}>
+                            <Card.Body>
+                              <Form onSubmit={submitHandler}>
+                                <Form.Group controlId='name'>
+                                  <Form.Label>Name</Form.Label>
+                                  <Form.Control
+                                    name='name'
+                                    type='text'
+                                    value={formData.name}
+                                    onChange={formHandler}></Form.Control>
+                                </Form.Group>
 
-                              <Button
-                                type='submit'
-                                variant='light'
-                                className='m-2'>
-                                Submit
-                              </Button>
-                              <Button
-                                className='m-2'
-                                type='button'
-                                variant='light'
-                                onClick={(e) => setShowName(!showName)}>
-                                Cancel
-                              </Button>
-                            </Form>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col className='text-right'>
-                    <i
-                      className='fas fa-edit'
-                      onClick={(e) => setShowName(!showName)}></i>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Email</Col>
-                  <Col xs={6}>
-                    <Row>
-                      <Col>
-                        <div hidden={showEmail}>{user.email}</div>
-                        <Card hidden={!showEmail}>
-                          <Card.Body>
-                            <Form onSubmit={submitHandler}>
-                              <Form.Group controlId='email'>
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control
-                                  type='email'
-                                  name='email'
-                                  value={formData.email}
-                                  onChange={formHandler}></Form.Control>
-                              </Form.Group>
+                                <Button
+                                  type='submit'
+                                  variant='light'
+                                  className='m-2'>
+                                  Submit
+                                </Button>
+                                <Button
+                                  className='m-2'
+                                  type='button'
+                                  variant='light'
+                                  onClick={(e) => setShowName(!showName)}>
+                                  Cancel
+                                </Button>
+                              </Form>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col className='text-right'>
+                      <i
+                        className='fas fa-edit'
+                        onClick={(e) => setShowName(!showName)}></i>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Email</Col>
+                    <Col xs={6}>
+                      <Row>
+                        <Col>
+                          <div hidden={showEmail}>{user.email}</div>
+                          <Card hidden={!showEmail}>
+                            <Card.Body>
+                              <Form onSubmit={submitHandler}>
+                                <Form.Group controlId='email'>
+                                  <Form.Label>Email</Form.Label>
+                                  <Form.Control
+                                    type='email'
+                                    name='email'
+                                    value={formData.email}
+                                    onChange={formHandler}></Form.Control>
+                                </Form.Group>
 
-                              <Button
-                                type='submit'
-                                variant='light'
-                                className='m-2'>
-                                Submit
-                              </Button>
-                              <Button
-                                type='button'
-                                variant='light'
-                                className='m-2'>
-                                Cancel
-                              </Button>
-                            </Form>
-                          </Card.Body>
-                        </Card>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col className='text-right'>
-                    {' '}
-                    <i
-                      className='fas fa-edit'
-                      onClick={(e) => setShowEmail(!showEmail)}></i>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            </ListGroup>
-          </Col>
-        </Row>
-      </Container>
+                                <Button
+                                  type='submit'
+                                  variant='light'
+                                  className='m-2'>
+                                  Submit
+                                </Button>
+                                <Button
+                                  type='button'
+                                  variant='light'
+                                  className='m-2'>
+                                  Cancel
+                                </Button>
+                              </Form>
+                            </Card.Body>
+                          </Card>
+                        </Col>
+                      </Row>
+                    </Col>
+                    <Col className='text-right'>
+                      {' '}
+                      <i
+                        className='fas fa-edit'
+                        onClick={(e) => setShowEmail(!showEmail)}></i>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              </ListGroup>
+            </Col>
+          </Row>
+        </Container>
+      )}
     </>
   );
 };

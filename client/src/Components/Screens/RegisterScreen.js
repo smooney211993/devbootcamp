@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Col, Row, Container } from 'react-bootstrap';
+import { Form, Button, Container } from 'react-bootstrap';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { userRegister } from '../..//actions/userActions';
@@ -30,6 +30,8 @@ const RegisterScreen = ({ history }) => {
   }, [history, isAuthenticated]);
   return loading ? (
     <Spinner />
+  ) : error ? (
+    <Message>{error.msg}</Message>
   ) : (
     <Container>
       <Form className='my-2' onSubmit={submitHandler}>

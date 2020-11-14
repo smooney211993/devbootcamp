@@ -94,10 +94,12 @@ const BootcampListScreen = ({ match, history }) => {
             </Button>
           </Form>
         </Row>
-        {loading ? (
+        {loading || deleteLoading ? (
           <Spinner />
         ) : error ? (
           <Message>{error.msg}</Message>
+        ) : deleteError ? (
+          <Message>{deleteError.msg}</Message>
         ) : (
           <>
             <Table striped bordered hover variant='light' className='my-2'>

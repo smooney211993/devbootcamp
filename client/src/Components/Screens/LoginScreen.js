@@ -27,7 +27,7 @@ const LoginScreen = ({ history }) => {
     } else if (isAuthenticated && role && role !== 'admin') {
       history.push('/');
     }
-  }, [isAuthenticated, role]);
+  }, [isAuthenticated, role, history]);
 
   return (
     <Container className='my-2'>

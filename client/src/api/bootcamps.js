@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { apiCaller } from '../utils/api';
 
 export const fetchBootcamps = (keyword, budget, rating, pageNumber) => {

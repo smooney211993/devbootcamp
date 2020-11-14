@@ -5,6 +5,7 @@ import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import axios from 'axios';
 
 import Spinner from '../Layout/Spinner';
+import Message from '../Layout/Message';
 
 import {
   getBootcamp,
@@ -108,6 +109,8 @@ const BootcampEditScreen = ({ match, history }) => {
             </Link>
           </Col>
         </Row>
+        {error && <Message>{error.msg}</Message>}
+        {updateError && <Message>{updateError.msg}</Message>}}
         {loading || updateLoading ? (
           <Spinner />
         ) : (

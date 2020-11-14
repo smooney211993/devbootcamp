@@ -9,7 +9,6 @@ import {
   Alert,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
 
 import Spinner from '../Layout/Spinner';
 import Rating from '../Layout/Rating';
