@@ -35,14 +35,17 @@ export const fetchBootcampReviewById = async (id) => {
 };
 
 export const postBootcampReviewWithApiCaller = (id, formData, authToken) => {
-  return apiCaller({
-    method: 'post',
-    url: `/api/v1/bootcamps/${id}/reviews`,
-    data: { ...formData },
-    headers: {
-      'Content-type': 'application/json',
+  return apiCaller(
+    {
+      method: 'post',
+      url: `/api/v1/bootcamps/${id}/reviews`,
+      data: { ...formData },
+      headers: {
+        'Content-type': 'application/json',
+      },
     },
-  });
+    authToken
+  );
 };
 
 export const postBootcampReview = async (id, formData) => {

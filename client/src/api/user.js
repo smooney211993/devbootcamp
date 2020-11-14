@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { apiCaller } from '../utils/api';
+const authToken = localStorage.getItem('token');
 export const fetchUserToken = (email, password) => {
   /*const config = {
     headers: {
@@ -17,24 +18,31 @@ export const fetchUserToken = (email, password) => {
     console.log(error);
     throw error;
   } */
-  return apiCaller({
-    method: 'POST',
-    url: `/api/v1/auth/login`,
-    data: { email, password },
-    headers: {
-      'Content-type': 'application/json',
+  return apiCaller(
+    {
+      method: 'POST',
+      url: `/api/v1/auth/login`,
+      data: { email, password },
+      headers: {
+        'Content-type': 'application/json',
+      },
     },
-  });
+    authToken
+  );
 };
 
-export const fetchUser = async () => {
-  try {
+export const fetchUser = () => {
+  /* try {
     const { data } = await axios.get(`/api/v1/auth/me`);
     return data;
   } catch (error) {
     console.log(error);
     throw error;
-  }
+  } */
+  return apiCaller({
+    method: 'get',
+    url: '/api/v1/auth/me',
+  });
 };
 
 export const registerUser = async (name, email, password) => {
