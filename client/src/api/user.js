@@ -89,3 +89,12 @@ export const updateUser = (formData) => {
     headers: { 'Content-type': 'application/json' },
   });
 };
+
+export const userPasswordUpdate = (formData) => {
+  return apiCaller({
+    method: 'put',
+    url: `/api/v1/auth/me/updatepassword`,
+    data: { ...formData },
+    headers: { 'Content-type': 'application/json' },
+  });
+};

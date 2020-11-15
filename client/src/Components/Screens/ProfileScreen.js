@@ -45,6 +45,7 @@ const ProfileScreen = () => {
       dispatch(loadUser());
     } else {
       setFormData({
+        ...formData,
         name: user.name,
         email: user.email,
       });
@@ -190,6 +191,7 @@ const ProfileScreen = () => {
                       <div hidden={showPassword}>xxxxxxxxxxxx</div>
                       <Card hidden={!showPassword}>
                         <Card.Body>
+                          {' '}
                           <Form>
                             <Form.Group>
                               <Form.Label>Enter Current Password</Form.Label>

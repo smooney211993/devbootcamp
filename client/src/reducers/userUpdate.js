@@ -1,4 +1,5 @@
 import {
+  USER_PASSWORD_UPATE_REQUEST,
   USER_UPDATE_REQUEST,
   USER_UPDATE_SUCCESS,
   USER_UPDATE_FAIL,
@@ -15,6 +16,7 @@ const initialState = {
 export default function (state = initialState, action) {
   const { payload, type } = action;
   switch (type) {
+    case USER_PASSWORD_UPATE_REQUEST:
     case USER_UPDATE_REQUEST:
       return { ...state, loading: true };
 

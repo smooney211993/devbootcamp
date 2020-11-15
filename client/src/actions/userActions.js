@@ -5,6 +5,7 @@ import {
   USER_LOGIN_RESET,
   USER_UPDATE_REQUEST,
   USER_UPDATE_RESET,
+  USER_PASSWORD_UPATE_REQUEST,
 } from '../actions/types';
 
 export const loadUser = () => ({
@@ -41,4 +42,11 @@ export const userUpdate = (formData) => ({
 
 export const userUpdateReset = () => ({
   type: USER_UPDATE_RESET,
+});
+
+export const userPasswordUpdate = (formData) => ({
+  type: USER_PASSWORD_UPATE_REQUEST,
+  payload: {
+    formData,
+  },
 });
