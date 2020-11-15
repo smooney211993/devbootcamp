@@ -22,15 +22,17 @@ import Spinner from '../Layout/Spinner';
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.userLoginRegister);
-  const { loading: updateLoading, success } = useSelector(
-    (state) => state.userUpdate
-  );
+  const { success } = useSelector((state) => state.userUpdate);
   const [showName, setShowName] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     confirmEmail: '',
+    currentPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
   });
 
   const formHandler = (e) => {
@@ -178,6 +180,50 @@ const ProfileScreen = () => {
                       <i
                         className='fas fa-edit'
                         onClick={(e) => setShowEmail(!showEmail)}></i>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <Row>
+                    <Col>Password</Col>
+                    <Col xs={6}>
+                      <div hidden={showPassword}>xxxxxxxxxxxx</div>
+                      <Card hidden={!showPassword}>
+                        <Card.Body>
+                          <Form>
+                            <Form.Group>
+                              <Form.Label>Enter Current Password</Form.Label>
+                              <Form.Control
+                                type='password'
+                                name='currentPassword'
+                                value={formData.currentPassword}
+                                onChange={formHandler}></Form.Control>
+                            </Form.Group>
+                            <Form.Group>
+                              <Form.Label>Enter New Password</Form.Label>
+                              <Form.Control
+                                type='password'
+                                name='newPassword'
+                                value={formData.newPassword}
+                                onChange={formHandler}></Form.Control>
+                            </Form.Group>
+                            <Form.Group>
+                              <Form.Label>Confirm New Password</Form.Label>
+                              <Form.Control
+                                type='password'
+                                name='confirmNewPassword'
+                                value={formData.confirmNewPassword}
+                                onChange={formHandler}></Form.Control>
+                            </Form.Group>
+                          </Form>
+                        </Card.Body>
+                      </Card>
+                    </Col>
+                    <Col className='text-right'>
+                      {' '}
+                      <i
+                        className='fas fa-edit'
+                        onClick={(e) => setShowPassword(!showPassword)}></i>
                     </Col>
                   </Row>
                 </ListGroup.Item>
