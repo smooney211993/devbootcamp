@@ -9,6 +9,7 @@ const initialState = {
   loading: null,
   success: null,
   error: null,
+  updateUser: {},
 };
 
 export default function (state = initialState, action) {
@@ -18,7 +19,12 @@ export default function (state = initialState, action) {
       return { ...state, loading: true };
 
     case USER_UPDATE_SUCCESS:
-      return { ...state, loading: false, success: true };
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        updateUser: payload.data,
+      };
     case USER_UPDATE_FAIL:
       return {
         ...state,

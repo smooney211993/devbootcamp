@@ -3,6 +3,8 @@ import {
   LOAD_USER_REQUEST,
   USER_REGISTER_REQUEST,
   USER_LOGIN_RESET,
+  USER_UPDATE_REQUEST,
+  USER_UPDATE_RESET,
 } from '../actions/types';
 
 export const loadUser = () => ({
@@ -28,4 +30,15 @@ export const userRegister = (name, email, password) => ({
 
 export const userLogOut = () => ({
   type: USER_LOGIN_RESET,
+});
+
+export const userUpdate = (formData) => ({
+  type: USER_UPDATE_REQUEST,
+  payload: {
+    formData,
+  },
+});
+
+export const userUpdateReset = () => ({
+  type: USER_UPDATE_RESET,
 });

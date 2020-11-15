@@ -41,7 +41,7 @@ export const fetchUser = () => {
   });
 };
 
-export const registerUser = async (name, email, password) => {
+export const registerUser = (name, email, password) => {
   /*const body = JSON.stringify({
     name,
     email,
@@ -68,7 +68,7 @@ export const registerUser = async (name, email, password) => {
   });
 };
 
-export const updateUser = async (formData) => {
+export const updateUser = (formData) => {
   /* const body = JSON.stringify(formData);
   const config = {
     headers: {

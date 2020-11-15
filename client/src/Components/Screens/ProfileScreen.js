@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { loadUser } from '../../actions/userActions';
+import {
+  loadUser,
+  userUpdate,
+  userUpdateReset,
+} from '../../actions/userActions';
 import {
   Row,
   Col,
@@ -18,32 +22,32 @@ import Spinner from '../Layout/Spinner';
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const { user, loading } = useSelector((state) => state.userLoginRegister);
+  const { loading: updateLoading, success } = useSelector(
+    (state) => state.userUpdate
+  );
   const [showName, setShowName] = useState(false);
   const [showEmail, setShowEmail] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    confirmEmail: '',
   });
 
   const formHandler = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    console.log('profile');
-  };
-
   useEffect(() => {
-    if (!user.name) {
-      dispatch(loadUser);
+    dispatch(userUpdateReset());
+    if (!user.name || success) {
+      dispatch(loadUser());
     } else {
       setFormData({
         name: user.name,
         email: user.email,
       });
     }
-  }, [dispatch, user]);
+  }, [dispatch, user, success]);
   return (
     <>
       {loading ? (
@@ -71,7 +75,11 @@ const ProfileScreen = () => {
                           <div hidden={showName}>{user.name}</div>
                           <Card hidden={!showName}>
                             <Card.Body>
-                              <Form onSubmit={submitHandler}>
+                              <Form
+                                onSubmit={(e) => {
+                                  e.preventDefault();
+                                  dispatch(userUpdate({ name: formData.name }));
+                                }}>
                                 <Form.Group controlId='name'>
                                   <Form.Label>Name</Form.Label>
                                   <Form.Control
@@ -116,13 +124,33 @@ const ProfileScreen = () => {
                           <div hidden={showEmail}>{user.email}</div>
                           <Card hidden={!showEmail}>
                             <Card.Body>
-                              <Form onSubmit={submitHandler}>
+                              <Form
+                                onSubmit={(e) => {
+                                  e.preventDefault();
+                                  if (
+                                    formData.email !== formData.confirmEmail
+                                  ) {
+                                    alert('Emails Do Not Match');
+                                  } else {
+                                    dispatch(
+                                      userUpdate({ email: formData.email })
+                                    );
+                                  }
+                                }}>
                                 <Form.Group controlId='email'>
-                                  <Form.Label>Email</Form.Label>
+                                  <Form.Label>Enter New Email</Form.Label>
                                   <Form.Control
                                     type='email'
                                     name='email'
                                     value={formData.email}
+                                    onChange={formHandler}></Form.Control>
+                                </Form.Group>
+                                <Form.Group controld='confirmemail'>
+                                  <Form.Label>Confirm Email</Form.Label>
+                                  <Form.Control
+                                    type='email'
+                                    value={formData.confirmEmail}
+                                    name='confirmEmail'
                                     onChange={formHandler}></Form.Control>
                                 </Form.Group>
 
@@ -133,6 +161,7 @@ const ProfileScreen = () => {
                                   Submit
                                 </Button>
                                 <Button
+                                  onClick={(e) => setShowEmail(!showEmail)}
                                   type='button'
                                   variant='light'
                                   className='m-2'>

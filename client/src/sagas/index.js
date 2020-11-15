@@ -4,6 +4,7 @@ import bootcampSaga from './bootcampSaga';
 import bootcampReviewSaga from './bootcampReviewsSaga';
 import userLoginSaga from './userLoginSaga';
 import userRegisterSaga from './userRegisterSaga';
+import userUpdateSaga from './userUpdateSaga';
 import loadUserSaga from './loadUserSaga';
 import createBootCampReviewSaga from './createBootcampReviewSaga';
 import deleteBootcampSaga from './deleteBootcampSaga';
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     createBootCampReviewSaga(),
     deleteBootcampSaga(),
     bootcampUpdateSaga(),
+    userUpdateSaga(),
   ]);
 }
