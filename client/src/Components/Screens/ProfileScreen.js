@@ -215,6 +215,19 @@ const ProfileScreen = () => {
                                 value={formData.confirmNewPassword}
                                 onChange={formHandler}></Form.Control>
                             </Form.Group>
+                            <Button
+                              type='submit'
+                              variant='light'
+                              className='m-2'>
+                              Submit
+                            </Button>
+                            <Button
+                              onClick={(e) => setShowPassword(!showPassword)}
+                              type='button'
+                              variant='light'
+                              className='m-2'>
+                              Cancel
+                            </Button>
                           </Form>
                         </Card.Body>
                       </Card>
