@@ -9,7 +9,7 @@ const AdminScreen = ({ history }) => {
     if (user && user.role !== 'admin') {
       history.pushState('/');
     }
-  });
+  }, [user]);
   return (
     <>
       <Container>
