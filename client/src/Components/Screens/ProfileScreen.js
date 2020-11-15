@@ -45,9 +45,12 @@ const ProfileScreen = () => {
       dispatch(loadUser());
     } else {
       setFormData({
-        ...formData,
         name: user.name,
         email: user.email,
+        confirmEmail: '',
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: '',
       });
     }
   }, [dispatch, user, success]);

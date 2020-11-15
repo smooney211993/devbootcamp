@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Col, Row, Button, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const AdminScreen = () => {
+const AdminScreen = ({ history }) => {
+  const { user } = useSelector((state) => state.userLoginRegister);
+  useEffect(() => {
+    if (user && user.role !== 'admin') {
+      history.pushState('/');
+    }
+  });
   return (
     <>
       <Container>
