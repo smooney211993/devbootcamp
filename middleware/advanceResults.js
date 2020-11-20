@@ -27,7 +27,7 @@ const advanceResults = (model, populate) => async (req, res, next) => {
   // finding bootcamps and also reverse populate with courses
   query = model.find(queryString);
   // select fields
-  if (req.query.keyword) {
+  /*if (req.query.keyword) {
     const keyword = {
       name: {
         $regex: req.query.keyword,
@@ -35,7 +35,30 @@ const advanceResults = (model, populate) => async (req, res, next) => {
       },
     };
     query = query.find({ ...keyword });
+  } */
+
+  if (model === Bootcamp) {
+    if (req.query.keyword) {
+      const keyword = {
+        name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      };
+      query = query.find({ ...keyword });
+    }
+  } else if (model === Course) {
+    if (req.query.keyword) {
+      const keyword = {
+        title: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        },
+      };
+      query = query.find({ ...keyword });
+    }
   }
+
   if (req.query.select) {
     const fields = req.query.select.split(',').join(' ');
     query = query.select(fields);
