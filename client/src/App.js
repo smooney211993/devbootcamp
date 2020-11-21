@@ -18,6 +18,7 @@ import BootcampReviews from './Components/Reviews/BootcampReviews';
 import AdminScreen from './Components/Screens/AdminScreen';
 import BootcampListScreen from './Components/Screens/BootcampListScreen';
 import BootcampEditScreen from './Components/Screens/BootcampEditScreen';
+import CourseListScreen from './Components/Screens/CourseListScreen';
 
 // profile screen
 import ProfileScreen from './Components/Screens/ProfileScreen';
@@ -98,6 +99,38 @@ const App = () => {
           <PrivateAdminRoute
             path='/admin/bootcamp/:bootcampId'
             component={BootcampEditScreen}
+          />
+
+          <PrivateAdminRoute
+            exact
+            path='/admin/courses/search/:keyword/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
+            component={CourseListScreen}
+          />
+          <PrivateAdminRoute
+            exact
+            path='/admin/courses/search/:keyword/averageCost/:averageCost/averageRating/:averageRating'
+            component={CourseListScreen}
+          />
+          <PrivateAdminRoute
+            exact
+            path='/admin/courses/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
+            component={CourseListScreen}
+          />
+          <PrivateAdminRoute
+            exact
+            path='/admin/courses/averageCost/:averageCost/averageRating/:averageRating'
+            component={CourseListScreen}
+          />
+
+          <PrivateAdminRoute
+            exact
+            path='/admin/courses/page/:pageNumber'
+            component={CourseListScreen}
+          />
+
+          <PrivateAdminRoute
+            path='/admin/courses'
+            component={CourseListScreen}
           />
 
           <PrivateAdminRoute path='/admin' component={AdminScreen} />

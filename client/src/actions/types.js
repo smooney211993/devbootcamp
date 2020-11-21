@@ -43,3 +43,20 @@ export const UPDATE_BOOTCAMP_REQUEST = 'UPDATE_BOOTCAMP_REQUEST';
 export const UPDATE_BOOTCAMP_SUCCESS = 'UPDATE_BOOTCAMP_SUCCESS';
 export const UPDATE_BOOTCAMP_FAIL = 'UPDATE_BOOTCAMP_FAIL';
 export const UPDATE_BOOTCAMP_RESET = 'UPDATE_BOOTCAMP_RESET';
+
+// too much repeated Code at the above
+
+// refactor using higher oder
+
+const REQUEST = 'REQUEST';
+const SUCCESS = 'SUCCESS';
+const FAIL = 'FAIL';
+
+function createRequestTypes(base) {
+  return [REQUEST, SUCCESS, FAIL].reduce((acc, type) => {
+    acc[type] = `${base}_${type}`;
+    return acc;
+  }, {});
+}
+
+export const courseTypes = createRequestTypes('LOAD_COURSE');

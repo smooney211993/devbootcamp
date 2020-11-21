@@ -9,6 +9,7 @@ import loadUserSaga from './loadUserSaga';
 import createBootCampReviewSaga from './createBootcampReviewSaga';
 import deleteBootcampSaga from './deleteBootcampSaga';
 import bootcampUpdateSaga from './bootcampUpdateSaga';
+import courseListSaga from './coursesListSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -22,5 +23,6 @@ export default function* rootSaga() {
     deleteBootcampSaga(),
     bootcampUpdateSaga(),
     userUpdateSaga(),
+    courseListSaga(),
   ]);
 }

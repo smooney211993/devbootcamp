@@ -6,7 +6,7 @@ const advanceResults = (model, populate) => async (req, res, next) => {
 
   //fields to exclude
 
-  const removeFields = ['select', 'sort', 'pageNumber', 'keyword'];
+  const removeFields = ['select', 'sort', 'pageNumber', 'keyword', 'budget'];
 
   // lopp over the removeFields and delete them from query
 
