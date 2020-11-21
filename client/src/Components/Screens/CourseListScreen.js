@@ -96,7 +96,12 @@ const CourseListScreen = ({ match, history }) => {
                 courses.length > 0 &&
                 courses.map((course) => (
                   <tr key={course._id}>
-                    <td>{course._id}</td>
+                    <td>
+                      <Link to={`/admin/courses/${course._id}`}>
+                        {course._id}
+                      </Link>
+                    </td>
+
                     <td>{course.title}</td>
                     <td>{course.bootcamp.name}</td>
                     <td>{course.user.name}</td>

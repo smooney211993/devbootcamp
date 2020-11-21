@@ -115,7 +115,11 @@ const BootcampListScreen = ({ match, history }) => {
                   bootcampList.length > 0 &&
                   bootcampList.map((bootcamp) => (
                     <tr key={bootcamp._id}>
-                      <td>{bootcamp._id}</td>
+                      <td>
+                        <Link to={`/admin/bootcamp/${bootcamp._id}`}>
+                          {bootcamp._id}
+                        </Link>
+                      </td>
                       <td>{bootcamp.name}</td>
                       <td>{bootcamp.createdAt.substring(0, 10)}</td>
                       <td>

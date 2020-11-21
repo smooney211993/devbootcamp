@@ -19,6 +19,7 @@ import AdminScreen from './Components/Screens/AdminScreen';
 import BootcampListScreen from './Components/Screens/BootcampListScreen';
 import BootcampEditScreen from './Components/Screens/BootcampEditScreen';
 import CourseListScreen from './Components/Screens/CourseListScreen';
+import CourseEditScreen from './Components/Screens/CourseEditScreen';
 
 // profile screen
 import ProfileScreen from './Components/Screens/ProfileScreen';
@@ -126,6 +127,11 @@ const App = () => {
             exact
             path='/admin/courses/page/:pageNumber'
             component={CourseListScreen}
+          />
+
+          <PrivateAdminRoute
+            path='/admin/courses/:courseId'
+            component={CourseEditScreen}
           />
 
           <PrivateAdminRoute

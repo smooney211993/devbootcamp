@@ -59,4 +59,6 @@ function createRequestTypes(base) {
   }, {});
 }
 
-export const courseTypes = createRequestTypes('LOAD_COURSE');
+export const courseTypes = createRequestTypes('COURSE_LIST');
+
+export const deleteCourseTypes = createRequestTypes('DELETE_COURSE');
