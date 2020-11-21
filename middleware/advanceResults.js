@@ -58,7 +58,7 @@ const advanceResults = (model, populate) => async (req, res, next) => {
       query = query.find({ ...keyword });
     }
   }
-
+  console.log(req.query);
   if (req.query.select) {
     const fields = req.query.select.split(',').join(' ');
     query = query.select(fields);

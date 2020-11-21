@@ -6,7 +6,7 @@ export const getAllCoursesAsAdmin = (keyword, budget, pageNumber) => {
     url: `/api/v1/courses/`,
     params: {
       keyword,
-      'averageCost[lte]': budget,
+      'budget[lte]': budget,
       pageNumber,
     },
   });

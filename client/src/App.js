@@ -103,22 +103,22 @@ const App = () => {
 
           <PrivateAdminRoute
             exact
-            path='/admin/courses/search/:keyword/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
+            path='/admin/courses/search/:keyword/averageCost/:averageCost/page/:pageNumber'
             component={CourseListScreen}
           />
           <PrivateAdminRoute
             exact
-            path='/admin/courses/search/:keyword/averageCost/:averageCost/averageRating/:averageRating'
+            path='/admin/courses/search/:keyword/averageCost/:averageCost'
             component={CourseListScreen}
           />
           <PrivateAdminRoute
             exact
-            path='/admin/courses/averageCost/:averageCost/averageRating/:averageRating/page/:pageNumber'
+            path='/admin/courses/averageCost/:averageCost/page/:pageNumber'
             component={CourseListScreen}
           />
           <PrivateAdminRoute
             exact
-            path='/admin/courses/averageCost/:averageCost/averageRating/:averageRating'
+            path='/admin/courses/averageCost/:averageCost/'
             component={CourseListScreen}
           />
 
