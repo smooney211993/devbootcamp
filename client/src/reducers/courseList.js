@@ -18,6 +18,7 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         courses: payload.data,
+        error: null,
         page: payload.page,
         pages: payload.pages,
       };
