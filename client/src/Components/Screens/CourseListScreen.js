@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getCourses } from '../../actions/courseActions';
+import { getCourses, deleteCourseReset } from '../../actions/courseActions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -33,6 +33,7 @@ const CourseListScreen = ({ match, history }) => {
   };
 
   useEffect(() => {
+    dispatch(deleteCourseReset());
     dispatch(getCourses(keyword, budget, pageNumber));
   }, [dispatch, budget, pageNumber, keyword]);
   return (

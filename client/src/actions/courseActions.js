@@ -1,4 +1,5 @@
 import { courseTypes } from './types';
+import { deleteCourseTypes } from './types';
 
 export const getCourses = (keyword = '', budget, pageNumber = '') => ({
   type: courseTypes.REQUEST,
@@ -7,4 +8,8 @@ export const getCourses = (keyword = '', budget, pageNumber = '') => ({
     pageNumber,
     budget,
   },
+});
+
+export const deleteCourseReset = () => ({
+  type: deleteCourseTypes.RESET,
 });

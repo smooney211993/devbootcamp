@@ -51,9 +51,10 @@ export const UPDATE_BOOTCAMP_RESET = 'UPDATE_BOOTCAMP_RESET';
 const REQUEST = 'REQUEST';
 const SUCCESS = 'SUCCESS';
 const FAIL = 'FAIL';
+const RESET = 'RESET';
 
 function createRequestTypes(base) {
-  return [REQUEST, SUCCESS, FAIL].reduce((acc, type) => {
+  return [REQUEST, SUCCESS, FAIL, RESET].reduce((acc, type) => {
     acc[type] = `${base}_${type}`;
     return acc;
   }, {});

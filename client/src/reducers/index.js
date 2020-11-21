@@ -8,6 +8,7 @@ import createBootcampReview from './createBootcampReview';
 import deleteBootcamp from './deleteBootcamp';
 import updateBootcamp from './updatebootcamp';
 import courseList from './courseList';
+import deleteCourse from './deleteCourse';
 
 export default combineReducers({
   bootcampList,
@@ -19,4 +20,5 @@ export default combineReducers({
   updateBootcamp,
   userUpdate,
   courseList,
+  deleteCourse,
 });
