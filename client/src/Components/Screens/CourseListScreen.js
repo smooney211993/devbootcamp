@@ -107,6 +107,14 @@ const CourseListScreen = ({ match, history }) => {
                     <td>{course.bootcamp.name}</td>
                     <td>{course.user.name}</td>
                     <td>{course.createdAt.substring(0, 10)}</td>
+                    <Link to={`/admin/courses/${course._id}`}>
+                      <Button type='button' className='m-2 '>
+                        <i className='fas fa-edit '></i>
+                      </Button>
+                    </Link>
+                    <Button type='button' className='m-2 '>
+                      <i className='fas fa-trash-alt '></i>
+                    </Button>
                   </tr>
                 ))}
             </tbody>

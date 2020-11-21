@@ -11,3 +11,10 @@ export const getAllCoursesAsAdmin = (keyword, budget, pageNumber) => {
     },
   });
 };
+
+export const deleteCourseByIdAsAdmin = (id) => {
+  return apiCaller({
+    method: 'delete',
+    url: `/api/v1/courses/${id}`,
+  });
+};

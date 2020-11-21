@@ -10,6 +10,13 @@ export const getCourses = (keyword = '', budget, pageNumber = '') => ({
   },
 });
 
+export const deleteCourse = (id) => ({
+  type: courseTypes.REQUEST,
+  payload: {
+    id,
+  },
+});
+
 export const deleteCourseReset = () => ({
   type: deleteCourseTypes.RESET,
 });
