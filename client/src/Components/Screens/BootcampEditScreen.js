@@ -110,7 +110,7 @@ const BootcampEditScreen = ({ match, history }) => {
           </Col>
         </Row>
         {error && <Message>{error.msg}</Message>}
-        {updateError && <Message>{updateError.msg}</Message>}}
+        {updateError && <Message>{updateError.msg}</Message>}
         {loading || updateLoading ? (
           <Spinner />
         ) : (
