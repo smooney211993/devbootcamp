@@ -27,3 +27,11 @@ export const getCourseById = (id) => {
     url: `/api/v1/courses/${id}`,
   });
 };
+
+export const updateCourseById = (id, formData) => {
+  return apiCaller({
+    method: 'put',
+    url: `/api/v1/courses/${id}`,
+    data: { ...formData },
+  });
+};

@@ -23,6 +23,7 @@ const CourseEditScreen = ({ match }) => {
     weeks: '',
     tuition: '',
     minimumSkill: '',
+    scholarhipsAvailable: null,
   });
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const CourseEditScreen = ({ match }) => {
         weeks: course.weeks,
         tuition: course.tuition,
         minimumSkill: course.minimumSkill,
+        scholarhipsAvailable: course.scholarhipsAvailable,
       });
     }
   }, [dispatch, courseId, course, success]);
@@ -122,6 +124,34 @@ const CourseEditScreen = ({ match }) => {
                 ))}
               </Form.Control>
             </Form.Group>
+            <Form.Group>
+              <Form.Label>Scholarship Available</Form.Label>
+              <Form.Check
+                label='True'
+                type='radio'
+                id='True'
+                name='scholarhipsAvailable'
+                onChange={(e) =>
+                  setFormData({ ...formData, [e.target.name]: true })
+                }
+                checked={
+                  formData.scholarhipsAvailable ? true : false
+                }></Form.Check>
+              <Form.Check
+                label='False'
+                type='radio'
+                id='False'
+                name='scholarhipsAvailable'
+                onChange={(e) =>
+                  setFormData({ ...formData, [e.target.name]: false })
+                }
+                checked={
+                  !formData.scholarhipsAvailable ? true : false
+                }></Form.Check>
+            </Form.Group>
+            <Button variant='primary' type='submit'>
+              Submit
+            </Button>
           </Form>
         )}
       </Container>
