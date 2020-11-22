@@ -1,10 +1,9 @@
 import { updateCourseTypes } from '../actions/types';
 import { updateCourseById } from '../api/courses';
-import { updateCourseTypes } from '../actions/types';
 
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-function* updateCourse(action) {
+function* courseUpdate(action) {
   const { id, formData } = action.payload;
   try {
     yield call(updateCourseById, id, formData);
@@ -21,5 +20,5 @@ function* updateCourse(action) {
 }
 
 export default function* updateCourseSaga() {
-  yield takeLatest(updateCourseTypes.REQUEST, updateCourse);
+  yield takeLatest(updateCourseTypes.REQUEST, courseUpdate);
 }

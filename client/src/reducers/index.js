@@ -10,6 +10,7 @@ import updateBootcamp from './updatebootcamp';
 import courseList from './courseList';
 import deleteCourse from './deleteCourse';
 import course from './course';
+import userList from './userList';
 
 import { updateCourseTypes } from '../actions/types';
 
@@ -54,4 +55,5 @@ export default combineReducers({
   deleteCourse,
   updateCourse,
   course,
+  userList,
 });

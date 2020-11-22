@@ -33,6 +33,14 @@ export const getCourse = (id) => ({
   },
 });
 
+export const updateCourse = (id, formData) => ({
+  type: updateCourseTypes.REQUEST,
+  payload: {
+    id,
+    formData,
+  },
+});
+
 export const updateCourseReset = () => ({
   type: updateCourseTypes.RESET,
 });

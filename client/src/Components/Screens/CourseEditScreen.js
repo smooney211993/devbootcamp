@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { updateCourseReset, getCourse } from '../../actions/courseActions';
+import {
+  updateCourseReset,
+  getCourse,
+  updateCourse,
+} from '../../actions/courseActions';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
@@ -59,12 +63,18 @@ const CourseEditScreen = ({ match }) => {
             </Link>
           </Col>
         </Row>
-        {loading ? (
+        {loading || updateLoading ? (
           <Spinner />
         ) : error ? (
           <Message>{error.msg}</Message>
+        ) : updateError ? (
+          <Message>{updateError.msg}</Message>
         ) : (
-          <Form>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              dispatch(updateCourse(courseId, formData));
+            }}>
             <Form.Group controlId='title'>
               <Form.Label>Title</Form.Label>
               <Form.Control
