@@ -20,3 +20,10 @@ export const deleteCourseByIdAsAdmin = (id) => {
     });
   }
 };
+
+export const getCourseById = (id) => {
+  return apiCaller({
+    method: 'get',
+    url: `/api/v1/courses/${id}`,
+  });
+};
