@@ -13,8 +13,10 @@ export const getAllCoursesAsAdmin = (keyword, budget, pageNumber) => {
 };
 
 export const deleteCourseByIdAsAdmin = (id) => {
-  return apiCaller({
-    method: 'delete',
-    url: `/api/v1/courses/${id}`,
-  });
+  if (window.confirm('Are You Sure You Want To Delete')) {
+    return apiCaller({
+      method: 'delete',
+      url: `/api/v1/courses/${id}`,
+    });
+  }
 };

@@ -10,6 +10,36 @@ import updateBootcamp from './updatebootcamp';
 import courseList from './courseList';
 import deleteCourse from './deleteCourse';
 
+import { updateCourseTypes } from '../actions/types';
+
+// higher order reducer creator
+const createReducer = (typeObject) => (
+  state = { loading: null, success: null, error: null },
+  action
+) => {
+  const { type, payload } = action;
+  switch (type) {
+    case typeObject.REQUEST:
+      return { ...state, loading: true };
+    case typeObject.SUCCESS:
+      return { ...state, loading: false, error: null, success: true };
+
+    case typeObject.FAIL:
+      return { ...state, loading: false, success: false, error: payload };
+    case typeObject.RESET:
+      return {
+        loading: null,
+        success: null,
+        error: null,
+      };
+
+    default:
+      return state;
+  }
+};
+
+const updateCourse = createReducer(updateCourseTypes);
+
 export default combineReducers({
   bootcampList,
   bootcamp,
@@ -21,4 +51,5 @@ export default combineReducers({
   userUpdate,
   courseList,
   deleteCourse,
+  updateCourse,
 });

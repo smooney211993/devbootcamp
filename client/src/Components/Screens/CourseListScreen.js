@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { getCourses, deleteCourseReset } from '../../actions/courseActions';
+import {
+  getCourses,
+  deleteCourseReset,
+  deleteCourse,
+} from '../../actions/courseActions';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -21,6 +25,10 @@ const CourseListScreen = ({ match, history }) => {
     (state) => state.courseList
   );
 
+  const { loading: deleteLoading, success, error: deleteError } = useSelector(
+    (state) => state.deleteCourse
+  );
+
   const clearSearch = () => {
     history.push('/admin/courses');
   };
@@ -35,7 +43,10 @@ const CourseListScreen = ({ match, history }) => {
   useEffect(() => {
     dispatch(deleteCourseReset());
     dispatch(getCourses(keyword, budget, pageNumber));
-  }, [dispatch, budget, pageNumber, keyword]);
+    if (success) {
+      dispatch(getCourses(keyword, budget, pageNumber));
+    }
+  }, [dispatch, budget, pageNumber, keyword, success]);
   return (
     <>
       <Container>
@@ -77,7 +88,7 @@ const CourseListScreen = ({ match, history }) => {
           </Form>
         </Row>
 
-        {loading ? (
+        {loading || deleteLoading ? (
           <Spinner />
         ) : error ? (
           <Message>{error.msg}</Message>
@@ -107,14 +118,19 @@ const CourseListScreen = ({ match, history }) => {
                     <td>{course.bootcamp.name}</td>
                     <td>{course.user.name}</td>
                     <td>{course.createdAt.substring(0, 10)}</td>
-                    <Link to={`/admin/courses/${course._id}`}>
-                      <Button type='button' className='m-2 '>
-                        <i className='fas fa-edit '></i>
+                    <td>
+                      <Link to={`/admin/courses/${course._id}`}>
+                        <Button type='button' className='m-2 '>
+                          <i className='fas fa-edit '></i>
+                        </Button>
+                      </Link>
+                      <Button
+                        type='button'
+                        className='m-2 '
+                        onClick={() => dispatch(deleteCourse(course._id))}>
+                        <i className='fas fa-trash-alt '></i>
                       </Button>
-                    </Link>
-                    <Button type='button' className='m-2 '>
-                      <i className='fas fa-trash-alt '></i>
-                    </Button>
+                    </td>
                   </tr>
                 ))}
             </tbody>

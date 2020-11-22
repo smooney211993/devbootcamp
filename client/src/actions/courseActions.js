@@ -1,5 +1,4 @@
-import { courseTypes } from './types';
-import { deleteCourseTypes } from './types';
+import { courseTypes, deleteCourseTypes, updateCourseTypes } from './types';
 
 export const getCourses = (keyword = '', budget, pageNumber = '') => ({
   type: courseTypes.REQUEST,
@@ -11,7 +10,7 @@ export const getCourses = (keyword = '', budget, pageNumber = '') => ({
 });
 
 export const deleteCourse = (id) => ({
-  type: courseTypes.REQUEST,
+  type: deleteCourseTypes.REQUEST,
   payload: {
     id,
   },
@@ -19,4 +18,8 @@ export const deleteCourse = (id) => ({
 
 export const deleteCourseReset = () => ({
   type: deleteCourseTypes.RESET,
+});
+
+export const updateCourseReset = () => ({
+  type: updateCourseTypes.RESET,
 });

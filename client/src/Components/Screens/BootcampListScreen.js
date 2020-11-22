@@ -98,10 +98,9 @@ const BootcampListScreen = ({ match, history }) => {
           <Spinner />
         ) : error ? (
           <Message>{error.msg}</Message>
-        ) : deleteError ? (
-          <Message>{deleteError.msg}</Message>
         ) : (
           <>
+            {deleteError && <Message>{deleteError.msg}</Message>}
             <Table striped bordered hover variant='light' className='my-2'>
               <thead>
                 <tr>
@@ -131,9 +130,9 @@ const BootcampListScreen = ({ match, history }) => {
                         <Button
                           type='button'
                           className='m-2 '
-                          onClick={() =>
-                            dispatch(deleteBootcamp(bootcamp._id))
-                          }>
+                          onClick={() => {
+                            dispatch(deleteBootcamp(bootcamp._id));
+                          }}>
                           <i className='fas fa-trash-alt '></i>
                         </Button>
                       </td>

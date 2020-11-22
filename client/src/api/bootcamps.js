@@ -86,10 +86,13 @@ export const deleteBootcamp = async (id) => {
   }
 
   */
-  return apiCaller({
-    method: 'delete',
-    url: `/api/v1/bootcamps/${id}`,
-  });
+
+  if (window.confirm('Are You Sure You Want To Delete')) {
+    return apiCaller({
+      method: 'delete',
+      url: `/api/v1/bootcamps/${id}`,
+    });
+  }
 };
 
 export const updateBootcampById = async (id, formData) => {

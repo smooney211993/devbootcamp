@@ -63,3 +63,5 @@ function createRequestTypes(base) {
 export const courseTypes = createRequestTypes('COURSE_LIST');
 
 export const deleteCourseTypes = createRequestTypes('DELETE_COURSE');
+
+export const updateCourseTypes = createRequestTypes('UPDATE_COURSE');
