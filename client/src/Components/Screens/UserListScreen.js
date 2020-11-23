@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 
 import { Table, Button, Row, Col, Container, Form } from 'react-bootstrap';
 
+import Spinner from '../Layout/Spinner';
+import Message from '../Layout/Message';
+
 import AdminUserPaginate from '../Layout/AdminUserPaginate';
 
 const UserListScreen = ({ match, history }) => {
@@ -69,41 +72,87 @@ const UserListScreen = ({ match, history }) => {
         </Col>
       </Row>
       <Row>
-        <Form inline className='ml-3' onSubmit={submitHandler}>
-          <Form.Group className='mr-2'>
-            <Form.Control
-              type='text'
-              name='name'
-              value={formData.name}
-              placeholder='Search Name'
-              onChange={(e) =>
-                setFormData({ ...formData, [e.target.name]: e.target.value })
-              }></Form.Control>
-          </Form.Group>
-          <Form.Group>
-            <Form.Control
-              type='text'
-              name='role'
-              value={formData.role}
-              placeholder='Search Role'
-              onChange={(e) =>
-                setFormData({ ...formData, [e.target.name]: e.target.value })
-              }></Form.Control>
-          </Form.Group>
-          <Button variant='primary' size='sm' className='ml-2 ' type='submit'>
-            Search
-          </Button>
-          <Button
-            variant='primary'
-            size='sm'
-            className='ml-2 '
-            type='button'
-            onClick={clearSearch}>
-            Clear
-          </Button>
-        </Form>
+        <Col>
+          <Form inline className='ml-3' onSubmit={submitHandler}>
+            <Form.Group className='mr-2'>
+              <Form.Control
+                type='text'
+                name='name'
+                value={formData.name}
+                placeholder='Search Name'
+                onChange={(e) =>
+                  setFormData({ ...formData, [e.target.name]: e.target.value })
+                }></Form.Control>
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                type='text'
+                name='role'
+                value={formData.role}
+                placeholder='Search Role'
+                onChange={(e) =>
+                  setFormData({ ...formData, [e.target.name]: e.target.value })
+                }></Form.Control>
+            </Form.Group>
+            <Button variant='primary' size='sm' className='ml-2 ' type='submit'>
+              Search
+            </Button>
+            <Button
+              variant='primary'
+              size='sm'
+              className='ml-2 '
+              type='button'
+              onClick={clearSearch}>
+              Clear
+            </Button>
+          </Form>
+        </Col>
       </Row>
       <Row>
+        <Col>
+          {loading ? (
+            <Spinner />
+          ) : error ? (
+            <Message>{error.msg}</Message>
+          ) : (
+            <Table striped bordered hover variant='light' className='my-2'>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Role</th>
+                  <th>Email</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users &&
+                  users.length > 0 &&
+                  users.map((user) => (
+                    <tr>
+                      <td>{user._id}</td>
+                      <td>{user.name}</td>
+                      <td>{user.role}</td>
+                      <td>{user.email}</td>
+                      <td>{user.createdAt.substring(0, 10)}</td>
+                      <td>
+                        <Link to={`/admin/user/${user._id}`}>
+                          <Button type='button' className='m-2 '>
+                            <i className='fas fa-edit '></i>
+                          </Button>
+                        </Link>
+                        <Button type='button' className='m-2 '>
+                          <i className='fas fa-trash-alt '></i>
+                        </Button>
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </Table>
+          )}
+        </Col>
+      </Row>
+      <Row className='my-2'>
         <AdminUserPaginate
           page={page}
           pages={pages}

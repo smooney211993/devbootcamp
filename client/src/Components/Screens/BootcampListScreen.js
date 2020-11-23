@@ -94,54 +94,59 @@ const BootcampListScreen = ({ match, history }) => {
             </Button>
           </Form>
         </Row>
-        {loading || deleteLoading ? (
-          <Spinner />
-        ) : error ? (
-          <Message>{error.msg}</Message>
-        ) : (
-          <>
-            {deleteError && <Message>{deleteError.msg}</Message>}
-            <Table striped bordered hover variant='light' className='my-2'>
-              <thead>
-                <tr>
-                  <th>Id</th>
-                  <th> Name</th>
-                  <th>Date Created</th>
-                </tr>
-              </thead>
-              <tbody>
-                {bootcampList !== null &&
-                  bootcampList.length > 0 &&
-                  bootcampList.map((bootcamp) => (
-                    <tr key={bootcamp._id}>
-                      <td>
-                        <Link to={`/admin/bootcamp/${bootcamp._id}`}>
-                          {bootcamp._id}
-                        </Link>
-                      </td>
-                      <td>{bootcamp.name}</td>
-                      <td>{bootcamp.createdAt.substring(0, 10)}</td>
-                      <td>
-                        <Link to={`/admin/bootcamp/${bootcamp._id}`}>
-                          <Button type='button' className='m-2 '>
-                            <i className='fas fa-edit '></i>
-                          </Button>
-                        </Link>
-                        <Button
-                          type='button'
-                          className='m-2 '
-                          onClick={() => {
-                            dispatch(deleteBootcamp(bootcamp._id));
-                          }}>
-                          <i className='fas fa-trash-alt '></i>
-                        </Button>
-                      </td>
+        <Row>
+          <Col>
+            {loading || deleteLoading ? (
+              <Spinner />
+            ) : error ? (
+              <Message>{error.msg}</Message>
+            ) : (
+              <>
+                {deleteError && <Message>{deleteError.msg}</Message>}
+
+                <Table striped bordered hover variant='light' className='my-2'>
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th> Name</th>
+                      <th>Date Created</th>
                     </tr>
-                  ))}
-              </tbody>
-            </Table>
-          </>
-        )}
+                  </thead>
+                  <tbody>
+                    {bootcampList !== null &&
+                      bootcampList.length > 0 &&
+                      bootcampList.map((bootcamp) => (
+                        <tr key={bootcamp._id}>
+                          <td>
+                            <Link to={`/admin/bootcamp/${bootcamp._id}`}>
+                              {bootcamp._id}
+                            </Link>
+                          </td>
+                          <td>{bootcamp.name}</td>
+                          <td>{bootcamp.createdAt.substring(0, 10)}</td>
+                          <td>
+                            <Link to={`/admin/bootcamp/${bootcamp._id}`}>
+                              <Button type='button' className='m-2 '>
+                                <i className='fas fa-edit '></i>
+                              </Button>
+                            </Link>
+                            <Button
+                              type='button'
+                              className='m-2 '
+                              onClick={() => {
+                                dispatch(deleteBootcamp(bootcamp._id));
+                              }}>
+                              <i className='fas fa-trash-alt '></i>
+                            </Button>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              </>
+            )}
+          </Col>
+        </Row>
         <AdminBootcampPaginate
           pages={pages}
           page={page}

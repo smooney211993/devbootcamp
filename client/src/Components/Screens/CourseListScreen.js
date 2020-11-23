@@ -109,7 +109,7 @@ const CourseListScreen = ({ match, history }) => {
                 courses.map((course) => (
                   <tr key={course._id}>
                     <td>
-                      <Link to={`/admin/courses/${course._id}`}>
+                      <Link to={`/admin/course/${course._id}`}>
                         {course._id}
                       </Link>
                     </td>
@@ -119,7 +119,7 @@ const CourseListScreen = ({ match, history }) => {
                     <td>{course.user.name}</td>
                     <td>{course.createdAt.substring(0, 10)}</td>
                     <td>
-                      <Link to={`/admin/courses/${course._id}`}>
+                      <Link to={`/admin/course/${course._id}`}>
                         <Button type='button' className='m-2 '>
                           <i className='fas fa-edit '></i>
                         </Button>

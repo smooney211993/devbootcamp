@@ -131,15 +131,14 @@ const App = () => {
           />
 
           <PrivateAdminRoute
-            path='/admin/courses/:courseId'
-            component={CourseEditScreen}
-          />
-
-          <PrivateAdminRoute
             path='/admin/courses'
             component={CourseListScreen}
           />
 
+          <PrivateAdminRoute
+            path='/admin/course/:courseId'
+            component={CourseEditScreen}
+          />
           <PrivateAdminRoute
             path='/admin/users/role/:role/page/:pageNumber'
             component={UserListScreen}
