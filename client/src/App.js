@@ -21,6 +21,7 @@ import BootcampEditScreen from './Components/Screens/BootcampEditScreen';
 import CourseListScreen from './Components/Screens/CourseListScreen';
 import CourseEditScreen from './Components/Screens/CourseEditScreen';
 import UserListScreen from './Components/Screens/UserListScreen';
+import UserEditScreen from './Components/Screens/UserEditScreen';
 
 // profile screen
 import ProfileScreen from './Components/Screens/ProfileScreen';
@@ -131,6 +132,7 @@ const App = () => {
           />
 
           <PrivateAdminRoute
+            exact
             path='/admin/courses'
             component={CourseListScreen}
           />
@@ -145,39 +147,56 @@ const App = () => {
           />
 
           <PrivateAdminRoute
+            exact
             path='/admin/users/role/:role'
             component={UserListScreen}
           />
           <PrivateAdminRoute
+            exact
             path='/admin/users/keyword/:keyword/role/:role/page/:pageNumber'
             component={UserListScreen}
           />
 
           <PrivateAdminRoute
+            exact
             path='/admin/users/keyword/:keyword/role/:role'
             component={UserListScreen}
           />
           <PrivateAdminRoute
+            exact
             path='/admin/users/keyword/:keyword/page/:pageNumber'
             component={UserListScreen}
           />
 
           <PrivateAdminRoute
+            exact
             path='/admin/users/keyword/:keyword'
             component={UserListScreen}
           />
 
           <PrivateAdminRoute
+            exact
             path='/admin/users/keyword/:keyword/page/:pageNumber'
             component={UserListScreen}
           />
 
           <PrivateAdminRoute
+            exact
             path='/admin/users/page/:pageNumber'
             component={UserListScreen}
           />
 
-          <PrivateAdminRoute path='/admin/users' component={UserListScreen} />
+          <PrivateAdminRoute
+            exact
+            path='/admin/users'
+            component={UserListScreen}
+          />
+
+          <PrivateAdminRoute
+            exact
+            path='/admin/user/:userId'
+            component={UserEditScreen}
+          />
 
           <PrivateAdminRoute path='/admin' component={AdminScreen} />
         </Switch>

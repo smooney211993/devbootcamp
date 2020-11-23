@@ -8,6 +8,7 @@ import {
   USER_PASSWORD_UPATE_REQUEST,
   getUserListTypes,
   deleteUserTypes,
+  getUserDetailsTypes,
 } from '../actions/types';
 
 export const loadUser = () => ({
@@ -71,4 +72,11 @@ export const deleteUser = (id) => ({
 
 export const deleteUserReset = () => ({
   type: deleteUserTypes.RESET,
+});
+
+export const getUser = (id) => ({
+  type: getUserDetailsTypes.REQUEST,
+  payload: {
+    id,
+  },
 });

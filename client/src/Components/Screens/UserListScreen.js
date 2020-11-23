@@ -152,7 +152,10 @@ const UserListScreen = ({ match, history }) => {
                             <i className='fas fa-edit '></i>
                           </Button>
                         </Link>
-                        <Button type='button' className='m-2 '>
+                        <Button
+                          type='button'
+                          className='m-2 '
+                          onClick={() => dispatch(deleteUser(user._id))}>
                           <i className='fas fa-trash-alt '></i>
                         </Button>
                       </td>

@@ -1,12 +1,12 @@
 import { getUserListTypes } from '../actions/types';
-import { getUserAsAdmin } from '../api/user';
+import { getUsersAsAdmin } from '../api/user';
 
 import { call, put, takeEvery } from 'redux-saga/effects';
 
 function* fetchUsers(action) {
   const { keyword, role, pageNumber } = action.payload;
   try {
-    const { data } = yield call(getUserAsAdmin, keyword, role, pageNumber);
+    const { data } = yield call(getUsersAsAdmin, keyword, role, pageNumber);
     yield put({
       type: getUserListTypes.SUCCESS,
       payload: data,

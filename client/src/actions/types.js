@@ -71,3 +71,7 @@ export const getCourseTypes = createRequestTypes('COURSE_');
 export const getUserListTypes = createRequestTypes('USER_LIST');
 
 export const deleteUserTypes = createRequestTypes('DELETE_USER');
+
+export const getUserDetailsTypes = createRequestTypes('USER_DETAILS');
+
+export const adminUserUpdateTypes = createRequestTypes('USER_ADMIN_UPDATE');
