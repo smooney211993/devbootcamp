@@ -12,6 +12,7 @@ import deleteCourse from './deleteCourse';
 import course from './course';
 import userList from './userList';
 import userDetails from './UserDetails';
+import userCreate from './UserCreate';
 
 import {
   updateCourseTypes,
@@ -66,4 +67,5 @@ export default combineReducers({
   deleteUser,
   userDetails,
   adminUserUpdate,
+  userCreate,
 });

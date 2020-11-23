@@ -80,6 +80,12 @@ const UserListScreen = ({ match, history }) => {
               Dashboard
             </Button>
           </Link>
+          <Link to='/admin/user/create'>
+            {' '}
+            <Button variant='light' className='m-2'>
+              Create User
+            </Button>
+          </Link>
         </Col>
       </Row>
       <Row>

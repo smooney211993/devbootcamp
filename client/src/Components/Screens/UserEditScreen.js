@@ -86,7 +86,7 @@ const UserEditScreen = ({ match }) => {
                   <Form.Group controlId='email'>
                     <Form.Label>email</Form.Label>
                     <Form.Control
-                      type='text'
+                      type='email'
                       placeholder='Enter email'
                       value={formData.email}
                       name='email'

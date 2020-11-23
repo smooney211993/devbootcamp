@@ -46,7 +46,7 @@ export const UPDATE_BOOTCAMP_RESET = 'UPDATE_BOOTCAMP_RESET';
 
 // too much repeated Code at the above
 
-// refactor using higher oder
+// refactor using higher order
 
 const REQUEST = 'REQUEST';
 const SUCCESS = 'SUCCESS';
@@ -75,3 +75,5 @@ export const deleteUserTypes = createRequestTypes('DELETE_USER');
 export const getUserDetailsTypes = createRequestTypes('USER_DETAILS');
 
 export const adminUserUpdateTypes = createRequestTypes('USER_ADMIN_UPDATE');
+
+export const adminCreateUserTypes = createRequestTypes('USER_ADMIN_CREATE');

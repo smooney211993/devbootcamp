@@ -1,0 +1,123 @@
+import React, { useState } from 'react';
+import { Col, Row, Button, Container, Form } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+const UserCreateScreen = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    role: '',
+    password: '',
+    confirmPassword: '',
+  });
+  return (
+    <>
+      <Container>
+        <Row className='text-align-center'>
+          <Col>
+            <h3>
+              <i className='fas fa-edit '></i> Create User
+            </h3>
+          </Col>
+          <Col className='text-right'>
+            <Link to='/admin/users'>
+              {' '}
+              <Button variant='light' className='m-2'>
+                Back
+              </Button>
+            </Link>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form>
+              <Form.Group controlId='name'>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Enter Name'
+                  value={formData.name}
+                  name='name'
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      [e.target.name]: e.target.value,
+                    })
+                  }></Form.Control>
+              </Form.Group>
+
+              <Form.Group controlId='email'>
+                <Form.Label>email</Form.Label>
+                <Form.Control
+                  type='email'
+                  placeholder='Enter email'
+                  value={formData.email}
+                  name='email'
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      [e.target.name]: e.target.value,
+                    })
+                  }></Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Role</Form.Label>
+                <Form.Control
+                  as='select'
+                  name='role'
+                  value={formData.role}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      [e.target.name]: e.target.value,
+                    })
+                  }>
+                  {['user', 'publisher', 'admin'].map((role, i) => (
+                    <option key={i} value={role}>
+                      {role}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+              <Form.Group controlId='password'>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='Enter Password'
+                  value={formData.password}
+                  maxLength={6}
+                  name='password'
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      [e.target.name]: e.target.value,
+                    })
+                  }></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='password'>
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type='password'
+                  placeholder='Please Confirm Password'
+                  maxLength={6}
+                  value={formData.confirmPassword}
+                  name='confirmPassword'
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      [e.target.name]: e.target.value,
+                    })
+                  }></Form.Control>
+              </Form.Group>
+              <Button variant='primary' type='submit'>
+                Submit
+              </Button>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
+
+export default UserCreateScreen;
