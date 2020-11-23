@@ -10,6 +10,7 @@ import {
   deleteUserTypes,
   getUserDetailsTypes,
   adminUserUpdateTypes,
+  adminCreateUserTypes,
 } from '../actions/types';
 
 export const loadUser = () => ({
@@ -89,4 +90,15 @@ export const adminUserUpdateReset = () => ({
 export const adminUserUpdate = (id, formData) => ({
   type: adminUserUpdateTypes.REQUEST,
   payload: { id, formData },
+});
+
+export const adminUserCreate = (formData) => ({
+  type: adminCreateUserTypes.REQUEST,
+  payload: {
+    formData,
+  },
+});
+
+export const adminUserCreateReset = () => ({
+  type: adminCreateUserTypes.RESET,
 });

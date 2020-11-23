@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const UserCreateScreen = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  adminUserCreate,
+  adminUserCreateReset,
+} from '../../actions/userActions';
+
+const UserCreateScreen = ({ history }) => {
+  const dispatch = useDispatch();
+  const { user, success, error, loading } = useSelector(
+    (state) => state.userCreate
+  );
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     role: '',
     password: '',
     confirmPassword: '',
+  });
+
+  useEffect(() => {
+    dispatch(adminUserCreateReset());
   });
   return (
     <>
