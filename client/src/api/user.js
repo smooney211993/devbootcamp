@@ -99,13 +99,13 @@ export const userPasswordUpdate = (formData) => {
   });
 };
 
-export const getUserAsAdmin = (keyword, roles, pageNumber) => {
+export const getUserAsAdmin = (keyword, role, pageNumber) => {
   return apiCaller({
     method: 'get',
     url: `/api/v1/auth/users/`,
     params: {
       keyword,
-      roles,
+      role,
       pageNumber,
     },
   });

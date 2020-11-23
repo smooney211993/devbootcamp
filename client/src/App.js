@@ -141,25 +141,38 @@ const App = () => {
           />
 
           <PrivateAdminRoute
-            path='/admin/users/keyword/:keyword/page/:pageNumber'
+            path='/admin/users/role/:role/page/:pageNumber'
             component={UserListScreen}
           />
+
           <PrivateAdminRoute
-            path='/admin/users/keyword/:keyword'
+            path='/admin/users/role/:role'
             component={UserListScreen}
           />
           <PrivateAdminRoute
             path='/admin/users/keyword/:keyword/role/:role/page/:pageNumber'
             component={UserListScreen}
           />
+
           <PrivateAdminRoute
-            path='/admin/users/keyword/:keyword/role/:role/'
+            path='/admin/users/keyword/:keyword/role/:role'
             component={UserListScreen}
           />
           <PrivateAdminRoute
-            path='/admin/users/role/:role/page/:pageNumber'
+            path='/admin/users/keyword/:keyword/page/:pageNumber'
             component={UserListScreen}
           />
+
+          <PrivateAdminRoute
+            path='/admin/users/keyword/:keyword'
+            component={UserListScreen}
+          />
+
+          <PrivateAdminRoute
+            path='/admin/users/keyword/:keyword/page/:pageNumber'
+            component={UserListScreen}
+          />
+
           <PrivateAdminRoute
             path='/admin/users/page/:pageNumber'
             component={UserListScreen}

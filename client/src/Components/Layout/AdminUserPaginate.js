@@ -15,7 +15,7 @@ const AdminUserPaginate = ({ pages, page, keyword = '', role = '' }) => {
                 : keyword.length > 0 && role.length > 0
                 ? `/admin/users/search/${keyword}/roles/${role}`
                 : keyword.length === 0 && role.length > 0
-                ? `/admin/users/roles/${role}/page/${x + 1}`
+                ? `/admin/users/role/${role}/page/${x + 1}`
                 : `/admin/users/page/${x + 1}`
             }>
             <Pagination.Item active={x + 1 === page}>{x + 1}</Pagination.Item>
