@@ -23,6 +23,7 @@ import CourseEditScreen from './Components/Screens/CourseEditScreen';
 import UserListScreen from './Components/Screens/UserListScreen';
 import UserEditScreen from './Components/Screens/UserEditScreen';
 import UserCreateScreen from './Components/Screens/UserCreateScreen';
+import BootcampCreateScreen from './Components/Screens/BootcampCreateScreen';
 
 // profile screen
 import ProfileScreen from './Components/Screens/ProfileScreen';
@@ -97,10 +98,17 @@ const App = () => {
           />
 
           <PrivateAdminRoute
+            exact
             path='/admin/bootcamps'
             component={BootcampListScreen}
           />
           <PrivateAdminRoute
+            exact
+            path='/admin/bootcamp/create'
+            component={BootcampCreateScreen}
+          />
+          <PrivateAdminRoute
+            exact
             path='/admin/bootcamp/:bootcampId'
             component={BootcampEditScreen}
           />

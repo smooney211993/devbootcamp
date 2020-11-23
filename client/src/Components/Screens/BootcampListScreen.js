@@ -69,7 +69,9 @@ const BootcampListScreen = ({ match, history }) => {
                 Dashboard
               </Button>
             </Link>
-            <Button variant='success'>Create Bootcamp</Button>
+            <Link to='/admin/bootcamp/create'>
+              <Button variant='success'>Create Bootcamp</Button>
+            </Link>
           </Col>
         </Row>
         <Row>

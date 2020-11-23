@@ -13,6 +13,7 @@ import course from './course';
 import userList from './userList';
 import userDetails from './UserDetails';
 import userCreate from './UserCreate';
+import createBootcamp from './createBootcamp';
 
 import {
   updateCourseTypes,
@@ -68,4 +69,5 @@ export default combineReducers({
   userDetails,
   adminUserUpdate,
   userCreate,
+  createBootcamp,
 });
