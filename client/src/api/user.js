@@ -135,7 +135,7 @@ export const updateUserAsAdmin = (id, formData) => {
 export const createUserAsAdmin = (formData) => {
   return apiCaller({
     method: 'post',
-    url: `/api/auth/users`,
+    url: `/api/v1/auth/users`,
     data: { ...formData },
   });
 };

@@ -16,6 +16,8 @@ export default function (state = initialState, action) {
       return { ...state, loading: false, error: null, user: payload.data };
     case adminCreateUserTypes.FAIL:
       return { ...state, loading: false, error: payload };
+    case adminCreateUserTypes.RESET:
+      return { user: null, loading: null, success: null, error: null };
 
     default:
       return state;

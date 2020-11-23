@@ -17,7 +17,7 @@ const UserCreateScreen = ({ history }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    role: '',
+    role: 'user',
     password: '',
     confirmPassword: '',
   });
@@ -128,7 +128,7 @@ const UserCreateScreen = ({ history }) => {
                     })
                   }></Form.Control>
               </Form.Group>
-              <Form.Group controlId='password'>
+              <Form.Group controlId='confirmpassword'>
                 <Form.Label>Password</Form.Label>
                 <Form.Control
                   type='password'

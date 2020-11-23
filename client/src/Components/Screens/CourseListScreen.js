@@ -53,7 +53,7 @@ const CourseListScreen = ({ match, history }) => {
         <Row>
           <Col>
             <h3 className='my-2'>
-              <i className='fas fa-book'></i>Bootcamps
+              <i className='fas fa-book'></i>Courses
             </h3>
           </Col>
           <Col className='text-right'>
