@@ -123,3 +123,11 @@ export const getUserAsAdmin = (id) => {
     url: `/api/v1/auth/users/${id}`,
   });
 };
+
+export const updateUserAsAdmin = (id, formData) => {
+  return apiCaller({
+    method: 'put',
+    url: `/api/v1/auth/users/${id}`,
+    data: { ...formData },
+  });
+};

@@ -55,10 +55,10 @@ const CourseEditScreen = ({ match }) => {
             </h3>
           </Col>
           <Col className='text-right'>
-            <Link to='/admin'>
+            <Link to='/admin/courses'>
               {' '}
               <Button variant='light' className='m-2'>
-                Dashboard
+                Back
               </Button>
             </Link>
           </Col>
