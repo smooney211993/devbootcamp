@@ -22,9 +22,28 @@ const UserCreateScreen = ({ history }) => {
     confirmPassword: '',
   });
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert('Passwords Do Not Match');
+    } else {
+      dispatch(
+        adminUserCreate({
+          name: formData.name,
+          email: formData.email,
+          role: formData.role,
+          password: formData.password,
+        })
+      );
+    }
+  };
+
   useEffect(() => {
     dispatch(adminUserCreateReset());
-  });
+    if ((user !== null && user._id) || success) {
+      history.push(`/admin/user/${user._id}`);
+    }
+  }, [dispatch, history, user, success]);
   return (
     <>
       <Container>
@@ -45,7 +64,7 @@ const UserCreateScreen = ({ history }) => {
         </Row>
         <Row>
           <Col>
-            <Form>
+            <Form onSubmit={submitHandler}>
               <Form.Group controlId='name'>
                 <Form.Label>Name</Form.Label>
                 <Form.Control
@@ -100,7 +119,7 @@ const UserCreateScreen = ({ history }) => {
                   type='password'
                   placeholder='Enter Password'
                   value={formData.password}
-                  maxLength={6}
+                  minLength={6}
                   name='password'
                   onChange={(e) =>
                     setFormData({
@@ -114,7 +133,7 @@ const UserCreateScreen = ({ history }) => {
                 <Form.Control
                   type='password'
                   placeholder='Please Confirm Password'
-                  maxLength={6}
+                  minLength={6}
                   value={formData.confirmPassword}
                   name='confirmPassword'
                   onChange={(e) =>
