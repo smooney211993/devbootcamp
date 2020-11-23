@@ -12,7 +12,7 @@ import deleteCourse from './deleteCourse';
 import course from './course';
 import userList from './userList';
 
-import { updateCourseTypes } from '../actions/types';
+import { updateCourseTypes, deleteUserTypes } from '../actions/types';
 
 // higher order reducer creator
 const createReducer = (typeObject) => (
@@ -41,6 +41,7 @@ const createReducer = (typeObject) => (
 };
 
 const updateCourse = createReducer(updateCourseTypes);
+const deleteUser = createReducer(deleteUserTypes);
 
 export default combineReducers({
   bootcampList,
@@ -56,4 +57,5 @@ export default combineReducers({
   updateCourse,
   course,
   userList,
+  deleteUser,
 });

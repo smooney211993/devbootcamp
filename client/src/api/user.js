@@ -100,13 +100,19 @@ export const userPasswordUpdate = (formData) => {
 };
 
 export const getUserAsAdmin = (keyword, role, pageNumber) => {
-  return apiCaller({
-    method: 'get',
-    url: `/api/v1/auth/users/`,
-    params: {
-      keyword,
-      role,
-      pageNumber,
-    },
-  });
+  if (window.confirm('Are You Sure You Want To Delete This User')) {
+    return apiCaller({
+      method: 'get',
+      url: `/api/v1/auth/users/`,
+      params: {
+        keyword,
+        role,
+        pageNumber,
+      },
+    });
+  }
+};
+
+export const deleteUserAsAdmin = (id) => {
+  return apiCaller({ method: 'delete', url: `/api/auth/users/${id}` });
 };

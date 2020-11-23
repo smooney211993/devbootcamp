@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { getUsers } from '../../actions/userActions';
+import {
+  getUsers,
+  deleteUser,
+  deleteUserReset,
+} from '../../actions/userActions';
 
 import { Link } from 'react-router-dom';
 
@@ -19,6 +23,10 @@ const UserListScreen = ({ match, history }) => {
   const pageNumber = match.params.pageNumber || 1;
   const { users, loading, error, page, pages } = useSelector(
     (state) => state.userList
+  );
+
+  const { loading: deleteLoading, error: deleteError, success } = useSelector(
+    (state) => state.deleteUser
   );
 
   const [formData, setFormData] = useState({
@@ -49,10 +57,13 @@ const UserListScreen = ({ match, history }) => {
     }
   };
   useEffect(() => {
+    dispatch(deleteUserReset());
     dispatch(getUsers(keyword, role, pageNumber));
-  }, [dispatch, keyword, role, pageNumber]);
-  console.log(`role is ${role}`);
-  console.log(`name is ${keyword}`);
+    if (success) {
+      dispatch(getUsers(keyword, role, pageNumber));
+    }
+  }, [dispatch, keyword, role, pageNumber, success]);
+
   return (
     <Container>
       <Row className='text-align-center'>
@@ -129,7 +140,7 @@ const UserListScreen = ({ match, history }) => {
                 {users &&
                   users.length > 0 &&
                   users.map((user) => (
-                    <tr>
+                    <tr key={user._id}>
                       <td>{user._id}</td>
                       <td>{user.name}</td>
                       <td>{user.role}</td>

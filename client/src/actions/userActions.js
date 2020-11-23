@@ -7,6 +7,7 @@ import {
   USER_UPDATE_RESET,
   USER_PASSWORD_UPATE_REQUEST,
   getUserListTypes,
+  deleteUserTypes,
 } from '../actions/types';
 
 export const loadUser = () => ({
@@ -59,4 +60,15 @@ export const getUsers = (keyword = '', role = '', pageNumber = '') => ({
     role,
     pageNumber,
   },
+});
+
+export const deleteUser = (id) => ({
+  type: deleteUserTypes.REQUEST,
+  payload: {
+    id,
+  },
+});
+
+export const deleteUserReset = () => ({
+  type: deleteUserTypes.RESET,
 });

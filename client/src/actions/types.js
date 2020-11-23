@@ -69,3 +69,5 @@ export const updateCourseTypes = createRequestTypes('UPDATE_COURSE');
 export const getCourseTypes = createRequestTypes('COURSE_');
 
 export const getUserListTypes = createRequestTypes('USER_LIST');
+
+export const deleteUserTypes = createRequestTypes('DELETE_USER');
