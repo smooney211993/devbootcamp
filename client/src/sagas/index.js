@@ -13,6 +13,7 @@ import courseListSaga from './coursesListSaga';
 import deleteCourseSaga from './deleteCourseSaga';
 import getCourseSaga from './getCourseSaga';
 import updateCourseSaga from './updateCourseSaga';
+import userListSaga from './userListSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -30,5 +31,6 @@ export default function* rootSaga() {
     deleteCourseSaga(),
     getCourseSaga(),
     updateCourseSaga(),
+    userListSaga(),
   ]);
 }

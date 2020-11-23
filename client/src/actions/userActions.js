@@ -6,6 +6,7 @@ import {
   USER_UPDATE_REQUEST,
   USER_UPDATE_RESET,
   USER_PASSWORD_UPATE_REQUEST,
+  getUserListTypes,
 } from '../actions/types';
 
 export const loadUser = () => ({
@@ -48,5 +49,14 @@ export const userPasswordUpdate = (formData) => ({
   type: USER_PASSWORD_UPATE_REQUEST,
   payload: {
     formData,
+  },
+});
+
+export const getUsers = (keyword = '', role = '', pageNumber = '') => ({
+  type: getUserListTypes.REQUEST,
+  payload: {
+    keyword,
+    role,
+    pageNumber,
   },
 });

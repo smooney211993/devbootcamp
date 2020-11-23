@@ -6,7 +6,14 @@ const advanceResults = (model, populate) => async (req, res, next) => {
 
   //fields to exclude
 
-  const removeFields = ['select', 'sort', 'pageNumber', 'keyword', 'budget'];
+  const removeFields = [
+    'select',
+    'sort',
+    'pageNumber',
+    'keyword',
+    'budget',
+    'role',
+  ];
 
   // lopp over the removeFields and delete them from query
 
@@ -37,7 +44,7 @@ const advanceResults = (model, populate) => async (req, res, next) => {
     query = query.find({ ...keyword });
   } */
 
-  if (model === Bootcamp) {
+  if (model === Bootcamp || model === User) {
     if (req.query.keyword) {
       const keyword = {
         name: {
@@ -59,6 +66,17 @@ const advanceResults = (model, populate) => async (req, res, next) => {
     }
   }
   console.log(req.query);
+
+  if (req.query.role) {
+    const role = {
+      role: {
+        $regex: req.query.role,
+        $options: 'i',
+      },
+    };
+    query = query.find({ ...role });
+  }
+
   if (req.query.select) {
     const fields = req.query.select.split(',').join(' ');
     query = query.select(fields);
