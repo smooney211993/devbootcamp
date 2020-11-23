@@ -26,7 +26,7 @@ const UserEditScreen = ({ match }) => {
   });
   useEffect(() => {
     dispatch(adminUserUpdateReset());
-    if (!user || userId !== user._id || success) {
+    if (!user || user._id !== userId || success) {
       dispatch(getUser(userId));
     } else {
       setFormData({
@@ -35,7 +35,7 @@ const UserEditScreen = ({ match }) => {
         role: user.role,
       });
     }
-  }, [dispatch, userId, success]);
+  }, [dispatch, userId, success, user]);
 
   return (
     <>

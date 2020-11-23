@@ -49,7 +49,7 @@ const updateUserAsAdmin = asyncHandler(async (req, res) => {
     runValidators: true,
   });
   res.status(201).json({
-    success: data,
+    success: true,
     data: user,
   });
 });
