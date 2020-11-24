@@ -4,6 +4,7 @@ import {
   deleteCourseTypes,
   updateCourseTypes,
   getCourseTypes,
+  createCourseTypes,
 } from './types';
 
 export const getCourses = (keyword = '', budget, pageNumber = '') => ({
@@ -43,4 +44,15 @@ export const updateCourse = (id, formData) => ({
 
 export const updateCourseReset = () => ({
   type: updateCourseTypes.RESET,
+});
+
+export const createCourse = (formData) => ({
+  type: createCourseTypes.REQUEST,
+  payload: {
+    formData,
+  },
+});
+
+export const createCourseReset = () => ({
+  type: createCourseTypes.RESET,
 });

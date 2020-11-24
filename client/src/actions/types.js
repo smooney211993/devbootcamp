@@ -79,3 +79,5 @@ export const adminUserUpdateTypes = createRequestTypes('USER_ADMIN_UPDATE');
 export const adminCreateUserTypes = createRequestTypes('USER_ADMIN_CREATE');
 
 export const createBootcampTypes = createRequestTypes('BOOTCAMP_ADMIN_CREATE');
+
+export const createCourseTypes = createRequestTypes('COURSE_CREATE');

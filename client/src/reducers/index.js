@@ -19,6 +19,7 @@ import {
   updateCourseTypes,
   deleteUserTypes,
   adminUserUpdateTypes,
+  createCourseTypes,
 } from '../actions/types';
 
 // higher order reducer creator
@@ -47,9 +48,31 @@ const createReducer = (typeObject) => (
   }
 };
 
+const withData = (actionObject, reducer) => (state, action) => {
+  const { type, payload } = action;
+  switch (type) {
+    case actionObject.SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        data: payload,
+        success: true,
+        error: null,
+      };
+
+    default:
+      return reducer(state, action);
+  }
+};
+
+// higher order reducers
 const updateCourse = createReducer(updateCourseTypes);
 const deleteUser = createReducer(deleteUserTypes);
 const adminUserUpdate = createReducer(adminUserUpdateTypes);
+const createCourse = withData(
+  createCourseTypes,
+  createReducer(createCourseTypes)
+);
 
 export default combineReducers({
   bootcampList,
@@ -70,4 +93,5 @@ export default combineReducers({
   adminUserUpdate,
   userCreate,
   createBootcamp,
+  createCourse,
 });

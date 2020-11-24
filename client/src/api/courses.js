@@ -38,3 +38,11 @@ export const updateCourseById = (id, formData) => {
     },
   });
 };
+
+export const createNewCourse = (formData) => {
+  return apiCaller({
+    method: 'post',
+    url: `/api/v1/courses`,
+    data: { ...formData },
+  });
+};

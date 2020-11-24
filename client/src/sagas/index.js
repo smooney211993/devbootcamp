@@ -19,6 +19,7 @@ import userDetailsSaga from './userDetailsSaga';
 import userDetailsUpdateSaga from './userDetailsUpdateSaga';
 import createUserSaga from './createUserSaga';
 import bootcampCreateSaga from './bootcampCreateSaga';
+import createCourseSaga from './createCourseSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -42,5 +43,6 @@ export default function* rootSaga() {
     userDetailsUpdateSaga(),
     createUserSaga(),
     bootcampCreateSaga(),
+    createCourseSaga(),
   ]);
 }
