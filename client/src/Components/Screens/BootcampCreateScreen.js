@@ -19,6 +19,7 @@ const BootcampCreateScreen = ({ history }) => {
   const [formData, setFormData] = useState({
     name: '',
     address: '',
+    email: '',
     careers: '',
     housing: null,
     description: '',
@@ -88,6 +89,15 @@ const BootcampCreateScreen = ({ history }) => {
                   placeholder='Enter Website'
                   name='website'
                   value={formData.website}
+                  onChange={handleFormData}></Form.Control>
+              </Form.Group>
+              <Form.Group controlId='email'>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type='email'
+                  placeholder='Enter Email'
+                  name='email'
+                  value={formData.email}
                   onChange={handleFormData}></Form.Control>
               </Form.Group>
               <Form.Group controlId='number'>

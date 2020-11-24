@@ -7,6 +7,7 @@ const {
   updateBootCamp,
   getBootcampsViaRadius,
   bootcampPhotoUpload,
+  getAllBootCamps,
 } = require('../controllers/bootcampController');
 const authToken = require('../middleware/authToken');
 const isAuthorized = require('../middleware/authorize');
@@ -18,6 +19,8 @@ const reviewRouter = require('./reviewRoute');
 const router = express.Router();
 
 // if this is hit its going to continue on to courseRouter and run into getcourses
+router.route('/all').get(getAllBootCamps);
+
 router.use('/:bootcampId/courses', courseRouter);
 router.use('/:bootcampId/reviews', reviewRouter);
 

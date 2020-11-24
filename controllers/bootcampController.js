@@ -3,6 +3,7 @@ const asyncHandler = require('express-async-handler');
 const geocoder = require('../utils/geocoder');
 const Bootcamp = require('../models/Bootcamps');
 const User = require('../models/User');
+const Bootcamps = require('../models/Bootcamps');
 
 // create new bootcamp
 // post request
@@ -25,6 +26,16 @@ const createNewBootCamp = asyncHandler(async (req, res) => {
 //api/v1/bootcamps
 const getBootCamps = asyncHandler(async (req, res) => {
   res.status(200).json(res.advanceResults);
+});
+
+const getAllBootCamps = asyncHandler(async (req, res) => {
+  const bootcamps = await Bootcamps.find();
+  if (!bootcamps) {
+    res.status(404);
+    throw new Error('No Bootcamps Found');
+  }
+
+  res.status(200).json({ success: true, data: bootcamps });
 });
 
 // get bootcamps via id
@@ -169,4 +180,5 @@ module.exports = {
   updateBootCamp,
   getBootcampsViaRadius,
   bootcampPhotoUpload,
+  getAllBootCamps,
 };

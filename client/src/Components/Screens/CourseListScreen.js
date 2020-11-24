@@ -63,6 +63,12 @@ const CourseListScreen = ({ match, history }) => {
                 Dashboard
               </Button>
             </Link>
+            <Link to='/admin/course/create'>
+              {' '}
+              <Button variant='light' className='m-2'>
+                Create Course
+              </Button>
+            </Link>
           </Col>
         </Row>
         <Row>
