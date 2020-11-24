@@ -120,3 +120,14 @@ export const updateBootcampById = async (id, formData) => {
     },
   });
 };
+
+export const creatNewBootcamp = (formData) => {
+  return apiCaller({
+    method: 'post',
+    url: `/api/v1/bootcamps`,
+    data: { ...formData },
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+};

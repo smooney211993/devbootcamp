@@ -33,5 +33,8 @@ export const updateCourseById = (id, formData) => {
     method: 'put',
     url: `/api/v1/courses/${id}`,
     data: { ...formData },
+    headers: {
+      'Content-type': 'application/json',
+    },
   });
 };

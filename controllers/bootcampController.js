@@ -16,6 +16,7 @@ const createNewBootCamp = asyncHandler(async (req, res) => {
     throw new Error('User Has Already Published A Bootcamp');
   }
   const newBootCamp = await Bootcamp.create(req.body);
+
   res.status(201).json({ success: true, data: newBootCamp });
 });
 

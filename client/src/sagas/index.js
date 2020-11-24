@@ -18,6 +18,7 @@ import deleteUserSaga from './deleteUserSaga';
 import userDetailsSaga from './userDetailsSaga';
 import userDetailsUpdateSaga from './userDetailsUpdateSaga';
 import createUserSaga from './createUserSaga';
+import bootcampCreateSaga from './bootcampCreateSaga';
 
 export default function* rootSaga() {
   yield all([
@@ -40,5 +41,6 @@ export default function* rootSaga() {
     userDetailsSaga(),
     userDetailsUpdateSaga(),
     createUserSaga(),
+    bootcampCreateSaga(),
   ]);
 }

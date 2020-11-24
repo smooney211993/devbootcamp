@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import axios from 'axios';
+import { apiCaller } from '../../utils/api';
 
 import Spinner from '../Layout/Spinner';
 import Message from '../Layout/Message';
@@ -42,8 +43,8 @@ const BootcampEditScreen = ({ match, history }) => {
 
   const uploadFileHandler = async (e) => {
     const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('image', file);
+    const formBody = new FormData();
+    formBody.append('image', file);
     setFormData({ ...formData, photo: file });
     setUploading(true);
     try {
@@ -52,11 +53,22 @@ const BootcampEditScreen = ({ match, history }) => {
           'Content-type': 'multipart/form-data',
         },
       };
+      /*
       const { data } = await axios.put(
         `/api/v1/bootcamps/${id}/photo`,
         formData,
         config
       );
+
+      */
+
+      const { data } = await apiCaller({
+        method: 'put',
+        url: `/api/v1/bootcamps/${id}/photo`,
+        data: formBody,
+        headers: { 'Content-type': 'multipart/form-data' },
+      });
+
       setFormData({ ...formData, photo: data.data });
       setUploading(false);
     } catch (error) {

@@ -2,10 +2,23 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 
-const BootcampCreateScreen = () => {
+import Spinner from '../Layout/Spinner';
+import Message from '../Layout/Message';
+
+import {
+  createBootCamp,
+  createBootCampReset,
+} from '../../actions/bootcampActions';
+import { useDispatch, useSelector } from 'react-redux';
+
+const BootcampCreateScreen = ({ history }) => {
+  const dispatch = useDispatch();
+  const { bootcamp, success, loading, error } = useSelector(
+    (state) => state.createBootcamp
+  );
   const [formData, setFormData] = useState({
     name: '',
-    formattedAddress: '',
+    address: '',
     careers: '',
     housing: null,
     description: '',
@@ -14,11 +27,21 @@ const BootcampCreateScreen = () => {
     jobGuarantee: null,
     phone: '',
     acceptGi: null,
+    averageCost: 1,
+    averageRating: 1,
   });
 
   const handleFormData = (e) => {
-    setFormData({ ...formData, [e.target.value]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    dispatch(createBootCampReset());
+    if (bootcamp !== null || success) {
+      history.push(`/admin/bootcamp/${bootcamp._id}`);
+    }
+  }, [dispatch, history, bootcamp, success]);
+
   return (
     <>
       <Container>
@@ -36,7 +59,19 @@ const BootcampCreateScreen = () => {
         </Row>
         <Row>
           <Col>
-            <Form>
+            {loading && <Spinner />}
+            {error && <Message>{error.msg}</Message>}
+            <Form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const body = {
+                  ...formData,
+                  careers: formData.careers
+                    .split(',')
+                    .map((career) => career.trim()),
+                };
+                dispatch(createBootCamp(body));
+              }}>
               <Form.Group controlId='name'>
                 <Form.Label>Name</Form.Label>
                 <Form.Control
@@ -71,7 +106,7 @@ const BootcampCreateScreen = () => {
                   type='text'
                   rows={6}
                   placeholder='Enter Address'
-                  name='formattedAddress'
+                  name='address'
                   value={formData.formattedAddress}
                   onChange={handleFormData}></Form.Control>
               </Form.Group>
@@ -79,10 +114,14 @@ const BootcampCreateScreen = () => {
                 <Form.Label>Careers</Form.Label>
                 <Form.Control
                   type='text'
-                  placeholder='Enter Careers'
+                  placeholder={`Please Enter Careers`}
                   name='careers'
                   value={formData.careers}
                   onChange={handleFormData}></Form.Control>
+                <Form.Text>
+                  Enter Either - Web Development, Mobile Development, UI/UX,
+                  Data Science, Business, Other - Seperate with a comma
+                </Form.Text>
               </Form.Group>
               <Form.Group controlId='housing'>
                 <Form.Label>Housing Available</Form.Label>

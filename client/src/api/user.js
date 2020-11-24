@@ -129,6 +129,9 @@ export const updateUserAsAdmin = (id, formData) => {
     method: 'put',
     url: `/api/v1/auth/users/${id}`,
     data: { ...formData },
+    headers: {
+      'Content-type': 'application/json',
+    },
   });
 };
 
@@ -137,5 +140,8 @@ export const createUserAsAdmin = (formData) => {
     method: 'post',
     url: `/api/v1/auth/users`,
     data: { ...formData },
+    headers: {
+      'Content-type': 'application/json',
+    },
   });
 };

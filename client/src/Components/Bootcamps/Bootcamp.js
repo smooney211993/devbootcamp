@@ -224,41 +224,44 @@ const Bootcamp = ({ match }) => {
                 ))}
             </Card.Body>
           </Card>
-          <Card className='m-2 '>
-            <Card.Header>
-              <h3>Featured Review</h3>
-            </Card.Header>
-            <Card.Body>
-              <Card.Title className='my-2'>
+          {reviews !== null && reviews.length > 0 && (
+            <Card className='m-2 '>
+              <Card.Header>
+                <h3>Featured Review</h3>
+              </Card.Header>
+              <Card.Body>
+                <Card.Title className='my-2'>
+                  {reviews && (
+                    <>
+                      {reviews[0].title} <Rating value={reviews[0].rating} />
+                    </>
+                  )}
+                </Card.Title>
+                {reviews && reviews[0].text}
+              </Card.Body>
+              <Card.Footer>
                 {reviews && (
                   <>
-                    {reviews[0].title} <Rating value={reviews[0].rating} />
+                    <i className='fas fa-user m-2'> </i>
+                    {reviews[0].user.name}
                   </>
                 )}
-              </Card.Title>
-              {reviews && reviews[0].text}
-            </Card.Body>
-            <Card.Footer>
-              {reviews && (
-                <>
-                  <i className='fas fa-user m-2'> </i>
-                  {reviews[0].user.name}
-                </>
-              )}
-            </Card.Footer>
-          </Card>
+              </Card.Footer>
+            </Card>
+          )}
           <Card className='m-2 p-2'>
             <Card.Header>
               <h3>Courses</h3>
             </Card.Header>
             <Card.Body>
               <Row>
-                {courses.length > 0 &&
-                  courses.map((course) => (
-                    <Col md={6} key={course._id} className='my-2'>
-                      <CourseCard course={course} bootcampId={id} />
-                    </Col>
-                  ))}
+                {courses.length > 0
+                  ? courses.map((course) => (
+                      <Col md={6} key={course._id} className='my-2'>
+                        <CourseCard course={course} bootcampId={id} />
+                      </Col>
+                    ))
+                  : 'There Are No Courses'}
               </Row>
             </Card.Body>
           </Card>
