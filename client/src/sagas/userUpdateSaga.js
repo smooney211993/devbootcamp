@@ -13,10 +13,13 @@ function* updateUserProfile(action) {
     const { data } = yield call(updateUser, formData);
     yield put({ type: USER_UPDATE_SUCCESS, payload: data });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: USER_UPDATE_FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

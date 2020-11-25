@@ -14,10 +14,13 @@ function* deleteBootcampAsAdmin(action) {
     yield call(deleteBootcamp, id);
     yield put({ type: DELETE_BOOTCAMP_SUCCESS });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield {
       type: DELETE_BOOTCAMP_FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     };

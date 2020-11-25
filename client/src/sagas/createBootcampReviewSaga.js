@@ -15,10 +15,13 @@ function* addBootcampReview(action) {
     const newReview = yield call(postBootcampReview, id, formData, authToken);
     yield put({ type: CREATE_BOOTCAMP_REVIEW_SUCCESS, payload: newReview });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: CREATE_BOOTCAMP_REVIEW_FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

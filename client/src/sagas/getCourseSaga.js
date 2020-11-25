@@ -9,10 +9,13 @@ function* fetchCourse(action) {
     const { data } = yield call(getCourseById, id);
     yield put({ type: getCourseTypes.SUCCESS, payload: data });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: getCourseTypes.FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

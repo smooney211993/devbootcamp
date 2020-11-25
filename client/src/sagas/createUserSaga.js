@@ -9,10 +9,13 @@ function* createUser(action) {
     const { data } = yield call(createUserAsAdmin, formData);
     yield put({ type: adminCreateUserTypes.SUCCESS, payload: data });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: adminCreateUserTypes.FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

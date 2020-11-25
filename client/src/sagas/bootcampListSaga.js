@@ -21,10 +21,13 @@ function* getAllBootCamps(action) {
     yield put({ type: BOOTCAMPS_LIST_SUCCESS, payload: data });
     yield put({ type: LOAD_USER_REQUEST });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: BOOTCAMPS_LIST_FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

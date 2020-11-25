@@ -14,10 +14,13 @@ function* bootcampUpdate(action) {
     yield call(updateBootcampById, id, formData);
     yield put({ type: UPDATE_BOOTCAMP_SUCCESS });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: UPDATE_BOOTCAMP_FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

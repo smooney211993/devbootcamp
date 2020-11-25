@@ -10,9 +10,15 @@ function* fetchUser(action) {
     const { data } = yield call(getUserAsAdmin, id);
     yield put({ type: getUserDetailsTypes.SUCCESS, payload: data });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: getUserDetailsTypes.FAIL,
-      payload: { msg: error.response.statusText, err: error.response.status },
+      payload: {
+        msg: message || error.response.statusText,
+        err: error.response.status,
+      },
     });
   }
 }

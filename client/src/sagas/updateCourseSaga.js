@@ -9,10 +9,13 @@ function* courseUpdate(action) {
     yield call(updateCourseById, id, formData);
     yield put({ type: updateCourseTypes.SUCCESS });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: updateCourseTypes.FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

@@ -9,10 +9,13 @@ function* adminUserUpdate(action) {
     yield call(updateUserAsAdmin, id, formData);
     yield put({ type: adminUserUpdateTypes.SUCCESS });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: adminUserUpdateTypes.FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

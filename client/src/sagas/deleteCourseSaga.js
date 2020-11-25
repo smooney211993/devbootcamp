@@ -8,10 +8,13 @@ function* deleteCourseById(action) {
     yield call(deleteCourseByIdAsAdmin, id);
     yield put({ type: deleteCourseTypes.SUCCESS });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: deleteCourseTypes.FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });

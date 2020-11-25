@@ -9,10 +9,13 @@ function* courseCreate(action) {
     const { data } = yield call(createNewCourse, bootcampId, formData);
     yield put({ type: createCourseTypes.SUCCESS, payload: data });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: createCourseTypes.FAIL,
       payload: {
-        msg: error.response.statusText,
+        msg: message || error.response.statusText,
         err: error.response.status,
       },
     });
