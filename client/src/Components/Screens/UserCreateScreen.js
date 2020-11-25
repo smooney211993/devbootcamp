@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Row, Button, Container, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Message from '../Layout/Message';
 
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -64,6 +65,7 @@ const UserCreateScreen = ({ history }) => {
         </Row>
         <Row>
           <Col>
+            {error && <Message>{error.msg}</Message>}
             <Form onSubmit={submitHandler}>
               <Form.Group controlId='name'>
                 <Form.Label>Name</Form.Label>
