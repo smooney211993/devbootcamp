@@ -14,9 +14,15 @@ function* getUserAccessToken(action) {
     yield put({ type: USER_LOGIN_SUCCESS, payload: data });
     yield put({ type: LOAD_USER_REQUEST });
   } catch (error) {
+    let message = Array.isArray(error.response.data.message)
+      ? error.response.data.message.join(', ')
+      : error.response.data.message;
     yield put({
       type: USER_LOGIN_FAIL,
-      payload: { msg: error.response.statusText, err: error.response.status },
+      payload: {
+        msg: message || error.response.statusText,
+        err: error.response.status,
+      },
     });
   }
 }
