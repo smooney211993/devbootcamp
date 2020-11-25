@@ -18,6 +18,7 @@ const CourseCreateScreen = ({ history }) => {
   const { data: course, loading, error, success } = useSelector(
     (state) => state.createCourse
   );
+
   const [bootcamps, setBootcamps] = useState([]);
   const [formData, setFormData] = useState({
     bootcamp: '',
@@ -30,6 +31,7 @@ const CourseCreateScreen = ({ history }) => {
   });
 
   useEffect(() => {
+    let active = false;
     const getBootcamps = async () => {
       try {
         const { data } = await apiCaller({
@@ -47,26 +49,33 @@ const CourseCreateScreen = ({ history }) => {
         console.log(error);
       }
     };
-    getBootcamps();
+    if (!active) {
+      getBootcamps();
+    }
+    return () => {
+      active = true;
+    };
   }, [dispatch]);
 
   useEffect(() => {
     dispatch(createCourseReset());
-    if ((course && course._id) || success) {
+    if ((course !== undefined && course._id !== undefined) || success) {
       history.push(`/admin/course/${course._id}`);
     }
-  }, [dispatch, course, history]);
+  }, [dispatch, course, history, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    const bootcampId = bootcamps.find(
+      (bootcamp) => bootcamp.name === formData.bootcamp
+    ).id;
     const body = {
       ...formData,
-      bootcamp: bootcamps.find(
-        (bootcamp) => bootcamp.name === formData.bootcamp
-      ).id,
+      bootcamp: bootcampId,
     };
     console.log(body);
-    // dispatch(createCourse(formData));
+
+    dispatch(createCourse(bootcampId, formData));
   };
 
   return (
@@ -177,6 +186,7 @@ const CourseCreateScreen = ({ history }) => {
                       [e.target.name]: e.target.value,
                     })
                   }>
+                  <option defaultValue='none'>Select an Option</option>
                   {['beginner', 'intermediate', 'advanced'].map((x, i) => (
                     <option key={i} value={x}>
                       {x}

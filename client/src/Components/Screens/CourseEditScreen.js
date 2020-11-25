@@ -15,6 +15,7 @@ import Message from '../Layout/Message';
 
 const CourseEditScreen = ({ match }) => {
   const courseId = match.params.courseId;
+  console.log(`courseId is ${courseId}`);
   const dispatch = useDispatch();
   const { course, loading, error } = useSelector((state) => state.course);
   const { loading: updateLoading, success, error: updateError } = useSelector(

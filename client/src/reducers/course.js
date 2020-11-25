@@ -13,7 +13,7 @@ export default function (state = initialState, action) {
       return { ...state, loading: true };
 
     case getCourseTypes.SUCCESS:
-      return { ...state, loading: false, course: payload.data };
+      return { ...state, loading: false, course: payload.data, error: null };
     case getCourseTypes.FAIL:
       return { ...state, loading: false, error: payload };
 

@@ -23,6 +23,7 @@ const getCourses = asyncHandler(async (req, res) => {
 //Get api/v1/course/:id
 
 const getCourseById = asyncHandler(async (req, res) => {
+  console.log(req.params.id);
   const course = await Course.findById(req.params.id).populate({
     path: 'bootcamp',
     select: 'name description',
@@ -64,6 +65,7 @@ const createCourse = asyncHandler(async (req, res) => {
     scholarshipAvailable,
     bootcamp,
   } = req.body;
+  console.log(req.body);
   const course = new Course({
     title,
     description,
@@ -72,6 +74,7 @@ const createCourse = asyncHandler(async (req, res) => {
     minimumSkill,
     scholarshipAvailable,
     bootcamp,
+    user: req.user.id,
   });
   const newCourse = await course.save();
   res.status(201).json({

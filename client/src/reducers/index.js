@@ -55,7 +55,7 @@ const withData = (actionObject, reducer) => (state, action) => {
       return {
         ...state,
         loading: false,
-        data: payload,
+        data: payload.data,
         success: true,
         error: null,
       };

@@ -2,12 +2,11 @@ import { createCourseTypes } from '../actions/types';
 import { createNewCourse } from '../api/courses';
 
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { createCourse } from '../actions/courseActions';
 
 function* courseCreate(action) {
-  const { formData } = action.payload;
+  const { bootcampId, formData } = action.payload;
   try {
-    const { data } = yield call(createNewCourse, formData);
+    const { data } = yield call(createNewCourse, bootcampId, formData);
     yield put({ type: createCourseTypes.SUCCESS, payload: data });
   } catch (error) {
     yield put({

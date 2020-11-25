@@ -39,10 +39,10 @@ export const updateCourseById = (id, formData) => {
   });
 };
 
-export const createNewCourse = (formData) => {
+export const createNewCourse = (bootcampId, formData) => {
   return apiCaller({
     method: 'post',
-    url: `/api/v1/courses`,
+    url: `/api/v1/bootcamps/${bootcampId}/courses`,
     data: { ...formData },
   });
 };

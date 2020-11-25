@@ -46,9 +46,10 @@ export const updateCourseReset = () => ({
   type: updateCourseTypes.RESET,
 });
 
-export const createCourse = (formData) => ({
+export const createCourse = (bootcampId, formData) => ({
   type: createCourseTypes.REQUEST,
   payload: {
+    bootcampId,
     formData,
   },
 });
