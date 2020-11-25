@@ -44,6 +44,9 @@ export const UPDATE_BOOTCAMP_SUCCESS = 'UPDATE_BOOTCAMP_SUCCESS';
 export const UPDATE_BOOTCAMP_FAIL = 'UPDATE_BOOTCAMP_FAIL';
 export const UPDATE_BOOTCAMP_RESET = 'UPDATE_BOOTCAMP_RESET';
 
+export const SET_ALERT_REQUEST = 'SET_ALERT_REQUEST';
+export const SET_ALERT = 'SET_ALERT';
+export const REMOVE_ALERT = 'REMOVE_ALERT';
 // too much repeated Code at the above
 
 // refactor using higher order

@@ -9,9 +9,11 @@ const errorHandler = (err, req, res, next) => {
     statusCode = 400;
     message = Object.values(err.errors).map((val) => val.message);
   }
+  console.log(message + 'message');
+  console.log(err.message + 'this is err.message');
   res.status(statusCode);
   res.json({
-    message: err.message || message,
+    message: message || err.message,
     stack: process.env.NODE_ENV === 'production' ? null : err.stack,
   });
 };

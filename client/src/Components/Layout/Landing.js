@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Col, Row, Card, Form, Button } from 'react-bootstrap';
 import { getBootcamps } from '../../actions/bootcampActions';
+
 import Spinner from './Spinner';
 import Message from './Message';
 import BootcampCard from '../Bootcamps/BootcampCard';

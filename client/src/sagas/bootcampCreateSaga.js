@@ -8,6 +8,7 @@ function* bootcampCreate(action) {
     const { data } = yield call(creatNewBootcamp, formData);
     yield put({ type: createBootcampTypes.SUCCESS, payload: data });
   } catch (error) {
+    console.log(error.response.data.message);
     yield put({
       type: createBootcampTypes.FAIL,
       payload: {
